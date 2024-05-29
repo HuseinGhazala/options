@@ -1,0 +1,125 @@
+<section class="g_cat">
+    <div class="container d-flex flex-column align-items-center justify-content-center ">
+      <div  class="mb-[55px]">
+          {% include 'title.twig' with { 'component_title': settings } %}  
+      </div>
+        {% if settings.slider %}
+           <div id="g_cat_slider_{{sectionId}}" class="swiper">
+            <div class="swiper-wrapper">
+          
+        {% else %}
+            <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
+        {% endif %}
+        {% for item in settings.categorys %}
+            <div class="{{settings.slider ? 'swiper-slide' : 'd-flex flex-column align-items-center products-item'}} "  data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back" style="max-width: 150px; {{ loop|length > 3 and not settings.slider ? 'max-width: 200px;' : '' }}">
+                <div class="overflow-hidden rounded-md image-parent">
+                    <a href="{{item.url}}">
+
+                        <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">
+                    </a>
+                </div>
+                <a href="{{item.url}}">
+                    <h3 class="mt-3 text-center font-weight-medium text-xl text-dark">{{item.category_name}}</h3>
+                </a>
+            </div>
+        {% endfor %}
+        {% if settings.slider %}
+                </div>
+                 <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+            </div>
+        {% else %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+ <script>
+    var swiper = new Swiper('.swiper', {
+    direction: 'horizontal',
+    effect	: 'slide',
+	slidesPerView: 1,
+	spaceBetween: 30,
+
+	breakpoints: {
+		768: {
+			slidesPerView: 1
+		}
+	}
+     
+    });
+
+    
+  </script>
+{% schema %}
+
+{
+    "name": {
+        "ar": "تصنيفات - جلامور",
+        "en": "glamour - categorey"
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "section_title": {
+            "type": "text",
+            "label": {
+                "ar": "عنوان السكشن ؟",
+                "en": "عنوان السكشن ؟"
+            }
+        },
+        "slider": {
+            "type": "checkbox",
+            "label": {
+                "ar": "العرض فى نظام slider",
+                "en": "العرض فى نظام slider"
+            }
+        },
+        "loop": {
+            "type": "checkbox",
+            "label": {
+                "ar": "تكرار الاقسام",
+                "en": "تكرار الاقسام"
+            },
+            "conditions": [
+                {
+                    "id": "slider",
+                    "operation": "=",
+                    "value": true
+                }
+            ]
+        },
+        "categorys": {
+            "type": "list",
+            "label": {
+                "ar": "الاقسام",
+                "en": "الاقسام"
+            },
+            "settings": {
+                "category_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "صوره التصنيف",
+                        "en": "category image"
+                    }
+
+                },
+                "category_name": {
+                    "type": "text",
+                    "label": {
+                        "ar": "اسم التصنيف",
+                        "en": "category name"
+                    }
+                },
+                "url": {
+                    "type": "category_products",
+                    "label": {
+                        "ar": "الرابط",
+                        "en": "link"
+                    }
+                }
+            }
+        }
+    }
+}
+
+{% endschema %}

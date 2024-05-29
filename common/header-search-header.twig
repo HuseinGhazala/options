@@ -29,7 +29,7 @@
 
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
 					<div class="form-group" style="position: relative; margin: 0px">
-						<span class="icon-search search-input-icon" style="z-index: 1"></span>
+						<i class="fa-solid fa-magnifying-glass relative"></i>
 						<div class="autocomplete" style="position: relative">
 							<input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.header_search_placeholder %}{{ header_settings.header_search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
 							<div class="autocomplete-items"></div>
@@ -41,7 +41,7 @@
 			<div class="bd-highlight d-flex align-items-center justify-content-end header-cart">
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
 					<div class="d-block d-lg-none sm-search-icon">
-						<span class="icon-search header-theme-icon-primary"></span>
+						<i class="fa-solid fa-magnifying-glass"></i>
 					</div>
 				{% endif %}
 				<div class="d-none d-lg-block">
@@ -50,7 +50,7 @@
 						<i class="fa-solid fa-cart-shopping"></i>
 					</a>
 				</div>
-				<div style="position: relative">
+				<div class="d-block d-lg-none" style=" position: relative">
 					<a class="a-shopping-cart" href="/cart/view" style="color: inherit">
 						<i class="fa-solid fa-cart-shopping"></i>
 						<span class="cart-badge d-none"></span>
@@ -72,7 +72,7 @@
 						</div>
 					{% endif %}
 				</div>
-                <a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic menu icon-menu-top d-block d-lg-none" tabindex="1">
+                <a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
 					<i class="fa-sharp fa-solid fa-bars"></i>
 				</a>
 			</div>

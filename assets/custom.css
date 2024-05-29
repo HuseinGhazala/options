@@ -128,7 +128,7 @@
     visibility: hidden;
     position: absolute;
     left: 0;
-    padding: 0px 15px 20px 15px;
+    padding: 20px 15px 20px 15px;
     width: 100%;
     background-color: var(--header-primary-color, var(--primary-color));
     transform: translateY(-100%);
@@ -629,6 +629,12 @@ header{
     right: 0;
     left: 0;
     background: transparent;
+}
+.form-group i{
+    z-index: 11111;
+    position: relative;
+    bottom: -32px;
+    right: 5px;
 }
 .search-header-bar {
     height: 60px;
