@@ -1,12 +1,12 @@
-<section class="g_cat">
+<section id="g_cat_{{sectionId}}" class="g_cat">
     <div class="container d-flex flex-column align-items-center justify-content-center ">
       <div  class="mb-[55px]">
+
           {% include 'title.twig' with { 'component_title': settings } %}  
       </div>
         {% if settings.slider %}
-           <div id="g_cat_slider_{{sectionId}}" class="swiper">
-            <div class="swiper-wrapper">
-          
+          <div id="g_cat_slider_{{sectionId}}" class="swiper" data-swiper='{"spaceBetween":12,"slidesPerView":3,"pagination":{"el":".swiper-pagination"},"autoplay":{"delay":"1000"},"breakpoints":{"320":{"slidesPerView":2,"spaceBetween":20},"480":{"slidesPerView":3,"spaceBetween":30},"640":{"slidesPerView":4,"spaceBetween":40}}}'>
+          <div class="swiper-wrapper">
         {% else %}
             <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
         {% endif %}
@@ -24,29 +24,42 @@
             </div>
         {% endfor %}
         {% if settings.slider %}
+                 </div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                 <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-            </div>
         {% else %}
             </div>
         {% endif %}
     </div>
 </section>
- <script>
-    var swiper = new Swiper('.swiper', {
-    direction: 'horizontal',
-    effect	: 'slide',
-	slidesPerView: 1,
-	spaceBetween: 30,
 
-	breakpoints: {
-		768: {
-			slidesPerView: 1
-		}
-	}
-     
-    });
+ <script>
+   // basic options for all sliders
+let defaults = {
+  spaceBetween: 5,
+  slidesPerView: 2
+};
+// call init function
+initSwipers(defaults);
+
+function initSwipers(defaults = {}, selector = ".swiper") {
+  let swipers = document.querySelectorAll(selector);
+  swipers.forEach((swiper) => {
+    // get options
+    let optionsData = swiper.dataset.swiper
+      ? JSON.parse(swiper.dataset.swiper)
+      : {};
+    // combine defaults and custom options
+    let options = {
+      ...defaults,
+      ...optionsData
+    };
+
+    //console.log(options);
+    // init
+    new Swiper(swiper, options);
+  });
+}
 
     
   </script>
