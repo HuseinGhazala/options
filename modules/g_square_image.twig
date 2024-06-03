@@ -1,0 +1,87 @@
+<section id="g_square_image_{{sectionId}}" class="ads container">
+    <div class="imgs">
+        {% for item in settings.images %}
+            {% if loop.index <= 3 %}
+               <div class="img "  data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back" >
+					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
+					<div class="over">
+						<div class="text">
+							<p>
+								{{item.square_title}}
+							</p>
+							<a href="{{item.square_url}}">
+								<button type="button" class="hover:opacity-95 duration-300">
+										تسوق الان
+								</button>
+							</a>
+						</div>
+					</div>
+				</div>
+				{% elseif loop.index == 4 %}
+			<div class="img f_img" data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back">
+					<div class="card h-100">
+						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top">
+						<div class="over">
+							<div class="text bg-dark bg-opacity-50 p-2">
+								<p class="mb-2 text-white">
+									{{ item.square_title}}
+								</p>
+								<a href="{{item.square_url}}">
+									<button type="button" class="btn btn-light btn-block">
+										تسوق الان
+									</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+   
+</section>
+{% schema %}
+{
+    "name": {
+        "ar": "صور مربعه - جلامور",
+        "en": "square image - gulamore"
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "images": {
+            "type": "list",
+            "label": {
+                "ar": "الصور",
+                "en": "images"
+            },
+            "settings":{
+                    "square_image": {
+                        "type": "image",
+                        "label": {
+                            "ar": "اختر الصوره",
+                            "en": "select image"
+                        }
+                    },
+                    "square_title": {
+                        "type": "text",
+                        "label": {
+                            "ar": "العنوان",
+                            "en": "title"
+                        }
+                    },
+                    "square_url": {
+                        "type": "category",
+                        "label": {
+                            "ar": "الرابط",
+                            "en": "link"
+                        }
+                    }
+            }
+            
+        }
+    }
+}
+
+
+{% endschema %}

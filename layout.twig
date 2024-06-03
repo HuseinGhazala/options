@@ -23,6 +23,7 @@
         :root {
             --primary-color: {{store.colors.primary}};
             --text-color-primary-bg: {{store.colors.text_of_primary_bg}};
+
             --sub-primary-color: #521B25;
             --white-color: #fff;
             --warning-color:  #FFCF57;
@@ -83,11 +84,12 @@
     <link rel="stylesheet" href="{{ asset_url ~ 'main.css?v=1.219' }}" />
 
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_cat.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_fixed_bannar.css') }}" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+   
     {% if session.lang.code == 'ar' %}
         <link rel="stylesheet" href="{{ asset_url ~ 'main.rtl.css?v=1.25' }}">
     {% endif %}
@@ -137,11 +139,10 @@
     {% if settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};{% endif %}
   }
 </style>
-
 {% block top_body %}{% endblock %}
-
 <div class="app d-flex flex-column visible">
     <div class="header">
+
         {% block header %}{% endblock %}
     </div>
     <div class="main flex-grow-1 app-content"
@@ -190,6 +191,12 @@
         }
     }
 </script>
+dgsgsgdsgdgsd
+<style>
+      :root{
+          --title-bg: url({{settings.titlebg_image}});
+      }
+   </style>
 
 <script src="{{ asset_url ~ 'jquery-3.6.0.min.js?v=1.0.0' }}" ></script>
 
@@ -206,8 +213,8 @@
   <!-- Initialize Swiper -->
  
 {% block footer_scripts %}{% endblock %}
-
 </body>
+
 
 </html>
 
@@ -525,6 +532,25 @@
         "default": "Changa"
       }
     }
+  },
+  "titlebg":{
+    "name": {
+      "ar": "خلفية العنوان",
+      "en": "Title background"
+    },
+    "icon": "fa fa-paint-brush",
+    "display": true,
+    "settings": {
+      "image": {
+        "type": "image",
+        "label": {
+          "ar": "الصورة",
+          "en": "Image"
+        }
+      }
+    }
   }
+
+
 }
 {% endschema %}

@@ -1,68 +1,28 @@
-<section id="g_cat_{{sectionId}}" class="g_cat">
+<section id="g_cat_{{sectionId}}" class="g_cat" dir="ltr">
     <div class="container d-flex flex-column align-items-center justify-content-center ">
-      <div  class="mb-[55px]">
-
-          {% include 'title.twig' with { 'component_title': settings } %}  
-      </div>
-        {% if settings.slider %}
-          <div id="g_cat_slider_{{sectionId}}" class="swiper" data-swiper='{"spaceBetween":12,"slidesPerView":3,"pagination":{"el":".swiper-pagination"},"autoplay":{"delay":"1000"},"breakpoints":{"320":{"slidesPerView":2,"spaceBetween":20},"480":{"slidesPerView":3,"spaceBetween":30},"640":{"slidesPerView":4,"spaceBetween":40}}}'>
-          <div class="swiper-wrapper">
-        {% else %}
-            <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
-        {% endif %}
-        {% for item in settings.categorys %}
-            <div class="{{settings.slider ? 'swiper-slide' : 'd-flex flex-column align-items-center products-item'}} "  data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back" style="max-width: 150px; {{ loop|length > 3 and not settings.slider ? 'max-width: 200px;' : '' }}">
-                <div class="overflow-hidden rounded-md image-parent">
+        <div class="mb-4" style="margin-bottom: 55px;">
+            {% include 'title.twig' with { 'component_title': settings } %}
+        </div>
+    
+        <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
+            {% for item in settings.categorys %}
+                <div class="d-flex flex-column align-items-center products-item" data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration="400" data-sal-easing="ease-out-back" style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
+                    <div class="overflow-hidden rounded image-parent">
+                        <a href="{{item.url}}">
+                            <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">
+                        </a>
+                    </div>
                     <a href="{{item.url}}">
-
-                        <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">
+                        <h3 class="mt-3 text-center font-weight-medium text-dark" style="font-size: 1.25rem;">{{item.category_name}}</h3>
                     </a>
                 </div>
-                <a href="{{item.url}}">
-                    <h3 class="mt-3 text-center font-weight-medium text-xl text-dark">{{item.category_name}}</h3>
-                </a>
-            </div>
-        {% endfor %}
-        {% if settings.slider %}
-                 </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-        {% else %}
-            </div>
-        {% endif %}
+            {% endfor %}
+        </div>
     </div>
 </section>
 
- <script>
-   // basic options for all sliders
-let defaults = {
-  spaceBetween: 5,
-  slidesPerView: 2
-};
-// call init function
-initSwipers(defaults);
 
-function initSwipers(defaults = {}, selector = ".swiper") {
-  let swipers = document.querySelectorAll(selector);
-  swipers.forEach((swiper) => {
-    // get options
-    let optionsData = swiper.dataset.swiper
-      ? JSON.parse(swiper.dataset.swiper)
-      : {};
-    // combine defaults and custom options
-    let options = {
-      ...defaults,
-      ...optionsData
-    };
 
-    //console.log(options);
-    // init
-    new Swiper(swiper, options);
-  });
-}
-
-    
-  </script>
 {% schema %}
 
 {
@@ -79,27 +39,6 @@ function initSwipers(defaults = {}, selector = ".swiper") {
                 "ar": "عنوان السكشن ؟",
                 "en": "عنوان السكشن ؟"
             }
-        },
-        "slider": {
-            "type": "checkbox",
-            "label": {
-                "ar": "العرض فى نظام slider",
-                "en": "العرض فى نظام slider"
-            }
-        },
-        "loop": {
-            "type": "checkbox",
-            "label": {
-                "ar": "تكرار الاقسام",
-                "en": "تكرار الاقسام"
-            },
-            "conditions": [
-                {
-                    "id": "slider",
-                    "operation": "=",
-                    "value": true
-                }
-            ]
         },
         "categorys": {
             "type": "list",
