@@ -1,0 +1,120 @@
+<section id="slider_bannar_g" class="slider-bannars !pt-[0]">
+<div class='slider-bannars_items' >
+    {% for item in settings.bannars %}
+      
+      <section style="background-size: 100% 100% !important; width: 100vw !important;" class="slider-bannars-moving bg-no-repeat py-[50px] px-[25px] flex items-center justify-center gap-[15px] flex-col sm:flex-row">
+        <div class="photo hidden sm:block w-[250px] md:w-[350px]">
+          <img loading="lazy" width='100%' src='{{item.F_image}}' alt="img"> 
+        </div>
+
+        <div class=" content text-center text font-Cairo"> 
+          <h2 class="text-black text-[38px] md:text-[42px] font-semibold leading-[50px]">{{ item.bannar_title }}  </h2>
+          <p class="text-dark mt-[16px] text-[16px] md:text-[18px] font-normal leading-[30px] ">{{item.bannar_desc}}</p>
+          <a href="{{item.bannar_url}}">
+            <button  class="w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg  hover:opacity-75 duration-300 bg-[var(--f-color)] text-white" >تسوق الان</button>
+          </a>
+        </div>
+
+        <div class="photo w-[200px] md:w-[350px] self-center sm:self-end sm:translate-y-[50px] translate-y-[0]">
+          <img loading="lazy" src='{{item.S_image}}' width='100%' alt="img">
+        </div> 
+      </section>
+    {% endfor %}
+</div>
+</section>
+
+<script>
+ let sections = document.querySelectorAll('.slider-bannars-moving');
+  let arrBannars = '{{settings.bannars | json_encode | raw }}';
+
+  function onResize() {
+    sections.forEach((section, index) => {
+      if (window.innerWidth <= 600) section.style.backgroundImage = `url('${JSON.parse(arrBannars)[index].bannar_M_image}')`;
+      else section.style.backgroundImage = `url('${JSON.parse(arrBannars)[index].bannar_D_image}')`;
+    })
+  }
+
+  onResize();
+  window.onresize = onResize;
+
+  
+document.addEventListner('DOMContentLoaded',()=>{
+    $('.slider-bannars_items').slick();
+})
+
+
+</script>
+
+{% schema %}
+
+{
+    "name":{
+        "ar":"بانر متحرك - جلامور",
+        "en":"sliderbannar - glamour"
+    },
+    "icon": "fal fa-user",
+    "display":"true",
+    "settings":{
+        "bannars": {
+            "type": "list",
+            "label": {
+                "ar": "الخلفيات",
+                "en": "bannars"
+            },
+            "settings": {
+                "bannar_D_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "خلفيه الكمبيوتر",
+                        "en": "desktop image"
+                    }
+                },
+                "bannar_M_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "خلفيه الهاتف",
+                        "en": "mobile image"
+                    }
+                },
+                "F_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "الصوره الاولي",
+                        "en": "first image"
+                    }
+                },
+                "S_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "الصوره الثانيه",
+                        "en": "second image"
+                    }
+                },
+                "bannar_title": {
+                    "type": "text",
+                    "label": {
+                        "ar": " عنوان البانر",
+                        "en": "bannar title"
+                    }
+                },
+                "bannar_desc": {
+                    "type": "text",
+                    "label": {
+                        "ar": " وصف البانر",
+                        "en": "bannar description"
+                    }
+                },
+                "bannar_url": {
+                    "type": "url",
+                    "label": {
+                        "ar": "الرابط",
+                        "en": "link"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+{% endschema %}
