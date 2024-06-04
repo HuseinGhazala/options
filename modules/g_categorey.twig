@@ -6,7 +6,7 @@
     
         <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
             {% for item in settings.categorys %}
-                <div class="d-flex flex-column align-items-center products-item" data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration="400" data-sal-easing="ease-out-back" style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
+                <div class="d-flex flex-column align-items-center products-item"  data-aos-delay="{{loop.index}}00" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
                     <div class="overflow-hidden rounded image-parent">
                         <a href="{{item.url}}">
                             <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">

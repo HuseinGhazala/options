@@ -9,6 +9,9 @@
     justify-content: center;
     
 }
+.img.f_img {
+    grid-column: 4 / 1;
+}
 
 .ads {
     font-weight: 600;

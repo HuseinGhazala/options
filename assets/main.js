@@ -1,3 +1,4 @@
+
 var fixed_header;
 var sticky;
 var cart_products = [];

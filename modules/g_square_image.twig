@@ -2,7 +2,7 @@
     <div class="imgs">
         {% for item in settings.images %}
             {% if loop.index <= 3 %}
-               <div class="img "  data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back" >
+               <div class="img "  data-aos-delay="{{loop.index}}00" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" >
 					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
 					<div class="over">
 						<div class="text">
@@ -18,11 +18,11 @@
 					</div>
 				</div>
 				{% elseif loop.index == 4 %}
-			<div class="img f_img" data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back">
+			<div class="img f_img" data-aos-delay="{{loop.index}}00" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
 					<div class="card h-100">
 						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top">
 						<div class="over">
-							<div class="text bg-dark bg-opacity-50 p-2">
+							<div class="text bg-opacity-50 p-2">
 								<p class="mb-2 text-white">
 									{{ item.square_title}}
 								</p>

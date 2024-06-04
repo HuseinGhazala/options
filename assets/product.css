@@ -1,0 +1,9 @@
+.product-item img {
+object-fit: unset;
+width: 100%;
+}
+.product-item {
+min-width: 100%;
+max-width: 100%;
+}
+
