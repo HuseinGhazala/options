@@ -1,0 +1,79 @@
+/* Section */
+.slider-bannars {
+    padding-top: 0; /* Remove default padding */
+  }
+  
+
+  
+  /* Individual Loop Item */
+  .slider-bannars-moving {
+    background-size: 100% 100%;
+    width: 100vw;
+    background-repeat: no-repeat;
+    padding: 50px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  }
+  
+  /* Photo (hidden on small screens) */
+  .photo.hidden {
+    display: none;
+  }
+  
+  /* Photo (visible on small screens and up) */
+  .photo.sm\:block {
+    display: block;
+    width: 250px;
+  }
+  
+  .photo.md\:width-350px {
+    width: 350px;
+  }
+  
+  /* Text Content Container */
+  .content.text-center.text.font-Cairo {
+    text-align: center;
+  }
+  
+  /* Banner Title */
+  .text-black.text-large.md:text-x-large.font-semibold.leading-extra-large {
+    color: black;
+    font-size: 1.25rem; /* Assuming large = 1.25rem */
+    line-height: 1.5rem; /* Assuming extra-large = 1.5rem */
+    font-weight: semibold;
+  }
+  
+  .md\:text-x-large {
+    font-size: 1.5rem; /* Assuming x-large = 1.5rem */
+  }
+  
+  /* Banner Description */
+  .text-dark.margin-top-large.text-medium.md:text-large.font-normal.leading-large {
+    color: #333 (assuming dark = #333);
+    margin-top: 1rem; /* Assuming large = 1rem */
+    font-size: 1em; /* Assuming medium = 1em */
+    line-height: 1.25rem; /* Assuming large = 1.25rem */
+    font-weight: normal;
+  }
+  
+  .md\:text-large {
+    font-size: 1.125rem; /* Assuming large = 1.125rem */
+  }
+  
+  /* Button */
+  .button.button-primary.width-full.margin-top-large.height-large.text-medium.font-bold.rounded-lg.hover:opacity-75.duration-300.text-white {
+    width: 100%;
+    margin-top: 1rem; /* Assuming large = 1rem */
+    padding: .5rem 1rem; /* Assuming medium = .5rem, 1rem */
+    border-radius: .25rem;
+    background-color: var(--f-color); /* Assuming `var(--f-color)` is defined */
+    color: white;
+    transition: opacity .3s ease-in-out;
+  }
+  
+  .button:hover {
+    opacity: .75; /* Override default hover opacity */
+  }
