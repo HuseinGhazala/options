@@ -271,7 +271,7 @@
 
 .rtl .description-title {
     margin-left: unset;
-    margin-right: 40px;
+    margin-right: 0px;
 }
 
 .description-paragrah {
@@ -284,7 +284,7 @@
 
 .rtl .description-paragrah {
     margin-left: unset;
-    margin-right: 72px;
+    margin-right: 0;
 }
 
 .tooltip-info-icon{
@@ -300,12 +300,12 @@
 }
 .rtl .card-table {
     margin-left: unset;
-    margin-right: 72px;
+    margin-right: 0px;
 }
 
 .card-table-header{
-    background-color: var(--secondary-color-alt4);
-    color:var(--secondary-color-alt3);
+    background-color: var(--primary-color);
+    color:#fff;
     font-size: 1.167rem;
     font-weight: var(--font-weight-sizeOne);
 }
@@ -722,7 +722,7 @@
 
     .rtl .description-title {
         margin-left: unset;
-        margin-right: 20px;
+        margin-right: 0px;
     }
 
     .bundle-offer-details-products {

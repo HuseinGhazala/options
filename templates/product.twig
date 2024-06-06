@@ -135,7 +135,7 @@
 
     <section class="product products-details-page">
         <div class="container pb-5">
-            <section class="products-details mb-5">
+            <section class="mb-5 products-details">
                 <div>
                     <div class="row">
 
@@ -346,272 +346,336 @@
                             </div>
 
                             <div class="border-product"></div>
-                            <div class="border-product">
+                            <div class="flex justify-between border-product">
                                 <h4 class="product-title">{{ locals.product_share }}</h4>
                                 <div class="product-icon">
                                     <div class="product-social d-flex">
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}" target="_blank"><i class="icon-facebook-f"></i></a>
-                                        <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}" target="_blank"><i class="icon-pinterest"></i></a>
-                                        <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}" target="_blank"><i class="icon-twitter"></i></a>
-                                        <a href="https://api.whatsapp.com/send?text={{ locals.check_out_this_product }}:{{ product.name }} {{ product.html_url }}" target="_blank">
-                                            <i class="icon-whatsapp"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}" target="_blank">
+                                                                <i class="fa-brands fa-facebook-f"></i>                                        </a>
+                                        <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}" target="_blank">
+                            <i class="fa-brands fa-pinterest"></i>                                        </a>
+                                                                    <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}" target="_blank">
+                            <i class="fa-brands fa-x-twitter"></i>                                        </a>
+                                                                    <a href="https://api.whatsapp.com/send?text={{ locals.check_out_this_product }}:{{ product.name }} {{ product.html_url }}" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i>                                        </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            {% if product.bundle_offer %}
-            <section class="bundle-offer-details-section mt-5">
-                <div class="d-flex align-items-center">
-                    <div class="description-icon">
-                        <span class="icon-gift"></span>
-                    </div>
-                    <div class="description-title">
-                        <div class="bundle-offer-title">{{ product.bundle_offer.name }}</div>
-                        <div class="bundle-offer-title-description">{{ product.bundle_offer.description }}</div>
-                    </div>
-                </div>
-                <div class="description-paragrah">
-                    <div class="bundle-offer-products">
-                        <div class="row bundle-offer-details-products">
-                            {% for key, product in product.bundle_offer.products.results | slice(0, 5) %}
-                                <div class="prod-col prod-col-tb">
-                                    {% include 'product-card.twig' with {'product' : product, 'index': key} %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% if product.bundle_offer.products.results | length > 5 %}
-                    <div class="bundle-offer-more">
-                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ locals.bundle_offer_all_products }}</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </section>
-            {% endif %}
-
-
-            {% if product.description and product.description| striptags | trim | length > 0 %}
-                <section id="product-description" class="mt-5">
-                    <div class="d-flex align-items-center">
-                        <div class="description-icon">
-                            <span class="icon-fact_check_black"></span>
-                        </div>
-                        <div class="description-title">
-                            {{ locals.product_description }}
-                        </div>
-                    </div>
-                    <div class="description-paragrah text-justify description-text-clear">
-                        {{ product.description | raw }}
-                    </div>
-                </section>
-            {% endif %}
-
-            {% if product.has_variants %}
-                <section class="product-selection mt-5">
-                    <div>
-                        <div class="d-flex align-items-center">
-                            <div class="description-icon">
-                                <span class="icon-format_list_bulleted"></span>
-                            </div>
-                            <div class="description-title">
-                                {{ locals.product_options }}
-                            </div>
-                        </div>
-
-                        <div class="card-table d-none d-lg-block">
-                            <div class="card">
-                                <div class="card-body card-table-header">
-                                    <div class="row">
-                                        {% for option in product.options %}
-                                            <div class="col">{{option.name}}</div>
-                                        {% endfor %}
-                                        <div class="col col-price">{{ locals.product_images }}</div>
-                                        <div class="col col-price">{{ locals.product_price }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% for variant in product.variants %}
-                            {% if not variant.unavailable %}
-                                <div  class="card-table options-table">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row flex-column flex-lg-row align-items-start align-items-lg-center">
-
-
-                                                {% for key, attribute in variant.attributes %}
-                                                    <div class="col m-col">
-                                                        <span class="variant-name-sm d-inline-block d-lg-none">{{ product.options[key].name }}</span>
-                                                        <span>{{ attribute.value }}</span>
                                                     </div>
-                                                {% endfor %}
+                                                </div>
+                                            </div>
+                                        </section>
 
-                                                <div class="col">
-                                                    {% if variant.images | length > 0 %}
-                                                        <div class="d-flex m-col">
-                                                            {% for key, image in variant.images %}
-                                                                <div class="variant-image-wrapper" data-var-id="{{ variant.id }}">
-                                                                    <div class="box-1-1">
-                                                                        <div class="content">
-                                                                            <a data-index="{{ key }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;" >
-                                                                                <img src="{{ image.image.medium }}" data-image-url="{{ image.image.full_size }}" loading="lazy">
-                                                                            </a>
+
+                                        {% if product.bundle_offer %}
+                                        <section class="mt-5 bundle-offer-details-section">
+                                            <div class="d-flex align-items-center">
+                                                <div class="description-icon">
+                                                    <span class="icon-gift"></span>
+                                                </div>
+                                                <div class="description-title">
+                                                    <div class="bundle-offer-title">{{ product.bundle_offer.name }}</div>
+                                                    <div class="bundle-offer-title-description">{{ product.bundle_offer.description }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="description-paragrah">
+                                                <div class="bundle-offer-products">
+                                                    <div class="row bundle-offer-details-products">
+                                                        {% for key, product in product.bundle_offer.products.results | slice(0, 5) %}
+                                                            <div class="prod-col prod-col-tb">
+                                                                {% include 'product-card.twig' with {'product' : product, 'index': key} %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                {% if product.bundle_offer.products.results | length > 5 %}
+                                                <div class="bundle-offer-more">
+                                                    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ locals.bundle_offer_all_products }}</a>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </section>
+                                        {% endif %}
+                            <style>
+
+                                        #abas{
+                                        margin:0;
+                                        padding:0;
+                                        }
+                                        #abas li{
+                                        display:inline-block;
+                                        border-bottom:none;
+                                        background-color:#EEEEEE;
+                                        }
+                                        #abas li a{
+                                        padding: 10px 20px;
+                                        display: block;
+                                        text-decoration:none;
+                                        color:#000000;
+                                        }
+                                        #abas li.selecionada{
+                                        background-color:#FFFFFF;
+                                        position:relative;
+                                        top:1px;
+                                        font-weight:bold;
+                                        }
+                                        #abas li.selecionada a{
+                                        padding-top: 11px;
+                                        background: var(--primary-color);
+                                        color: #fff;
+                                        }
+                                        .conteudo{
+                                        display:block;
+                                        padding:10px;
+                                        display:none;
+                                        }
+                                        .conteudo.visivel{
+                                        display:block;
+                                        }
+                                        
+                                     
+                            </style>
+                            <ul id="abas" class="teste">
+                                {% if product.description and product.description| striptags | trim | length > 0 %}
+                                <li class="selecionada"><a id="aba_1" >تفاصيل المنتج</a></li>
+                                {% endif %}
+                                {% if product.has_variants %}
+                                    <li><a id="aba_2" >مميزات المنتج</a></li>
+                            {% endif %}
+                            {% if store.is_product_reviews_enabled %}
+                            <li><a id="aba_3" >تقييمات المنتج</a></li>
+                            {% endif %}
+                            </ul>
+                            <div id="conteudos">
+                            <div id="conteudo_1" class="conteudo visivel">
+                                {% if product.description and product.description| striptags | trim | length > 0 %}
+                                            <section id="product-description" class="mt-5">
+                                                <div class="text-justify description-paragrah description-text-clear">
+                                                    {{ product.description | raw }}
+                                                </div>
+                                            </section>
+                                        {% endif %}
+                            </div>
+                            <div id="conteudo_2" class="conteudo">
+                            {% if product.has_variants %}
+                                            <section class="mt-5 product-selection">
+                                                <div>
+                                                    <div class="card-table d-none d-lg-block">
+                                                        <div class="card">
+                                                            <div class="card-body card-table-header">
+                                                                <div class="row">
+                                                                    {% for option in product.options %}
+                                                                        <div class="col">{{option.name}}</div>
+                                                                    {% endfor %}
+                                                                    <div class="col col-price">{{ locals.product_images }}</div>
+                                                                    <div class="col col-price">{{ locals.product_price }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% for variant in product.variants %}
+                                                        {% if not variant.unavailable %}
+                                                            <div  class="card-table options-table">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row flex-column flex-lg-row align-items-start align-items-lg-center">
+
+
+                                                                            {% for key, attribute in variant.attributes %}
+                                                                                <div class="col m-col">
+                                                                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ product.options[key].name }}</span>
+                                                                                    <span>{{ attribute.value }}</span>
+                                                                                </div>
+                                                                            {% endfor %}
+
+                                                                            <div class="col">
+                                                                                {% if variant.images | length > 0 %}
+                                                                                    <div class="d-flex m-col">
+                                                                                        {% for key, image in variant.images %}
+                                                                                            <div class="variant-image-wrapper" data-var-id="{{ variant.id }}">
+                                                                                                <div class="box-1-1">
+                                                                                                    <div class="content">
+                                                                                                        <a data-index="{{ key }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;" >
+                                                                                                            <img src="{{ image.image.medium }}" data-image-url="{{ image.image.full_size }}" loading="lazy">
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        {% endfor %}
+                                                                                    </div>
+                                                                                {% else %}
+                                                                                    <span class="d-none d-lg-inline">{{ locals.variants_no_image }}</span>
+                                                                                {% endif %}
+                                                                            </div>
+
+                                                                            <div class="col m-col">
+                                                                                <span class="variant-name-sm d-inline-block d-lg-none">{{ locals.product_price }}</span>
+                                                                                {% if variant.formatted_sale_price %}
+                                                                                    <h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{ variant.formatted_sale_price }}
+                                                                                        <del>{{ variant.formatted_price }}</del>
+                                                                                    </h4>
+                                                                                {% else %}
+                                                                                    <h4 class="d-inline-block" style="font-size: 1.2rem">{{ variant.formatted_price }}</h4>
+                                                                                {% endif %}
+                                                                            </div>
+
+
+
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-                                                            {% endfor %}
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                </div>
+                                            </section>
+                                        {% endif %}  </div>
+                            <div id="conteudo_3" class="conteudo">
+                                {% if store.is_product_reviews_enabled %}
+                                            <section class="mt-5 review-details">
+                                                <div>
+                                                    <div class="flex-wrap d-flex align-items-center" style="width: 100%">
+                                                        <div class="description-icon">
+                                                            <span class="icon-reviews_black"></span>
                                                         </div>
-                                                    {% else %}
-                                                        <span class="d-none d-lg-inline">{{ locals.variants_no_image }}</span>
-                                                    {% endif %}
+                                                        <div class="description-title">
+                                                            {{ locals.product_reviews }}
+                                                        </div>
+                                                        {% if product.rating %}
+                                                        <div class="rating-section">
+                                                                <div>
+                                                                    {% include 'rating-stars.twig' with {'rating' : product.rating.average } %}
+                                                                    <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
+                                                                </div>
+                                                        </div>
+                                                        {% endif %}
+
+                                                        &nbsp;
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-primary add-review-btn" data-toggle="modal" data-target="#exampleModalCenter"><span class="icon-add_circle"></span>{{ locals.add_product_review}} </button>
+                                                    </div>
+                                                    <div class="reviews-break-down-div description-paragrah">
+                                                        <div class="mt-3 mb-4 d-flex align-items-center">
+                                                            {% if product.rating %}
+                                                            <h4 class="rating-average">{{ product.rating.average }}</h4>
+                                                            <div class="d-flex flex-column">
+
+
+                                                                <div class="row card-rate">
+                                                                    <span class="rating_count_5">{{ product.rating['5_ratings'].count }}</span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span> &nbsp;  &nbsp;
+                                                                    <span>{{ locals.reviews_rating_5 }}</span>
+                                                                </div>
+                                                                <div class="row card-rate">
+                                                                    <span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                                                    <span>{{ locals.reviews_rating_4 }}</span>
+                                                                </div>
+                                                                <div class="row card-rate">
+                                                                    <span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1 deactive"></span>
+                                                                    <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                                                    <span>{{ locals.reviews_rating_3 }}</span>
+                                                                </div>
+                                                                <div class="row card-rate">
+                                                                    <span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1 deactive"></span>
+                                                                    <span class="icon-star1 deactive"></span>
+                                                                    <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                                                    <span>{{ locals.reviews_rating_2 }}</span>
+                                                                </div>
+                                                                <div class="row card-rate">
+                                                                    <span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
+                                                                    <span class="icon-star1"></span>
+                                                                    <span class="icon-star1 deactive"></span>
+                                                                    <span class="icon-star1 deactive"></span>
+                                                                    <span class="icon-star1 deactive"></span>
+                                                                    <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                                                    <span>{{ locals.reviews_rating_1 }}</span>
+                                                                </div>
+                                                            </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="reviews-break-down-empty description-paragrah d-none">
+                                                        <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
+                                                            <span>{{ locals.product_no_reviews }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="comment-section description-paragrah">
+                                                        {% include 'customer-reviews.twig' with {'reviews' : product.reviews.data } %}
+
+                                                        {% if product.reviews.next_page > 1 %}
+                                                        <div class="text-right">
+                                                            <a href="/products/{{ product.id }}/reviews" type="button" class="btn all-reviews-btn">
+                                                                {{ locals.go_all_reviews }}
+                                                            </a>
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+
                                                 </div>
+                                            </section>
 
-                                                <div class="col m-col">
-                                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ locals.product_price }}</span>
-                                                    {% if variant.formatted_sale_price %}
-                                                        <h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{ variant.formatted_sale_price }}
-                                                            <del>{{ variant.formatted_price }}</del>
-                                                        </h4>
-                                                    {% else %}
-                                                        <h4 class="d-inline-block" style="font-size: 1.2rem">{{ variant.formatted_price }}</h4>
-                                                    {% endif %}
-                                                </div>
+                                            <!-- Modal -->
+                                            {% include 'customer-reviews-add.twig' with {'product' : product } %}
 
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-
-                    </div>
-                </section>
-            {% endif %}
-
-            {% if store.is_product_reviews_enabled %}
-                <section class="mt-5 review-details">
-                    <div>
-                        <div class="d-flex flex-wrap align-items-center" style="width: 100%">
-                            <div class="description-icon">
-                                <span class="icon-reviews_black"></span>
+                                        {% endif %}  </div>
                             </div>
-                            <div class="description-title">
-                                {{ locals.product_reviews }}
-                            </div>
-                            {% if product.rating %}
-                            <div class="rating-section">
-                                    <div>
-                                        {% include 'rating-stars.twig' with {'rating' : product.rating.average } %}
-                                        <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
-                                    </div>
-                            </div>
-                            {% endif %}
+                                    
+        <script>
+            var abas = document.getElementById("abas");
+                var conteudos = document.getElementById("conteudos");
 
-                            &nbsp;
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary add-review-btn" data-toggle="modal" data-target="#exampleModalCenter"><span class="icon-add_circle"></span>{{ locals.add_product_review}} </button>
-                        </div>
-                        <div class="reviews-break-down-div description-paragrah">
-                            <div class="d-flex align-items-center mt-3 mb-4">
-                                {% if product.rating %}
-                                <h4 class="rating-average">{{ product.rating.average }}</h4>
-                                <div class="d-flex flex-column">
+                /* Essa função retira a classe "selecionada" e esconde a DIV com o conteúdo visível */
+                function limparSelecao(){
+                abas.getElementsByClassName("selecionada")[0].classList.remove("selecionada");
+                conteudos.getElementsByClassName("visivel")[0].classList.remove("visivel");
+                }
 
+                /* Essa é executada quando alguma das abas é clicada */
+                abas.addEventListener("click", function(event){
+                var abaClicada = event.target.id;
+                var itemSelecionado = abaClicada.substring(abaClicada.lastIndexOf("_"));
 
-                                    <div class="row card-rate">
-                                        <span class="rating_count_5">{{ product.rating['5_ratings'].count }}</span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span> &nbsp;  &nbsp;
-                                        <span>{{ locals.reviews_rating_5 }}</span>
-                                    </div>
-                                    <div class="row card-rate">
-                                        <span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ locals.reviews_rating_4 }}</span>
-                                    </div>
-                                    <div class="row card-rate">
-                                        <span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1 deactive"></span>
-                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ locals.reviews_rating_3 }}</span>
-                                    </div>
-                                    <div class="row card-rate">
-                                        <span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1 deactive"></span>
-                                        <span class="icon-star1 deactive"></span>
-                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ locals.reviews_rating_2 }}</span>
-                                    </div>
-                                    <div class="row card-rate">
-                                        <span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
-                                        <span class="icon-star1"></span>
-                                        <span class="icon-star1 deactive"></span>
-                                        <span class="icon-star1 deactive"></span>
-                                        <span class="icon-star1 deactive"></span>
-                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ locals.reviews_rating_1 }}</span>
-                                    </div>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="reviews-break-down-empty description-paragrah d-none">
-                            <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
-                                <span>{{ locals.product_no_reviews }}</span>
-                            </div>
-                        </div>
+                /* Chama função que tira a seleção do item atual */
+                limparSelecao();
 
-                        <div class="comment-section description-paragrah">
-                            {% include 'customer-reviews.twig' with {'reviews' : product.reviews.data } %}
+                /* Insere a classe "selecionada" na nova aba visível */
+                event.target.parentElement.classList.add("selecionada");
 
-                            {% if product.reviews.next_page > 1 %}
-                            <div class="text-right">
-                                <a href="/products/{{ product.id }}/reviews" type="button" class="btn all-reviews-btn">
-                                    {{ locals.go_all_reviews }}
-                                </a>
-                            </div>
-                            {% endif %}
-                        </div>
+                /* Insere a classe "visivel" para o conteúdo da aba selecionada */
+                conteudos.querySelector("#conteudo"+ itemSelecionado).classList.add("visivel");
+                });
+        </script>
+                
 
-                    </div>
-                </section>
-
-                <!-- Modal -->
-                {% include 'customer-reviews-add.twig' with {'product' : product } %}
-
-            {% endif %}
+        
 
             {% if (product.related_products | length) >  0 %}
                 <section class="mt-5 mb-5">
-                    <div class="d-flex align-items-center">
-                        <div class="description-icon" style="font-size: 24px; height: 24px">
-                            <span class="icon-uniE011"></span>
-                        </div>
-                        <div class="description-title">
-                            <div class="">{{ locals.similar_products_title }}</div>
-                        </div>
+                    <div class="justify-center d-flex align-items-center">
+                     
+                       
+                         {% include 'title.twig' with { 'component_title': locals.similar_products_title  } %}
+
                     </div>
                     <div class="description-paragrah">
                         <div class="">
@@ -640,28 +704,28 @@
         </div>
 
         {% if product.bundle_offer.products.results | length > 5 %}
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable bundle-offer-products-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <div class="bundle-offer-title"></div>
-                        <div class="bundle-offer-title-description"></div>
-                        <div class="bundle-offer-products">
-                            <div class="row bundle-offer-details-products-all">
-                                {% for key, product in product.bundle_offer.products.results %}
-                                    <div class="prod-col prod-col-tb">
-                                        {% include 'product-card.twig' with {'product' : product, 'index': key} %}
-                                    </div>
-                                {% endfor %}
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable bundle-offer-products-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="bundle-offer-title"></div>
+                            <div class="bundle-offer-title-description"></div>
+                            <div class="bundle-offer-products">
+                                <div class="row bundle-offer-details-products-all">
+                                    {% for key, product in product.bundle_offer.products.results %}
+                                        <div class="prod-col prod-col-tb">
+                                            {% include 'product-card.twig' with {'product' : product, 'index': key} %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         {% endif %}
     </section>
 {% endblock %}
@@ -921,17 +985,20 @@
 
 
         var initSlick = function(productImages) {
-            var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
-            var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
+            var arrowNextClass = (window.appDirection === 'ltr') ? 'fa-arrow-right': 'fa-arrow-left';
+            var arrowPrevClass = (window.appDirection === 'ltr') ? 'fa-arrow-left' : 'fa-arrow-right';
 
             $('#product-images-slick').slick({
+             
+                slidesToShow: 4,
+                slidesToScroll: 1,
                 infinite: false,
-                autoplay: false,
+                autoplay: true,
                 arrows: (productImages.length > 1),
                 dots: (productImages.length > 1),
                 rtl: !(window.appDirection === 'ltr'),
-                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
-                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>'
+                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><i class="fa-solid '+arrowNextClass+'"></i></button>',
+                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><i class="fa-solid '+arrowPrevClass+'"></i></button>'
             });
         }
 
@@ -981,10 +1048,10 @@
 
             if(screenWidth >= 768 || editingMode){
                 $('#related-products.products-slider').slick({
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
                     infinite: false,
-                    autoplay: false,
+                    autoplay: true,
                     arrows: true,
                     dots: false,
                     rtl: !(window.appDirection === 'ltr'),
@@ -994,13 +1061,16 @@
                         {
                             breakpoint: 992,
                             settings: {
-                                slidesToShow: 5,
-                                slidesToScroll: 5
+                                slidesToShow: 4,
+                                slidesToScroll: 1
                             }
                         },
                         {
                             breakpoint: 768,
-                            settings: "unslick"
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
                         }
                     ]
                 });

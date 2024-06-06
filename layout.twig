@@ -21,14 +21,14 @@
     <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-    .sm-search-div.show{
-      display:  block !important;
-    }
-    ul.main-nav{
-      justify-content: center !important;
-      align-items: center;
-      gap: 10px;
-    }
+        .sm-search-div.show{
+          display:  block !important;
+        }
+        ul.main-nav{
+          justify-content: center !important;
+          align-items: center;
+          gap: 10px;
+        }
         :root {
             --primary-color: {{store.colors.primary}};
             --text-color-primary-bg: {{store.colors.text_of_primary_bg}};
@@ -76,46 +76,42 @@
     {% if session.lang.code == 'ar' %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap-rtl.css?v=1.05' }}" />
     {% else %}
-        <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap.min.css?v=1.01' }}" />
+        <link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap.min.css?v=1.01') }}" />
     {% endif %}
 
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap-fixes.css?v=1.11' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap-fixes.css?v=1.11') }}" />
 
 
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'jquery-ui.min.css' }}"  />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'jquery-ui.structure.min.css' }}"  />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'jquery-ui.theme.min.css' }}"  />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.min.css') }}"  />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.structure.min.css') }}"  />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.theme.min.css') }}"  />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'slick.css' }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'slick-theme.css?v=1.07' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('slick.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('slick-theme.css?v=1.07') }}" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'slide-menu.css' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu.css') }}" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'slide-menu-style.css?v=1.16' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}" />
 
-    <link rel="stylesheet" href="{{ asset_url ~ 'main.css?v=1.219' }}" />
+    <link rel="stylesheet" href="{{ assetUrl('main.css?v=1.219') }}" />
 
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_cat.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_fixed_bannar.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_sliderbannar.css') }}" />
-        <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_features.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_features.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}" />
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'custom.css' }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_cat.css' }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_square_image.css' }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_fixed_bannar.css' }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'product.css' }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_sliderbannar.css' }}" />
+    
 
 
    
     {% if session.lang.code == 'ar' %}
-        <link rel="stylesheet" href="{{ asset_url ~ 'main.rtl.css?v=1.25' }}">
+        <link rel="stylesheet" href="{{ assetUrl('main.rtl.css?v=1.25') }}">
     {% endif %}
 
     {% block top_links %}{% endblock %}
@@ -140,6 +136,7 @@
   body,html {
     font-family: {% if settings.fonts_name %}{{ strReplace('+', ' ', settings.fonts_name) }}{% else %}'Changa'{% endif %}, sans-serif;
   }
+
   :root {
     {% if settings.colors_header_background_color %}
     --header-primary-color: {{settings.colors_header_background_color}};
@@ -222,17 +219,17 @@
       }
    </style>
 
-<script src="{{ asset_url ~ 'jquery-3.6.0.min.js?v=1.0.0' }}" ></script>
+<script src="{{ assetUrl('jquery-3.6.0.min.js?v=1.0.0') }}" ></script>
 
-<script src="{{ asset_url ~ 'jquery-ui.min.js' }}" ></script>
+<script src="{{ assetUrl('jquery-ui.min.js') }}" ></script>
 
-<script src="{{ asset_url ~ 'popper.min.js?v=1.0' }}" ></script>
-<script src="{{ asset_url ~ 'bootstrap.min.js' }}" ></script>
+<script src="{{ assetUrl('popper.min.js?v=1.0') }}" ></script>
+<script src="{{ assetUrl('bootstrap.min.js') }}" ></script>
 
-<script src="{{ asset_url ~ 'slide-menu.ie.js?v=1.06' }}" ></script>
-<script src="{{ asset_url ~ 'slick.min.js' }}" ></script>
+<script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}" ></script>
+<script src="{{ assetUrl('slick.min.js') }}" ></script>
 
-<script type="text/javascript" src="{{ asset_url ~ 'main.js?v=1.117' }}" ></script>
+<script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}" ></script>
 
   <!-- Initialize Swiper -->
  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

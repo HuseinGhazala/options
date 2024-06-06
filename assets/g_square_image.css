@@ -52,6 +52,7 @@
 }
 
 .ads .img .over .text {
+    width: 100%;
     text-align: right;
     padding: 0 7%;
     height: 100%;
@@ -138,6 +139,9 @@
 }
 
 @media (max-width: 767px) {
+    .img.f_img {
+        grid-column: unset !important;
+    }
     .ads {
         justify-items: center;
         font-size: 20px;

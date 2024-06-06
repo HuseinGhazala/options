@@ -9,9 +9,15 @@ max-width: 100%;
 
 
 .product-item a.btn.btn-primary.btn-product-card-select-variant {
-    width: 100%;
+    width: 90%;
     height: 50px;
 
+}
+.pro-details{
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .box-1-1{
     overflow: hidden;
@@ -21,23 +27,26 @@ max-width: 100%;
     font-size: 13px;
     font-weight: 500;
 }
-   div.desk{
+
+
+.desk{
     z-index: 111111;
     position: relative;
     bottom: -50px;
     transition: all 0.3s;
-   }
-   div.mob{
+}
+.mob{
     display: none;
-   }
+}
+.product-item:hover .desk{
+    bottom: 10px;
+}
 
-
-@media screen and(max-width: 768px) {
-    div.desk{
-     display: none;
+@media (max-width: 768px) {
+    .desk{
+        display: none !important;
     }
-    div.mob{
-        display: block;
-       }
+    .mob{
+        display: block !important;
+    }
  }
-

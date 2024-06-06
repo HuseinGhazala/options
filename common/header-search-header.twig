@@ -2,7 +2,9 @@
 	<div class="container ">
 		<div class="d-flex align-items-center search-header-bar">
 			<div class="d-flex align-items-center bd-highlight header-logo">
-
+                <a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
+					<i class="fa-sharp fa-solid fa-bars"></i>
+				</a>
 				{% if template != 'home' %}
 					<a onclick="goBack()" class="ic-menu-back d-block d-lg-none">
 						<span style="font-weight: bold" class="{% if session.lang.code == 'ar' %}icon-arrow-right{% else %}icon-arrow-left{% endif %} header-theme-icon-primary"></span>
@@ -32,7 +34,7 @@
                     
                     {% for menu in main_navigation_menu.items %}
                         {% if menu.url %}
-                            <li class="top-level-link {% if menu.slug == 'all_categories' %} all-categories {% endif %}" >
+                            <li class="top-level-link " >
                                 <a href="{{ menu.url }}"
                                         {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.name }}</span></a>
                                 {% if menu.items | length > 0 %}
@@ -72,8 +74,8 @@
 					</div>
 				{% endif %}
 				<div class="d-none d-lg-block">
-					<a href="/cart/view" style="color: inherit">
-						<h3 class="cart-header-total"></h3>
+					<a href="/cart/view" style="color: inherit" class="relative">
+						<h3 class="cart-badge"></h3>
 						<i class="fa-solid fa-cart-shopping"></i>
 					</a>
 				</div>
@@ -99,19 +101,16 @@
 						</div>
 					{% endif %}
 				</div>
-                <a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
-					<i class="fa-sharp fa-solid fa-bars"></i>
-				</a>
+               
 				<div class="account-area">
 					{% if customer %}
-						<button type="button" onclick="window.location.href='/account-profile'" class="btn btn-dark account-btn">
+						<button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn">
 							<i class="fa-solid fa-user header-theme-icon-primary" style="position: relative; top: 1px"></i>
 							<span style="position: relative; bottom: 2px">{{ locals.hello }}&nbsp;{{ customer.name }}&nbsp;</span>
 						</button>
 					{% else %}
-						<button type="button" onclick="window.location.href='/auth/login'" class="btn btn-dark account-btn">
+						<button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn">
 							<i class="fa-solid fa-user header-theme-icon-primary" style="position: relative; top: 1px"></i>
-							<span style="position: relative; bottom: 2px">&nbsp;{{ locals.login }}&nbsp;</span>
 						</button>
 					{% endif %}
 				</div>

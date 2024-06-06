@@ -1167,8 +1167,7 @@ ul.main-nav > li > a, .item-all-categories a {
     cursor: pointer;
 }
 
-ul.main-nav > li:hover, .item-all-categories { background-color: #f9f9f9; }
-ul.main-nav > li:hover > a, .item-all-categories > a { color: #333 !important; font-weight:  var(--font-weight-sizeOne); }
+ul.main-nav > li:hover > a, .item-all-categories > a { color: var(--primary-color) !important; font-weight:  var(--font-weight-sizeOne); }
 
 ul.main-nav > li ul.sub-menu-lists {
     margin: 0px;
