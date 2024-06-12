@@ -1,9 +1,9 @@
-<section class="w-full section_c_r space">
+<div class="w-full section_c_r space" section-id="{{ sectionId }}">
 	<div class="container flex items-center justify-center gap-[60px] container_review">
 		{% for item in settings.customer_reviews %}
-			<div class="relative rounded-lg content_tistimonial w-[!33%]">
+			<div class="relative rounded-lg content_tistimonial">
 				<div class="absolute top-0 overflow-hidden imag_raduse">
-					<img loading="lazy" src="{{item.customer_image}} " alt="{{item.customer_name}}">
+					<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
 				</div>
 				<div class="cover_content">
 					<div class="desc_contant">
@@ -20,9 +20,45 @@
 			</div>
 		{% endfor %}
 	</div>
-</section>
+</div>
 
-<style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
+        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
+        var screenWidth = window.screen.width;
+            var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+        
+        if(screenWidth >= 768 || editingMode) {
+            $('[section-id={{ sectionId }}] .container_review').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: false,
+                autoplay: true,
+                arrows: true,
+                dots: false,
+                rtl: !(window.appDirection === 'ltr'),
+                nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
+                prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>',
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: "unslick"
+                    }
+                ]
+            });
+        }
+    });
+</script>
+
+    <style>
 .stars_rating {
   --percent: calc(var(--rating) / 5 * 100%);
   display: inline-block;
@@ -34,7 +70,7 @@
   letter-spacing: 3px;
   background: linear-gradient(90deg, #fc0 var(--percent), #c5c5c5 var(--percent));
   background-clip: text;
-  webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 .section_c_r .slick-track {
         display: flex;
@@ -43,44 +79,7 @@
 .section_c_r .slick-list {
         overflow: visible !important;
 }
-
 </style>
-<script>
-	document.addEventListener("DOMContentLoaded", function () {
-var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
-var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-var screenWidth = window.screen.width;
-var editingMode = {% if store.editing_mode %}
-true
-{% else %}
-false
-{% endif %};
-$('.container_review').slick({
-slidesToShow: 3,
-slidesToScroll: 3,
-infinite: true,
-autoplay: true,
-arrows: true,
-dots: true,
-rtl: !(window.appDirection === 'ltr'),
-nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="' + arrowNextClass + '"></span></button>',
-prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="' + arrowPrevClass + '"></span></button>',
-responsive: [
-{
-breakpoint: 992,
-settings: {
-slidesToShow: 3,
-slidesToScroll: 3
-}
-}, {
-breakpoint: 768,
-settings: "unslick"
-}
-]
-});
-});
-</script>
-
 {% schema %}
 {
     "name": {
