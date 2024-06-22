@@ -1,0 +1,104 @@
+<div class="w-full section_c_r space" section-id="{{ sectionId }}">
+	<div class="container flex items-center justify-center container_review">
+		{% for item in settings.customer_reviews %}
+			<div class="relative rounded-lg content_tistimonial">
+				<div class="absolute top-0 overflow-hidden imag_raduse">
+					<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
+				</div>
+				<div class="cover_content">
+					<div class="desc_contant">
+						{{item.customer_review}}
+					</div>
+					<div class="rating_name">
+						<h2 class="name">{{item.customer_name}}</h2>
+						<div class="stars_rating" style="--rating: {{item.customer_rate}};" aria-label="Rating of this product is 2.3 out of 5."></div>
+						<h2 class="job">
+							{{item.customer_job}}
+						</h2>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+    <style>
+    .container_review {
+        gap: 24px;
+}
+.stars_rating {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+}
+.stars_rating::before {
+  content: "★★★★★";
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, #fc0 var(--percent), #c5c5c5 var(--percent));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section_c_r .slick-list {
+        overflow: visible !important;
+}
+.slick-track {
+    width:100% !important;
+}
+</style>
+{% schema %}
+{
+    "name": {
+        "ar": "اراء العملاء - جلامور",
+        "en": "customer review - glamour"
+    },
+    "icon": "fal fa-user",
+    "display": "true",
+    "settings": {
+        "customer_reviews": {
+            "type": "list",
+            "label": {
+                "ar": "الخلفيات",
+                "en": "banners"
+            },
+            "settings": {
+                "customer_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "صوره العميل",
+                        "en": "customer image"
+                    }
+                },
+                "customer_job": {
+                    "type": "text",
+                    "label": {
+                        "ar": "اكتب وظيفه العميل",
+                        "en": "customer job"
+                    }
+                },
+                "customer_name": {
+                    "type": "text",
+                    "label": {
+                        "ar": "اكتب اسم العميل",
+                        "en": "customer name"
+                    }
+                },
+                "customer_review": {
+                    "type": "text",
+                    "label": {
+                        "ar": "اكتب تعليق العميل",
+                        "en": "customer review"
+                    }
+                },
+                "customer_rate": {
+                    "type": "text",
+                    "label": {
+                        "ar": "اكتب عدد النجوم",
+                        "en": "customer rate"
+                    }
+                }
+            }
+        }
+    }
+}
+{% endschema %}
