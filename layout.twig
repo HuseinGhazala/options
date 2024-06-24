@@ -230,6 +230,9 @@
 <script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}" ></script>
 <script src="{{ assetUrl('slick.min.js') }}" ></script>
 
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+
+
 <script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}" ></script>
 
   <!-- Initialize Swiper -->
@@ -574,8 +577,21 @@
         }
       }
     }
+  },
+  "newsletter":{
+    "name":{
+      "ar":"النشره البريديه",
+      "en":"newsletter"
+    },
+    "settings": {
+      "url": {
+        "type": "url",
+        "label": {
+          "ar": "لينك النشره البريديه",
+          "en": "link for newsletter"
+        }
+      }
+    }
   }
-
-
 }
 {% endschema %}

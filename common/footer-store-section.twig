@@ -1,3 +1,47 @@
+<div class="relative bg-[var(--s-color)] py-8">
+    <div class=" m-auto flex justify-start max-w-[1300px] items-center flex-wrap max-lg:justify-start gap-9 md:gap-6 px-5">
+        <div class="flex items-center justify-between gap-4" >
+            <div class="flex items-center justify-center p-2 bg-white rounded-full w-14 h-14">
+                <i class="sicon-mail text-[24px] text-[var(--f-color)]"></i>
+            </div>
+            <div class="flex flex-col gap-2">
+                <h2 class="text-xl font-semibold ">{{ locals.sub_newsletter }}</h2>
+                <p class="text-sm text-[#636363]">{{ locals.join_desc}}</p>
+            </div>
+        </div>
+        <div id="mc_embed_shell" class="flex-col flex-1 w-full gap-5 felx" >
+            <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+
+
+        <h2 class="mb-4 text-sm font-medium">{{ locals.un_sub}}</h2>
+        <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="flex items-center justify-center gap-2 validate" target="_blank">
+
+                <div id="mc_embed_signup_scroll" class="flex flex-wrap w-[83%] items-center justify-start gap-2">
+                    <input type="email" name="EMAIL" id="mce-EMAIL" required="" value="" placeholder="{{ locals.email }}" class="email_button required email p-[10px] rounded-lg max-h-[48px] flex-1 border-none outline-none"/>
+                </div>
+                <div id="mce-responses" class="clear foot">
+                    <div class="w-0 h-0 overflow-hidden response" id="mce-error-response" style="display: none;"></div>
+                    <div class="w-0 h-0 overflow-hidden response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                <div aria-hidden="true" style="display:none;">
+                    =
+                    <input type="text" name="b_d7da51f96ed5732ca7c262453_979293c931" tabindex="-1" value="">
+                </div>
+                <div class="optionalParent">
+                    <div class="clear foot">
+                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button py-[8px] bg-[var(--f-color)] text-white rounded-lg max-w-[90px] max-h-[48px] px-[16px]" value="{{ locals.sub }}">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="flex flex-col gap-4" >
+            <div class="flex flex-wrap">
+
+            </div>
+        
+    </div>
+</div>
 <div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg">
     <div class="container">
         <div class="row">
@@ -44,54 +88,56 @@
                         <div  class="footer-about-us-links-div {% if store.business_location.show_location %}mt-5{% endif %}">
                             <h1 class="pb-2">{% if about_settings.social_media_title %}{{ about_settings.social_media_title }}{% else %}{{ locals.social_media }}{% endif %}</h1>
                             <div class="social-icons d-flex flex-wrap">
-
-                                {% if store.social_media.items.facebook %}
-                                    <a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
-                                        <i class="fa-brands fa-facebook-f d-flex align-items-center justify-content-center"></i>
-                                    </a>
-                                {% endif %}
-
-                                {% if store.social_media.items.instagram %}
-                                    <a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
-                                        <i class="fa-brands fa-instagram d-flex align-items-center justify-content-center"></i>
-                                    </a>
-                                {% endif %}
-
-                                {% if store.social_media.items.twitter %}
-                                    <a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
-                                        <i class="fa-brands fa-x-twitter d-flex align-items-center justify-content-center"></i>
-                                    </a>
-                                {% endif %}
-
-                                {% if store.social_media.items.snapchat %}
-                                    <a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
-                                        <i class="fa-brands fa-snapchat  d-flex align-items-center justify-content-center"></i>
-                                    </a>
-                                {% endif %}
-
-                                {% if store.social_media.items.tiktok %}
-                                    <a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
-                                        <i class="fa-brands fa-tiktok  d-flex align-items-center justify-content-center"></i>
-                                    </a>
-                                {% endif %}
-
-                                {% if store.social_media.items.phone %}
+                                <div class="contact">
+                                    {% if store.social_media.items.phone %}
                                     <a href="tel:{{ store.social_media.items.phone }}" target="_blank">
                                         <i class="fa-solid fa-phone  d-flex align-items-center justify-content-center"></i>
                                     </a>
-                                {% endif %}
+                                    {% endif %}
 
-                                {% if store.social_media.items.email %}
-                                    <a href="mailto:{{ store.social_media.items.email }}" target="_blank">
-                                        <i class="fa-solid fa-envelope  d-flex align-items-center justify-content-center"></i>
-                                    </a>
-                                {% endif %}
+                                    {% if store.social_media.items.email %}
+                                        <a href="mailto:{{ store.social_media.items.email }}" target="_blank">
+                                            <i class="fa-solid fa-envelope  d-flex align-items-center justify-content-center"></i>
+                                        </a>
+                                    {% endif %}
 
-                                {% if store.social_media.items.website %}
-                                    <a href="{{ store.social_media.items.website }}" target="_blank">
-                                        <span class="icon-globe-secondary d-flex align-items-center justify-content-center"></span>
-                                    </a>
-                                {% endif %}
+                                    {% if store.social_media.items.website %}
+                                        <a href="{{ store.social_media.items.website }}" target="_blank">
+                                            <span class="icon-globe-secondary d-flex align-items-center justify-content-center"></span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="media">
+                                    {% if store.social_media.items.facebook %}
+                                        <a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
+                                            <i class="fa-brands fa-facebook-f d-flex align-items-center justify-content-center"></i>
+                                        </a>
+                                    {% endif %}
+
+                                    {% if store.social_media.items.instagram %}
+                                        <a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
+                                            <i class="fa-brands fa-instagram d-flex align-items-center justify-content-center"></i>
+                                        </a>
+                                    {% endif %}
+
+                                    {% if store.social_media.items.twitter %}
+                                        <a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
+                                            <i class="fa-brands fa-x-twitter d-flex align-items-center justify-content-center"></i>
+                                        </a>
+                                    {% endif %}
+
+                                    {% if store.social_media.items.snapchat %}
+                                        <a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
+                                            <i class="fa-brands fa-snapchat  d-flex align-items-center justify-content-center"></i>
+                                        </a>
+                                    {% endif %}
+
+                                    {% if store.social_media.items.tiktok %}
+                                        <a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
+                                            <i class="fa-brands fa-tiktok  d-flex align-items-center justify-content-center"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>

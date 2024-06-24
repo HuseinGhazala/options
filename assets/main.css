@@ -2074,6 +2074,10 @@ hr {
 .addBtn {
     width: 100%;
 }
+.addBtn .btn{
+    width: 100%;
+    padding: 10px;
+}
 .addBtn .btn:disabled{
     background-color: gray;
 }
@@ -2141,3 +2145,5 @@ hr {
     width: 100%;
 
   }
+
+  
