@@ -41,7 +41,12 @@
 .section_c_r .slick-list {
         overflow: visible !important;
 }
-
+.section_c_r .slick-slide {
+    padding:10px;
+    text-align:center;
+    margin-right:15px;
+    margin-left:15px;
+}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
@@ -49,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function(){
         var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
         var screenWidth = window.screen.width;
         var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-            $('[section-id={{ sectionId }}] .container_review').slick({
-                slidesToShow: 2,
+            $('[section-id={{ sectionId }}] .container_review')?.slick({
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 infinite: false,
                 autoplay: false,
