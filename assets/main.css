@@ -1076,8 +1076,8 @@ button.more-button , a.more-button {
 .store-section .social-icons a {
     border: 1px solid #919191;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2170,6 +2170,8 @@ hr {
 
   .contact{
     margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
   }
   .footer-store-section h1{
     font-size: 18px;
@@ -2188,6 +2190,7 @@ hr {
 }
   .links_social{
     display: flex;
+    width: 100%;
     justify-content: start;
     gap: 8%;
     align-items: center;
@@ -2195,4 +2198,6 @@ hr {
   .media{
     justify-content: center;
     gap: 5%;
+    flex-direction: column;
+    margin-bottom: 5%;
   }

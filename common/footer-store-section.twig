@@ -85,59 +85,65 @@
                             </p>
                         </div>
                         {% endif %}
-                        <div  class="footer-about-us-links-div {% if store.business_location.show_location %}mt-5{% endif %}">
-                            <h1 class="pb-2">{% if about_settings.social_media_title %}{{ about_settings.social_media_title }}{% else %}{{ locals.social_media }}{% endif %}</h1>
-                            <div class="social-icons d-flex flex-wrap">
-                                <div class="contact">
-                                    {% if store.social_media.items.phone %}
+						<div class="media">
+								<h1>{{locals.contact_us}}</h1>
+								<div class="links_social">
+									{% if store.social_media.items.phone %}
                                     <a href="tel:{{ store.social_media.items.phone }}" target="_blank">
                                         <i class="fa-solid fa-phone  d-flex align-items-center justify-content-center"></i>
                                     </a>
                                     {% endif %}
 
-																	{% if store.social_media.items.email %}
-																			<a href="mailto:{{ store.social_media.items.email }}" target="_blank">
-																					<i class="fa-solid fa-envelope  d-flex align-items-center justify-content-center"></i>
-																			</a>
-																	{% endif %}
+									{% if store.social_media.items.email %}
+											<a href="mailto:{{ store.social_media.items.email }}" target="_blank">
+													<i class="fa-solid fa-envelope  d-flex align-items-center justify-content-center"></i>
+											</a>
+									{% endif %}
 
                                     {% if store.social_media.items.website %}
                                         <a href="{{ store.social_media.items.website }}" target="_blank">
                                             <span class="icon-globe-secondary d-flex align-items-center justify-content-center"></span>
                                         </a>
                                     {% endif %}
+								</div>
+                                    
                                 </div>
-                                <div class="media">
-                                    {% if store.social_media.items.facebook %}
+                        <div  class="footer-about-us-links-div {% if store.business_location.show_location %}mt-5{% endif %}">
+                            <h1 class="pb-2">{% if about_settings.social_media_title %}{{ about_settings.social_media_title }}{% else %}{{ locals.social_media }}{% endif %}</h1>
+                            <div class="social-icons  flex-wrap">
+                                <div class="contact">
+								{% if store.social_media.items.facebook %}
                                         <a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
                                             <i class="fa-brands fa-facebook-f d-flex align-items-center justify-content-center"></i>
                                         </a>
                                     {% endif %}
 
-																	{% if store.social_media.items.instagram %}
-																			<a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
-																					<i class="fa-brands fa-instagram d-flex align-items-center justify-content-center"></i>
-																			</a>
-																	{% endif %}
+									{% if store.social_media.items.instagram %}
+											<a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
+													<i class="fa-brands fa-instagram d-flex align-items-center justify-content-center"></i>
+											</a>
+									{% endif %}
 
-																	{% if store.social_media.items.twitter %}
-																			<a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
-																					<i class="fa-brands fa-x-twitter d-flex align-items-center justify-content-center"></i>
-																			</a>
-																	{% endif %}
+									{% if store.social_media.items.twitter %}
+											<a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
+													<i class="fa-brands fa-x-twitter d-flex align-items-center justify-content-center"></i>
+											</a>
+									{% endif %}
 
-																	{% if store.social_media.items.snapchat %}
-																			<a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
-																					<i class="fa-brands fa-snapchat  d-flex align-items-center justify-content-center"></i>
-																			</a>
-																	{% endif %}
+									{% if store.social_media.items.snapchat %}
+											<a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
+													<i class="fa-brands fa-snapchat  d-flex align-items-center justify-content-center"></i>
+											</a>
+									{% endif %}
 
                                     {% if store.social_media.items.tiktok %}
                                         <a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
                                             <i class="fa-brands fa-tiktok  d-flex align-items-center justify-content-center"></i>
                                         </a>
                                     {% endif %}
+                                    
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
