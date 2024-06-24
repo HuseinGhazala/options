@@ -1,5 +1,5 @@
 
-<section  id="slider_bannar_g" class="slider-bannars pt-96">
+<section  id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
 <div class='slider-bannars_items' >
     {% for item in settings.bannars %}
       
@@ -47,7 +47,7 @@
 
         var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
 
-            $('.slider-bannars_items').slick({
+            $('.slider-bannars_items')?.slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: false,
