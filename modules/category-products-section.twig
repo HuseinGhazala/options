@@ -1,77 +1,45 @@
-<div section-id="{{ sectionId }}"
-     data-lg-scroll-offset="130"
-     data-md-scroll-offset="130"
-     data-sm-scroll-offset="94"
-     class="home-products-section section-padding-space">
-    <div class="container slider-container">
-                    {% include 'title.twig' with { 'component_title': settings.category.name } %}
-
-        <div class="d-flex flex-column">
-            <div class="products-slider-wrapper" style="position: relative">
-
-
-                    <div class="products-slider s-slider">
-                        {% for product in settings.category.products %}
-                            <div class="prod-col">
-                                {% include 'product-card.twig' with {'product' : product, 'index': key} %}
-                            </div>
-                        {% endfor %}
-                    </div>
-
-
-                {% if settings.display_more %}
-                    <div class="mt-5 text-center category-products-display-more-section">
-                        <a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}"
-                           class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+<div section-id="{{ sectionId }}" data-lg-scroll-offset="130" data-md-scroll-offset="130" data-sm-scroll-offset="94" class="home-products-section section-padding-space">
+	<div class="container slider-container">
+		{% include 'title.twig' with { 'component_title': settings.category.name } %}
+		<div class="d-flex flex-column">
+			<div class="products-slider-wrapper swiper-container mySwiper" style="position: relative">
+				<div class="products-slider s-slider swiper-wrapper">
+					{% for product in settings.category.products %}
+						<div class="prod-col swiper-slide">
+							{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+						</div>
+					{% endfor %}
+				</div>
+				{% if settings.display_more %}
+					<div class="mt-5 text-center category-products-display-more-section">
+						<a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </div>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+const swiper = new Swiper('.mySwiper', {
+slidesPerView: 4,
+spaceBetween: 10,
+centeredSlides: true,
+loop: true,
+pagination: {
+el: '.swiper-pagination',
+clickable: true
+},
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev'
+}
+});
+});
+</script>
 
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function(){
-            var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
-            var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-
-            var screenWidth = window.screen.width;
-
-            var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-
-            if(screenWidth >= 768 || editingMode){
-                $('[section-id={{ sectionId }}] .products-slider').slick({
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    infinite: false,
-                    autoplay: true,
-                    arrows: true,
-                    dots: false,
-                    rtl: !(window.appDirection === 'ltr'),
-                    nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
-                    prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',
-                    responsive: [
-                        {
-                            breakpoint: 992,
-                            settings: {
-                                slidesToShow: 4,
-                                slidesToScroll: 1
-                            }
-                        },
-                        {
-                            breakpoint: 768,
-                            settings: "unslick"
-                        }
-                    ]
-                });
-            }
-        });
-    </script>
-
-
-    {% schema %}
-    {
+{% schema %}
+{
       "name": {
         "ar": "منتجات التصنيف",
         "en": "Category products"
@@ -107,4 +75,4 @@
         }
       }
     }
-    {% endschema %}
+{% endschema %}

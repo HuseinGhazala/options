@@ -76,7 +76,10 @@
                         {% if product.is_infinite == false and product.quantity <= 0 %}
                         <a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
                         {% elseif ( product.has_options or product.has_fields ) %}
-                        <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+                        <a class="
+                        
+                        
+                        " href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
                         {% else %}
                         <a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
                             <img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20" height="20"/>

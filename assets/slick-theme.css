@@ -183,9 +183,7 @@
     height: 330px;
 }
 
-.products-slider {
-    display: none;
-}
+
 
 .products-slider.slick-initialized{
     display: block;
