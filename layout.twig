@@ -258,9 +258,18 @@ onCompleted();
 
 				{# Local storage #}
 				<script>
+<<<<<<< HEAD
 					localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");
 localStorage.setItem("android", "{{ settings.android_store_url }}");
 localStorage.setItem("mac", "{{ settings.mac_store_url }}");
+=======
+					localStorage.setItem("newsletter", "{{settings.newsletter_url }}");						
+					localStorage.setItem("android", "{{settings.android_store_url }}");						
+					localStorage.setItem("mac", "{{settings.mac_store_url }}");
+					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
+					document.querySelector('a.android-store')?.setAttribute('href', "{{settings.android_store_url }}");
+					document.querySelector('a.mac-store')?.setAttribute('href', "{{settings.mac_store_url }}");
+>>>>>>> 1d0d32cbdacd4cfd67a609018bcd3dfde2a356ba
 				</script>
 
 				<!-- Initialize Swiper -->
