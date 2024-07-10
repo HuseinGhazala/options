@@ -183,11 +183,9 @@
     height: 330px;
 }
 
-.products-slider, .categories-slider {
-    display: none;
-}
 
-.products-slider.slick-initialized, .categories-slider.slick-initialized {
+
+.products-slider.slick-initialized{
     display: block;
     height: auto;
 }
