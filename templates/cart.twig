@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="discount-progress-linear" class="{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'min_not_reached' %}d-block{% else %}d-none{% endif %}">
-                            <div class="progress-bar free-shipping-rule-progress" style="width: {{ cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min }}%">
+                            <div class="progress-bar free-shipping-rule-progress" style="width: 100%">
                                 {% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'applied' %}
                                     <span>{{ locals.coupon_discount_free_shipping }}</span>
                                 {% else %}
