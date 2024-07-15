@@ -179,7 +179,7 @@
   .icon-long-arrow-right:before {
     content: "\f178";
   }
-  .icon-trash-alt:before {
+  .icon-trash-alt::before {
     content: "\f2ed";
   }
   .icon-search1:before {
