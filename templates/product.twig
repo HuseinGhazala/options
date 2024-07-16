@@ -70,15 +70,6 @@
 			position: absolute;
 		}
 
-		.slick-dots li {
-			width: 10px;
-			height: 10px;
-		}
-
-		.slick-dots li button::before {
-			font-size: 8px !important;
-		}
-
 		.pswp__button.pswp__button--share {
 			display: none !important;
 		}
@@ -100,7 +91,7 @@
 		class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
 		<!-- Background of PhotoSwipe.
-																																             It's a separate element, as animating opacity is faster than rgba(). -->
+		It's a separate element, as animating opacity is faster than rgba(). -->
 		<div class="pswp__bg"></div>
 
 		<!-- Slides wrapper with overflow:hidden. -->
@@ -968,8 +959,6 @@ $('.product-images-carousel-thumbs').append('<div class="col-3">\n' + '         
 
 }
 
-initSlick(productImages);
-
 } else {
 $('.product-images-carousel').addClass('d-none');
 $('.product-images-carousel-thumbs').addClass('d-none-important');
@@ -1006,26 +995,6 @@ scrollTop: $($.attr(this, 'href')).offset().top -(
 
 });
 
-$(document).ready(function () {
-initSlick(productImages);
-});
-
-$(document).on('click', '.thumb-image-a', function (event) {
-var tarr = event.target;
-
-$('#product-images-slick').slick('slickGoTo', $(tarr).attr('data-index'), true);
-});
-
-
-$(document).on('click', '#product-images-slick .image-link', function (event) {
-$('.pswp').removeClass('d-hide');
-$('.app').addClass('d-hide');
-
-openPhotoSwipe(productImages.map(function (image) {
-return image.image.full_size
-}), $('#product-images-slick .slick-active').attr('data-slick-index'));
-
-});
 
 $(document).on('click', '.variant-image-wrapper a', function (event) {
 $('.pswp').removeClass('d-hide');
@@ -1044,27 +1013,6 @@ openPhotoSwipe(images, $(elm).attr('data-index'));
 });
 
 
-var initSlick = function (productImages) {
-var arrowNextClass = (window.appDirection === 'ltr') ? 'fa-arrow-right' : 'fa-arrow-left';
-var arrowPrevClass = (window.appDirection === 'ltr') ? 'fa-arrow-left' : 'fa-arrow-right';
-
-$('#product-images-slick').slick({
-
-slidesToShow: 4,
-slidesToScroll: 1,
-infinite: false,
-autoplay: true,
-arrows: (productImages.length > 1),
-dots: (productImages.length > 1),
-rtl: !(window.appDirection === 'ltr'),
-nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><i class="fa-solid ' + arrowNextClass + '"></i></button>',
-prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><i class="fa-solid ' + arrowPrevClass + '"></i></button>'
-});
-}
-
-$('#product-images-slick').on('init', function (event, slick) {
-$('.product-images-carousel').removeClass('product-images-carousel-init');
-});
 
 var openPhotoSwipe = function (productImages, index) {
 var pswpElement = document.querySelectorAll('.pswp')[0];
@@ -1093,48 +1041,6 @@ $('.app').removeClass('d-hide');
 
 gallery.init();
 };
-
-var showRelatedProducts = function () {
-var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
-var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-
-var screenWidth = window.screen.width;
-
-var editingMode = {% if store.editing_mode %}
-true
-{% else %}
-false
-{% endif %};
-
-if (screenWidth >= 768 || editingMode) {
-$('#related-products.products-slider').slick({
-slidesToShow: 4,
-slidesToScroll: 1,
-infinite: false,
-autoplay: true,
-arrows: true,
-dots: false,
-rtl: !(window.appDirection === 'ltr'),
-nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="' + arrowNextClass + '"></span></button>',
-prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="' + arrowPrevClass + '"></span></button>',
-responsive: [
-{
-breakpoint: 992,
-settings: {
-slidesToShow: 4,
-slidesToScroll: 1
-}
-}, {
-breakpoint: 768,
-settings: {
-slidesToShow: 2,
-slidesToScroll: 1
-}
-}
-]
-});
-}
-}
 
 // Swiper
   document.addEventListener('DOMContentLoaded', function () {
