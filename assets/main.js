@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* mobile slide menu */
     fixMenu();
 
-    menuFiixedHeader();
+    // menuFiixedHeader();
 });
 
 
