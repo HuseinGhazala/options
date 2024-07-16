@@ -56,28 +56,6 @@
 </section>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        $('[section-id={{ sectionId }}] .main-slider').slick({
-            infinite: false,
-            autoplay: true,
-            arrows: false,
-            dots: {% if (settings.hide_dots or (settings.slider | length <= 1)) %}false{% else %}true{% endif %},
-            rtl: !(window.appDirection === 'ltr')
-        });
-
-
-        $('[section-id={{ sectionId }}] .main-slider').on('beforeChange', function(event, { slideCount: count }, currentSlide, nextSlide){
-            var currentImage = $('[section-id={{ sectionId }}] .slider-image-'+nextSlide);
-            if(!currentImage.attr('src')){
-                currentImage.attr('srcset',currentImage.attr('data-srcset'))
-                currentImage.attr('src',currentImage.attr('src'))
-            }
-        });
-    });
-</script>
-
-
 {% schema %}
 {
   "name": {
