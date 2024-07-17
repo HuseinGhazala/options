@@ -73,6 +73,7 @@
     flex-grow: 1;
 }
 
+	
 
 .cart-product-delete
  ,.cart-products-action
@@ -1044,3 +1045,4 @@
     padding: 1rem;
     border-radius: 8px;
 }
+

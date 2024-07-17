@@ -1,6 +1,6 @@
 <section
     id="video-banner" section-id="{{ sectionId }}"
-    class="relative h-[400px] md:h-[500px] mx-[10px] sm:mx-4 md:mx-0"
+    class="relative md:h-[500px] mx-[10px] sm:mx-4 md:mx-0"
   >
   <div  class="video-parent h-full w-full rounded-lg sm:rounded-none">
     <img loading="lazy" class="bg-image" src="{{settings.video_image}}" alt="ban-bg">
@@ -15,6 +15,17 @@
   </div>
   </section>
 
+<style>
+    #video-banner {
+        margin-bottom: 111px
+    }
+
+    @media (max-width: 765px) {
+        #video-banner {
+            margin-bottom: 56px;
+        }
+    }
+</style>
 
 <script>
  let playVideo = (video) => {

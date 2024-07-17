@@ -8340,14 +8340,7 @@ input[type=radio].sr-only:checked ~ div.ads .img .over {
   }
   .g_features .products-item h3{font-size:14px;line-height:18px}
 }
-#video-banner {
-  height: -moz-fit-content;
-  height: fit-content;
-  margin-bottom: 111px;
-  @media (max-width: 765px) {
-      margin-bottom: 56px;
-  }
-  }
+
   #video-banner::before {
     content: "";
   position:absolute;
@@ -11340,4 +11333,15 @@ section.sticky-product-bar.bg-white.p-5.target\:btn:target.rounded-b-none {
   background: linear-gradient(180deg, rgb(255 255 255 / 66%) 0%, rgb(255 255 255) 100%);
   transition: all 0.3s ease-in-out;
 
+}
+
+.cart-product-delete span.icon-delete::before {
+  content: "\f1f8";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
+}
+
+button.btn.btn-lg.btn-block span {
+  margin-right: unset !important;
 }
