@@ -7,7 +7,7 @@
             <div class="search-bar flex-grow-1">
                 {% if not ('hide_search_bar' in header_settings.header_options) %}
                 <input id="search-input" placeholder="{% if header_settings.header_search_placeholder %} {{ header_settings.header_search_placeholder }} {% else %} {{ locals.search }} {% endif %}" autocomplete="off" spellcheck="false">
-                <img src="{{ asset_url ~ 'search-icon.svg' }}" alt="" width="31" height="31">  
+                <img src="{{ asset_url ~ 'search-icon.svg' }}" alt="" width="31px" height="31px">  
                
                 {% endif %}
             </div>
@@ -18,10 +18,10 @@
                 <span class="mx-2">{{ session.currency.code }}</span>
             </div>
             <div class="cart-icon-section">
-                <img src="{{ asset_url ~ 'cart-icon.svg' }}" alt="" width="31" height="31">
+                <img src="{{ asset_url ~ 'cart-icon.svg' }}" alt="" width="31px" height="31px">
                 <div id="cart-counter" class="cart-items-counter"></div>
             </div>
-            <img src="{{ asset_url ~ 'drop-down.svg' }}" alt="" width="31" height="31">
+            <img src="{{ asset_url ~ 'drop-down.svg' }}" alt="" width="31px" height="31px">
         </a>
         <div id="header-shopping-cart" class="cart-sidebar d-flex flex-column">
             <div class="cart-sidebar-header m-5">
@@ -30,7 +30,7 @@
             </div>
             <div id="cart-items" class="d-flex flex-column m-5"></div>
             <div id="empty-cart" class="text-center flex-column text-center flex-grow-1 justify-content-center">
-                <div><img src="{{ asset_url ~ 'empty-cart.svg' }}" alt="" width="84" height="88"></div>
+                <div><img src="{{ asset_url ~ 'empty-cart.svg' }}" alt="" width="84px" height="88px"></div>
                 <div class="empty-cart-title text-nowrap pt-3">{{ locals.empty_cart }}</div>
             </div>
         </div>

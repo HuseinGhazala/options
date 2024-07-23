@@ -681,9 +681,14 @@ button.more-button , a.more-button {
 }
 
 .footer .logistics-pay-icons {
-    margin-right: -8px;
-    margin-left: -8px;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
 }
+
 .footer-copyrights-vat-certificate{
     background: #FBEAEF;
 }
@@ -692,10 +697,6 @@ button.more-button , a.more-button {
 }
 .footer .logistics-pay-icons a img{
     width: 70%;
-}
-
-.footer .icons div {
-    padding: 10px 15px;
 }
 
 .vat-crn-sections span {
@@ -1017,11 +1018,6 @@ button.more-button , a.more-button {
 .product-item small {
     font-size: 1rem;
     color: #8B8B8B;
-}
-
-.product-item img {
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .products-title-section {

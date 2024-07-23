@@ -1,6 +1,6 @@
 <div class="search-header header-theme-bg-primary">
 	<div class="container ">
-		<div class="d-flex align-items-center search-header-bar">
+		<div style='margin-bottom: 10px' class="d-flex align-items-center search-header-bar">
 			<div class="d-flex align-items-center bd-highlight header-logo">
                 <a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
 					<i class="fa-sharp fa-solid fa-bars"></i>
@@ -28,7 +28,7 @@
 				</a>
 			</div>
 			
-			 <nav role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
+			 <nav style="overflow-y: scroll;" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
 
                 <ul class="flex-wrap main-nav d-flex flex-grow-1 menu-header-theme-text-for-primary-bg">
                     
@@ -88,7 +88,7 @@
 						<div id="tooltip" class="d-none popover" role="tooltip">
 							<div class="arrow"></div>
 							<div class="gift-popover-body">
-								<img src="{{ asset_url }}gift-popover-icon.svg" width="24" height="24"/>
+								<img src="{{ asset_url }}gift-popover-icon.svg" width="24px" height="24px"/>
 								<p class="my-2 h6">
 									{{ locals.cart_send_as_gift }}
 								</p>

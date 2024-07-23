@@ -231,7 +231,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 				{# Local storage #}
 				<script>
-					localStorage.setItem("newsletter", "{{settings.newsletter_url }}");						
+					localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");						
 					localStorage.setItem("android", "{{settings.android_store_url }}");						
 					localStorage.setItem("mac", "{{settings.mac_store_url }}");
 					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
@@ -589,7 +589,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		},
 		"settings": {
 			"url": {
-				"type": "url",
+				"type": "text",
 				"label": {
 					"ar": "لينك النشره البريديه",
 					"en": "link for newsletter"

@@ -94,7 +94,7 @@
 								<div class="d-flex">
 									<input class="form-control send-coupon" type="text" placeholder="{{ locals.coupon_discount_enter }}"/>
 									<button type="button" class="btn btn-primary" onclick="sendCoupon()">
-										<img class="send-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
+										<img class="send-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15px" height="15px"/>
 										{{ locals.coupon_discount_submit }}
 									</button>
 								</div>
@@ -105,7 +105,7 @@
 								<span>{{ cart.coupon.message }}</span>&nbsp;
 								<a onclick="deleteCoupon()" style="color: inherit; cursor: pointer">
 									<span class="icon-trash-alt"></span>
-									<img class="delete-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
+									<img class="delete-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15px" height="15px"/>
 								</a>
 							</div>
 						{% endif %}
@@ -197,7 +197,7 @@ addDeleteProgressImage()
 
 function addDeleteProgressImage() {
 $('.cart-product-delete a .prefix', document).addClass('d-none');
-$('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src=" {{ asset_url }}spinner.gif" width="15" height="15"/>');
+$('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src=" {{ asset_url }}spinner.gif" width="15px" height="15px"/>');
 }
 
 $(document).on('click', '.cart-product-delete a', function (event) {

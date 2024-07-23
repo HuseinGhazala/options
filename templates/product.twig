@@ -340,7 +340,7 @@
 													<input type="hidden" class="send-notify-product-id" value="{{ product.selected_product.id }}">
 													<input class="form-control send-notify-email" type="email" placeholder="{{ locals.notify_me_hint }}"/>
 													<button type="button" class="btn btn-primary btn-send-notify" onclick="sendProductNotifyMe()">
-														<img class="send-notify-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
+														<img class="send-notify-progress d-none" src="{{ asset_url }}spinner.gif" width="15px" height="15px"/>
 														{{ locals.send }}
 													</button>
 												</div>
@@ -355,7 +355,7 @@
 								<div class="border-product"></div>
 								<button id="product-view-add-to-cart" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
 									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25" height="25"/>
+									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
 									<span>{{ locals.add_to_cart }}</span>
 								</button>
 

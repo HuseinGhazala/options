@@ -1,15 +1,19 @@
 .product-item img {
-object-fit: unset;
-width: 100%;
+    object-fit: unset;
 }
 .product-item {
 min-width: 100%;
 max-width: 100%;
 }
 
+#product-view-add-to-cart img {
+    width: 25px;
+    height: 25px;
+}
+
 
 .product-item a.btn.btn-primary.btn-product-card-select-variant {
-    width: 90%;
+    width: 90%; 
     height: 50px;
 
 }
