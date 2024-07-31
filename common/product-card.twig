@@ -66,16 +66,35 @@
 						</div>
 					{% endif %}
 
-					<button type="button" id="open-prodcut-details" class="open-prodcut-details">
-						<i class="fa-regular fa-eye"></i>
-						<span>عرض التفاصيل</span>
-					</button>
+<button type="button"
+    id="open-product-details-{{ product.id }}"
+    class="open-product-details"
+    data-product-id="{{ product.selected_product.id }}"
+    data-product-name="{{ product.name }}"
+    data-product-image="{{ imageUrl(product.images[0]['image']['medium'], { w: 400, q: 85, f: 'auto' }) }}"
+    data-real-price="{{ product.formatted_sale_price ? product.formatted_sale_price : product.formatted_price  }}"
+    data-product-price="{{ product.formatted_price }}"
+    data-discount="{{ product.discount_percentage }}"
+    data-category="{{ product.categories[0].name }}"
+    data-description="{{ product.short_description }}"
+
+		data-id="{{ product.id }}"
+		data-isinfinite="{{ product.is_infinite }}"
+		data-quantity="{{ product.quantity }}"
+		data-has-options="{{ product.has_options }}"
+		data-has-fields="{{ product.has_options }}"
+		data-slug="{{ product.slug }}"
+		data-asset-url="{{ asset_url }}"
+>
+    <i class="fa-regular fa-eye"></i>
+    <span>عرض التفاصيل</span>
+</button>
+
 
 
 					{% if product.is_infinite == false and product.quantity <= 0 %}
 						<small style="font-size: 1.1rem">{{ locals.lbl_error_product_out_of_stock }}</small>
 					{% endif %}
-
 				</div>
 				<div style=" text-align: center" class="mob">
 					{% if product.is_infinite == false and product.quantity <= 0 %}
@@ -94,7 +113,117 @@
 	</div>
 {% endif %}
 
+<style>
+/* إعدادات الـpopup */
+.popup-product-details {
+    display: none; /* مخفي افتراضياً */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* تعتيم الخلفية */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    display: flex;
+		align-items: center;
+		gap: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.popup-image {
+    max-width: 200px; /* عرض الصورة */
+    margin-right: 20px; /* تباعد بين الصورة والنص */
+}
+
+.photo-product {
+	min-width: 200px;
+}
+
+.popup-text {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	max-width: 300px;
+}
+
+.popup-text .name {
+	font-size: 19px;
+	font-weight: 700;
+}
+
+.price-product-discound {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+#close-popup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+}
+
+</style>
+
 <script>
-	const openProductDetails = document.querySelector('button#open-prodcut-details');
-	
+	document.addEventListener('DOMContentLoaded', function() {
+		const popupContainer = document.querySelector('div.popup-product-details');
+
+		document.querySelectorAll('.open-product-details').forEach(button => {
+			button.addEventListener('click', function() {
+				const productId = this.getAttribute('data-product-id');
+				const productName = this.getAttribute('data-product-name');
+				const productDescription = this.getAttribute('data-description');
+				const productImage = this.getAttribute('data-product-image');
+				const productRealPrice = this.getAttribute('data-real-price');
+				const productPrice = this.getAttribute('data-product-price');
+				const productDiscount = this.getAttribute('data-discount');
+				const productCategory = this.getAttribute('data-category');
+				const dataId = this.getAttribute('data-id');
+				const prodcutSlug = this.getAttribute('data-slug');
+
+				// ملء محتوى النافذة المنبثقة
+				popupContainer.innerHTML = `
+					<div class="popup-content">	
+						<i class="fa-solid fa-xmark" id="close-popup"></i>
+						<div class='photo-product'>
+							<img src="${productImage}" alt="Product Image" class="popup-image" />
+						</div>
+
+						<div class="popup-text">
+							<div class='category'>${productCategory}</div>
+							<div class='name'>${productName}</div>
+							<div class='description'>${productDescription}</div>
+							<div class='product-formatted-price theme-text-primary'>${productRealPrice}</div>
+							${ productDiscount ? 
+								`<div class='price-product-discound'>
+									<del class='price product-formatted-price-old'>${productPrice}</del>
+									<span class="product-formatted-price-discount" style="color:#f25f5f;">{{ locals.product_discount }} ${productDiscount}%</span>
+								</div>`
+							: '' }
+
+							<a class="btn btn-primary btn-product-card-select-variant" href="/products/${ prodcutSlug }">{{ locals.read_more }}</a>
+
+						</div>
+					</div>
+				`;
+				popupContainer.style.display = 'flex';
+
+				document.getElementById('close-popup').addEventListener('click', function() {
+					popupContainer.style.display = 'none';
+				});
+			});
+		});
+	});
 </script>
