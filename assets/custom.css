@@ -8443,7 +8443,7 @@ input[type=radio].sr-only:checked ~ div.product_deadline .img .percentage_icon::
   transform: rotate(270deg);
 }
 .product_deadline .data{position:relative;width:70%;padding:24px 0 24px 24px}
-.product_deadline .data .title{font-size:14px;font-weight:400;color:var(--f-color)}
+.product_deadline .data .title{font-size:14px;font-weight:400;color:#CE5A67; }
 .product_deadline .data h2{font-size:18px;font-weight:600;--tw-text-opacity:1;color:rgba(65, 68, 68, 1);color:rgba(65, 68, 68, var(--tw-text-opacity))}
 .product_deadline .data .s-rating-stars {
   margin: 40px 0;
