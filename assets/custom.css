@@ -10837,8 +10837,11 @@ section.sticky-product-bar.s-infinite-scroll-wrapper > button.p-5.rounded-md.rou
 .common_questions .accordion-common h2[aria-expanded=true] {
   padding-bottom: 11px !important;
 }
+.common_questions .accordion-common h2[aria-expanded=false] .accordion-title-common {
+  color: #303A42;
+}
 .common_questions .accordion-common h2[aria-expanded=true] .accordion-title-common {
-  color: #333;
+  color: #CE5A67;
 }
 .common_questions .accordion-common h2[aria-expanded=true] i.icon-add ,
 i.fa-solid {
