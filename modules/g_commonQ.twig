@@ -6,11 +6,11 @@
     {% for question in settings.questions %}
       <div class="accordion-item-common duration-300 border-b-[#0000001c] border-b rounded-sm rtl:pl-[26px] ltr:pr-[26px] shadow-common w-[calc(100%_-_4px)] md:w-[calc(50%_-_12px)]">
         <h2 class='flex items-center cursor-pointer justify-between py-[30px]' id="accordion-button-1" aria-expanded="false">
-          <span class="accordion-title-common text-[#303A42] text-[14px] md:text-[19px] font-bold">{{ question.ques }}</span>
+          <span style='color: #CE5A67;' class="accordion-title-common text-[14px] md:text-[19px] font-bold">{{ question.ques }}</span>
           <i class="fa-solid fa-plus icon-add duration-300 text-[#303A42]"></i> 
         </h2>
         <div class="min-h-0 overflow-hidden bg-transparent opacity-0 accordion-content-common max-h-0">
-          <p class='mb-[25px] text-[14px] text-[#303A42]'>{{ question.ans }}</p>
+          <p style='color: #303A42;' class='mb-[25px] text-[14px]'>{{ question.ans }}</p>
         </div>
       </div>
     {% endfor %}
