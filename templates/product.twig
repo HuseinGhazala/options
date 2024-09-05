@@ -206,8 +206,8 @@
 						<div class="col-lg-6  col-product-info {% if product.selected_product.images | length <= 1 %}col-product-info-single-image{% endif %}">
 
 
-							<section>
-								<h1>{{ product.name }}</h1>
+							<section class="sec_des">
+								<h1 class ="text-[24px] font-bold leading-[147%]">{{ product.name }}</h1>
 								<div class="d-flex flex-column flex-lg-row product-features">
 									{% if product.rating %}
 										<div>
@@ -244,12 +244,12 @@
 								{% if product.short_description is not empty %}
 									<p>
 										{{ product.short_description | raw }}
-										&nbsp;<a id="product-description-a" href="#product-description" class="text-color-primary">{{ locals.product_description_more }}</a>
+										&nbsp;<a id="product-description-a" href="#product-description" class="text-[16px] font-medium leading-[25px]">{{ locals.product_description_more }}</a>
 									</p>
 								{% endif %}
 								<div class="d-flex">
 									<div>
-										<h1 class="product-formatted-price theme-text-primary">
+										<h1 class="product-formatted-price text-[24px] font-bold leading-[147%]">
 											{% if product.selected_product.formatted_sale_price %}
 												{{ product.selected_product.formatted_sale_price }}
 											{% else %}
@@ -296,7 +296,7 @@
 							<form id="product-form">
 								<input id="product-id" type="hidden" value="{{ product.selected_product.id }}">
 
-								<div class="size-box">
+								<div class="size-box g-custom-size-box">
 
 									{{ template_for_product_variants_list }}
 
@@ -332,7 +332,7 @@
 								<div class="section-out-of-stock-notify-me {% if product.selected_product.out_of_stock %}d-block{% else %}d-none{% endif %}">
 									<div class="border-product" style="margin-top: 15px"></div>
 									<div>
-										<h4 class="product-title">{{ locals.lbl_error_product_out_of_stock }}</h4>
+										<h4 class="product-title ">{{ locals.lbl_error_product_out_of_stock }}</h4>
 										<form>
 											<div class="form-group form-notify-me">
 												<h4>{{ locals.notify_me_title }}</h4>
@@ -352,8 +352,13 @@
 
 							</form>
 							
-							<div class="product-buttons {% if product.selected_product.out_of_stock %}d-none{% else %}d-block{% endif %}">
-								<div class="border-product"></div>
+							<div class="product-buttons flex gap-10 {% if product.selected_product.out_of_stock %}d-none{% else %}{% endif %}">
+								<div class="border-product "></div>
+								<button id="product-view-add-to-cart" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
+									<span>{{ locals.add_to_cart }}</span>
+								</button>
 								<button id="product-view-add-to-cart" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
 									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
 									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
@@ -419,8 +424,17 @@
 				</section>
 			{% endif %}
 			<style>
+				.sec_des p span{
+					font-size:16px;
+					font-weight: 400;
+					line-height:25px;
+				}
+				.g-custom-size-box div label {
+					font-size:16px;
+					font-weight: 500;
+					line-height:25px;
 
-
+				}
 				.slide-product .swiper-slide {
 					background-size: cover;
 					background-position: center;
@@ -491,7 +505,7 @@
 			</style>
 			<ul id="abas" class="teste">
 				{% if product.description and product.description| striptags | trim | length > 0 %}
-					<li class="selecionada">
+					<li class="selecionada ">
 						<a id="aba_1">تفاصيل المنتج</a>
 					</li>
 				{% endif %}
