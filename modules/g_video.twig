@@ -4,7 +4,7 @@
     class="relative md:h-[500px] mx-[10px] sm:mx-4 md:mx-0">
   <div class="video-parent h-full w-full rounded-lg sm:rounded-none">
     <img loading="lazy" id="bgImage" class="bg-image w-full" src="{{ settings.video_image }}" alt="Background Image">
-    <video id="videoPlayer" src="{{ settings.video_url }}" playsinline muted></video>
+    <video id="videoPlayer" src="{{ settings.video_url }}" playsinline loop muted controls></video>
     <div class="text-box contain flex gap-4 md:gap-8 items-center text-white z-[3] absolute top-[50%] right-[5%] md:right-[10%] lg:right-[15%] xl:right-[20%] 2xl:right-[25%] translate-y-[-50%]">
       <div class='flex flex-col gap-2'>
         <h4 id="txt" style="color:{{ settings.title_color }}" class='text-center md:text-[40px] font-semibold leading-[1.5]'>{{ settings.video_title }}</h4>
@@ -40,8 +40,8 @@ video {
   height: 100%;
   object-fit: cover;
   z-index: 2;
-  display: none; /* Initially hide video */
-  opacity:1;
+  display: none; 
+  opacity: 1;
 }
 
 .text-box {
@@ -84,34 +84,54 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoTag = document.querySelector('#videoPlayer');
   const bgImage = document.querySelector('#bgImage');
   const videoParent = document.querySelector('.video-parent');
+  const playButton = document.querySelector('#play');
+  const textBox = document.querySelector('.text-box');
   const isAutoplay = '{{ settings.video_control }}' === 'true';
 
-  // Update video source if it's not already set
-  if (!videoTag.src) {
-    videoTag.src = '{{ settings.video_url }}';
-  }
-
-  const toggleVideo = () => {
-    if (videoTag.paused) {
-      videoTag.play();
-      bgImage.style.display = 'none';
-    } else {
-      videoTag.pause();
-      bgImage.style.display = 'block';
-    }
-  };
-
   if (isAutoplay) {
-    videoTag.style.display = 'block'; // Show video if autoplay is enabled
-    videoTag.addEventListener('click', toggleVideo);
+    videoTag.style.display = 'block'; 
+    videoTag.style.opacity = '1'; 
+    bgImage.style.display = 'none'; 
+    textBox.style.display = 'none'; 
+    playButton.style.display = 'none';
+    videoTag.play(); 
   } else {
+    videoTag.style.display = 'none';
+    playButton.style.display = 'block'; 
+    textBox.style.display = 'flex'; 
+    bgImage.style.display = 'block';
+
+    
     videoParent.addEventListener('click', () => {
-      videoTag.style.display = 'block'; // Show video when clicked
-      toggleVideo();
+      videoTag.style.display = 'block'; 
+      videoTag.style.opacity = 1; 
+      videoTag.play(); 
+      bgImage.style.display = 'none'; 
+      playButton.style.display = 'none'; 
+      textBox.style.display = 'none'; 
+    });
+
+    
+    videoTag.addEventListener('pause', () => {
+      videoTag.style.display = 'none'; 
+      videoTag.style.opacity = 0; 
+      videoTag.play();
+      bgImage.style.display = 'block'; 
+      playButton.style.display = 'block'; 
+      textBox.style.display = 'flex';
+    });
+
+  
+    videoTag.addEventListener('ended', () => {
+      videoTag.style.display = 'none'; 
+      bgImage.style.display = 'block'; 
+      playButton.style.display = 'block';
+      textBox.style.display = 'flex'; 
     });
   }
 });
 </script>
+
 {% schema %}
 
 {
