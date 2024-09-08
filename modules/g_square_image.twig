@@ -9,7 +9,7 @@
 							<p>
 								{{item.square_title}}
 							</p>
-							<a href="{{item.square_url.url}}">
+							<a href="{{item.square_url}}">
 								<button type="button" class="duration-300">
 									{{locals.shop_now}}
 								</button>
@@ -26,7 +26,7 @@
 								<p class="mb-2 text-black">
 									{{ item.square_title}}
 								</p>
-								<a href="{{item.square_url.url}}">
+								<a href="{{item.square_url}}">
 									<button type="button" class="btn-light btn-block">
 										{{locals.shop_now}}
 									</button>
@@ -106,7 +106,7 @@
                         }
                     },
                     "square_url": {
-                        "type": "category",
+                        "type": "url",
                         "label": {
                             "ar": "الرابط",
                             "en": "link"
