@@ -573,7 +573,7 @@
     }
 
     .products-list .prod-col, .products-list .prod-col-attr{
-        width: 50%;
+        width: 100%;
     }
 
     .product-item {
