@@ -15,7 +15,7 @@
   "header_all_categories":"جميع التصنيفات",
   "header_delivery_and_payment_options":"خيارات الدفع والتوصيل",
   "customer_reviews": "آراء العملاء",
-  "shop_now": " تسوق الآن",
+  "Discover_more": " اكتشفي المزيد",
   "day":"يوم",
   "min":"دقيقه",
   "hour":"ساعه",
@@ -68,7 +68,6 @@
   "products_more":"المزيد من المنتجات",
 
   "products_list_empty":"لا يوجد منتجات",
-
 
   "products_page_show_sale_price":"عرض التخفيضات فقط",
 
