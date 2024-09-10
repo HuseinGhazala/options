@@ -1,79 +1,71 @@
-<div class="d-flex align-items-center justify-content-between products-filter">
-    <div class="d-flex filter-buttons-container">
-        <!-- Filter Label and Buttons -->
-        <div class="d-inline-block">
+<div class="d-flex align-items-center justify-content-between products-filter flex-column flex-lg-row">
+    <div class="d-flex filter-buttons-container flex-column flex-lg-row mb-3 mb-lg-0">
+        <div class="product_shap d-flex align-items-center justify-content-between gap-3 p-2 border border-secondary rounded" style="width: 100%; max-width: 400px; height: 56px;align-items: center;border: 1px solid #b2bdc7 !important;border-radius: 8px !important;">
             <div>
-                <label class="filter-result">{{ locals.products_list_filter }}</label>
+                <label class="filter-result d-none">{{ locals.products_list_filter }}</label>
             </div>
 
             <!-- Small screen filter button -->
-            <button id="products-list-filter" type="button" class="btn btn-filter filter-block-width d-lg-none products-list-filter-sm" data-toggle="collapse" data-target="#filters-form-collapse-sm">
+            <button id="products-list-filter" type="button" class="btn btn-filter d-lg-none w-100 text-left" data-toggle="collapse" data-target="#filters-form-collapse-sm" style="height: 33px;">
                 <span>{{ locals.products_list_filter }}</span>&nbsp;
                 <i class="icon-add filter-icons filters_expanded"></i>
                 <i class="icon-remove filter-icons filters_not_expanded d-none"></i>
             </button>
 
             <!-- Large screen filter button -->
-            <button id="products-list-filter" type="button" class="btn btn-filter filter-block-width d-none d-lg-block" data-toggle="modal" data-target="#filterModal">
+            <button id="products-list-filter" type="button" class="btn btn-filter d-none d-lg-inline-block" data-toggle="modal" data-target="#filterModal" style="height: 30px; border: 1px #B6B6B6 solid; border-radius: 8px;">
                 <span>{{ locals.products_list_filter }}</span>&nbsp;
                 <i class="icon-filter-secondary" aria-hidden="true"></i>
             </button>
-        </div>
 
-        <!-- Sort and Display Options -->
-        <div class="product_shap w-24 pr-4 gap-[10px] flex items-center justify-around relative" style="border: 1px #B6B6B6 solid; width: 400px; height: 56px; border-radius: 8px;">
-            <div style="display: flex; column-gap: 8px;">
-                <i class="fa-solid fa-table-cells border border-[#EEE] border-solid rounded-[4px] vr_hr_active p-[5px] cursor-pointer" data-display="vertical"></i>
-                <i class="fa-solid fa-bars border border-[#EEE] border-solid rounded-[4px] p-[5px] cursor-pointer" data-display="horizontal"></i>
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-table-cells border border-light rounded p-2 cursor-pointer vr_hr_active" data-display="vertical"></i>
+                <i class="fa-solid fa-bars border border-light rounded p-2 cursor-pointer" data-display="horizontal"></i>
             </div>
-            <div class="d-inline-block filter-block-width sort-block-width">
-                <div style="display: flex;" class="dropdown">
-                    <div>
-                        <label class="filter-order" style="margin-bottom: auto; color: #a5a5a5;">{{ locals.products_list_sort }}</label>
-                    </div>
-                    <button id="products-list-sort" type="button" class="btn btn-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
+
+            <div class="dropdown">
+                <label class="filter-order text-muted mb-0">{{ locals.products_list_sort }}</label>
+                <button id="products-list-sort" type="button" class="btn btn-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"style="border: none;padding: 0 !important;">
+                    {# <span style="font-size: 14px;">{{ sort_option }}</span>&nbsp; #}
                         <span style="font-size: 14px;">
-                            {% if requestGet('sort_by') == 'popularity_order' %}
-                                {{ locals.products_list_filter_popularity }}
-                            {% elseif requestGet('sort_by') == 'price' and requestGet('order') == 'asc' %}
-                                {{ locals.products_list_filter_price_low }}
-                            {% elseif requestGet('sort_by') == 'price' and requestGet('order') == 'desc' %}
-                                {{ locals.products_list_filter_price_high }}
-                            {% else %}
-                                {{ locals.products_list_filter_latest }}
-                            {% endif %}
-                        </span>&nbsp;
-                        <i class="icon-swap_vert text hide-ie"></i>
-                    </button>
-                    <div class="dropdown-menu select-dropdown">
-                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'created_at', order: 'desc'}) }}">
-                            {{ locals.products_list_filter_latest }}
-                        </a>
-                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'popularity_order', order: 'asc'}) }}">
+                        {% if requestGet('sort_by') == 'popularity_order' %}
                             {{ locals.products_list_filter_popularity }}
-                        </a>
-                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'asc'}) }}">
+                        {% elseif requestGet('sort_by') == 'price' and requestGet('order') == 'asc' %}
                             {{ locals.products_list_filter_price_low }}
-                        </a>
-                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'desc'}) }}">
+                        {% elseif requestGet('sort_by') == 'price' and requestGet('order') == 'desc' %}
                             {{ locals.products_list_filter_price_high }}
-                        </a>
-                    </div>
+                        {% else %}
+                            {{ locals.products_list_filter_latest }}
+                        {% endif %}
+                    </span>&nbsp;
+                    
+                </button>
+                <div class="dropdown-menu select-dropdown">
+                    <a class="dropdown-item" href="{{ requestAdd({sort_by: 'created_at', order: 'desc'}) }}">
+                        {{ locals.products_list_filter_latest }}
+                    </a>
+                    <a class="dropdown-item" href="{{ requestAdd({sort_by: 'popularity_order', order: 'asc'}) }}">
+                        {{ locals.products_list_filter_popularity }}
+                    </a>
+                    <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'asc'}) }}">
+                        {{ locals.products_list_filter_price_low }}
+                    </a>
+                    <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'desc'}) }}">
+                        {{ locals.products_list_filter_price_high }}
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Products Count Display -->
-    <div class="d-none d-lg-inline-block text-color-primary">
+    <div class="d-none d-lg-inline-block text-color-primary" style=" width: 11%;">
         {% if count > 0 %}
-            <span class="text-line-height d-inline-block">{{ locals.products_list_result }}&nbsp;</span>
-            <span class="text text-line-height d-inline-block" style="font-weight: bold">{{count}}&nbsp;</span>
-            <span class="text-line-height d-inline-block">
-                {{ locals.products_list_result_products }}
-            </span>
+            <span>{{ locals.products_list_result }}&nbsp;</span>
+            <span class="font-weight-bold">{{count}}&nbsp;</span>
+            <span>{{ locals.products_list_result_products }}</span>
         {% else %}
-            <span class="text text-line-height d-inline-block" style="font-weight: bold">{{ locals.products_list_empty }}&nbsp;</span>
+            <span class="font-weight-bold">{{ locals.products_list_empty }}&nbsp;</span>
         {% endif %}
     </div>
 </div>
@@ -87,7 +79,7 @@
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-body" style="position: relative">
+            <div class="modal-body position-relative">
                 <button id="products-list-filter-form-close" type="button" class="close btn" data-dismiss="modal" aria-label="Close">
                     <span class="icon-times2"></span>
                 </button>
@@ -112,8 +104,48 @@
                 productList?.classList.add(displayValue);
 
                 productShapes.forEach(icon => icon.classList.remove('vr_hr_active'));
-                event.target.classList.toggle('vr_hr_active');
+                event.target.classList.add('vr_hr_active');
             });
         });
     });
 </script>
+
+<!-- Responsive Styling -->
+<style>
+    @media (max-width: 768px) {
+        .products-filter {
+            flex-direction: column;
+        }
+        .filter-buttons-container {
+            width: 100%;
+        }
+        .product_shap {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .products-filter {
+            flex-direction: row;
+        }
+        .filter-buttons-container {
+            /* width: auto; */
+            width: 100%;
+        }
+        .product_shap {
+            width: 400px;
+        }
+    }
+    @media (max-width:767px) {
+    .products-list {
+        grid-template-columns: repeat(2, 1fr); /* عرض منتجين */
+         width: 100%;
+    }
+}    
+@media (max-width:345px) {
+    .products-list {
+        grid-template-columns: repeat(1, 1fr); /* عرض منتجين */
+         width: 100%;
+    }
+}
+</style>

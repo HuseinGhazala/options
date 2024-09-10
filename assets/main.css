@@ -2160,7 +2160,7 @@ hr {
     }
   }
   .product_shap i.fa-solid{
-      margin-top: 5px !important;
+      /* margin-top: 5px !important; */
   }
   .product_shap i.fa-solid.vr_hr_active {
     color: #fff !important;
