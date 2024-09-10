@@ -7,8 +7,10 @@
       </div>
     </div>
 		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
- 		{% for item in settings.bannars %}
-				<swiper-slide style="background-size: 100% 100% !important; width: 100vw !important; background: url({{ settings.bannar_D_image }})"  class="swiper-slide slider-bannars-moving">
+
+			{% for item in settings.bannars %}
+				<swiper-slide style="background-size: 100% 100% !important; width: 100vw !important; background: url({{ settings.bannar_D_image }})" class="swiper-slide slider-bannars-moving">
+
 					<div class="photo_one">
 						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
 					</div>
@@ -36,7 +38,6 @@
 <style>
 
 
-    
 	swiper-container {
 		width: 100%;
 		height: 100%;
@@ -68,9 +69,11 @@ font-weight:bold
 
 
 <script>
-// swiper
-	document.addEventListener('DOMContentLoaded', function () {
-const swiper = new Swiper('.mySwiper', {
+
+	// swiper
+document.addEventListener('DOMContentLoaded', function () {
+const swiper = new Swiper('.slider-bannars_items .swiper', {
+
 direction: 'vertical',
 loop: true,
 pagination: {
@@ -91,7 +94,6 @@ el: '.swiper-scrollbar'
 
 });
 });
-
 </script>
 
 
