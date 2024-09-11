@@ -10,7 +10,7 @@
     width: 100%;
     @media (max-width: 765px) {
         height: 60vh;
-        margin-bottom: 56px;
+        margin-bottom: 0px !important;
     }
 }
 .g_fixed_bannar a button{
