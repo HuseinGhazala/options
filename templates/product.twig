@@ -1090,26 +1090,26 @@ gallery.init();
   document.addEventListener('DOMContentLoaded', function () {
   var swiper = new Swiper('.slider-inspire .swiper-containerr', {
     loop: true,
-    slidesPerView: 2,
+    slidesPerView: 3,
     spaceBetween: 5,
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    // breakpoints: {
-    //   640: {
-    //     slidesPerView: 2,
-    //     spaceBetween: 10,
-    //   },
-    //   768: {
-    //     slidesPerView: 3,
-    //     spaceBetween: 24,
-    //   },
-    //   1024: {
-    //     slidesPerView: 4,
-    //     spaceBetween: 30,
-    //   },
-    // }
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 24,
+      },
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      },
+    }
   });
 });
 
