@@ -18,50 +18,53 @@
 		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
 			/* loader edit */
-			.overlay{
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				backdrop-filter: blur(20px);
-				display: flex;
-				z-index: 999;
-				align-items: center;
-				justify-content: center;
-			}
-			.img_loader{
-				position: fixed;
-				z-index: 9999;
-				max-height: 90px;
-				max-width: 90px;
-			}
-			.spinner {
+			/* .spinner {
 				height: 7rem;
 				width: 7rem;
 				z-index: 9998; 
 				padding: 20px;
 				cursor: not-allowed;
 				border-radius: 50%;
-				box-shadow: -10px -10px 10px var(--color-primary), 0px -10px 10px 0px var(--s-color), 10px -10px 10px var(--color-primary), 10px 0 10px var(--t-color), 10px 10px 10px 0px var(--s-color), 0 10px 10px 0px var(--color-primary), -10px 10px 10px 0px var(--s-color);
-				animation: rot55 0.7s linear infinite;
-			}
-			.L_logo{
-				height: 20vw;
-				max-height: 50px;
-				width: 20vw;
-				max-width: 50px;
-			}
-			@keyframes rot55 {
-				to {
-				transform: rotate(360deg);
+				box-shadow: -10px -10px 10px var(--primary-color), 0px -10px 10px 0px var(--text-color-primary-bg), 10px -10px 10px var(--primary-color), 10px 0 10px var(--text-color-primary-bg), 10px 10px 10px 0px var(--primary-color), 0 10px 10px 0px var(--text-color-primary-bg), -10px 10px 10px 0px var(--primary-color);
+				} */
+				.overlay {
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					backdrop-filter: blur(20px);
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					z-index: 999;
+					animation: logoAnimation 0.7s linear forwards;
 				}
-			}     
-			.spinner--hidden {
-				display: none;
-			}
-			#app.loaded .overlay,
-			#app.loaded .L_logo{
+				
+				.img_loader {
+					position: fixed;
+					max-height: 110px;
+					max-width: 110px;
+					z-index: 9999;
+				}
+
+				@keyframes logoAnimation {
+					0% {
+						transform: scale(0.2);
+						opacity: 0; 
+					}
+					50% {
+						transform: scale(0.6);
+						opacity: 0.5; 
+					}
+					100% {
+						transform: scale(1);
+						opacity: 1;
+					}
+				}
+			
+			body.loaded .overlay,
+			body.loaded .img_loader{
 				display: none; 
 			}
 
@@ -168,12 +171,11 @@
 
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
 		{# edit loader #}
+		{# {% if settings.loader  == 'true' %} #}
 		<div class="overlay">
 			<img src="{{ store.logo }}" class="img_loader"/>
-			<div class="spinner">
-				<div class="spinnerin"></div>
-			</div>
 		</div>
+		{# {% endif %} #}
 
 
 		<div class="popup-product-details"></div>
@@ -289,18 +291,6 @@
 					{{ zidapi_script|raw }}
 
 <script>
-// edit loader
-	window.addEventListener("load", () => {
-	const loader = document.querySelector(".spinner");
-	loader.classList.add("spinner--hidden");
-	loader.addEventListener("transitionend", () => {
-	if (!document.querySelector(".spinner")) return;
-	document.body.removeChild(loader);
-	});
-	document.body.classList.add('loaded');  
-	}); 
-
-
 
 window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
 
@@ -369,6 +359,22 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 				
 				{% block footer_scripts %}{% endblock %}
+				
+
+
+				<script>
+					
+				document.addEventListener('DOMContentLoaded', function() {
+					const overlay = document.querySelector(".overlay");
+					overlay.style.display = 'flex';
+				});
+
+				window.addEventListener('load', function() {
+					const overlay = document.querySelector(".overlay").style.display = 'none';
+					const logo = document.querySelecto(".img_loader").style.display = 'none';
+				});
+
+				</script>
 			</body>
 
 
@@ -460,8 +466,42 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		}
 	</style>
 {% endif %}
-		{% schema %}
-		{
+
+	{% schema %}
+	{
+	"load": {
+		"name": {
+			"ar": "التحميل",
+			"en": "loading"
+		},
+		"icon": "fa fa-paint-brush",
+		"display": true,
+		"settings": {
+			"loader": {
+				"type": "select",
+				"label": {
+					"ar": "انيمشن تحميل الصفحة",
+					"en": "loader of the page"
+				},
+				"options": [
+					{
+						"value": "true",
+						"label": {
+							"ar": "نعم",
+							"en": "yes"
+						}
+					},
+					{
+						"value": "false",
+						"label": {
+							"ar": "لا",
+							"en": "no"
+						}
+					}
+				]
+			}
+		}
+	},		
 	"colors": {
 		"name": {
 			"ar": "الالوان",
