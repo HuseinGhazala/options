@@ -1,16 +1,16 @@
 <!doctype html>
 <html class="no-js" lang="{{ session.lang.code }}" dir="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}">
-
+	
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-
+		
 		{{ header_meta_tags | raw }}
-
-
+		
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-
+		
+		
 		<link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!--jquery UI -->
@@ -18,48 +18,34 @@
 		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
 			/* loader edit */
-			/* .spinner {
-				height: 7rem;
-				width: 7rem;
-				z-index: 9998; 
-				padding: 20px;
-				cursor: not-allowed;
-				border-radius: 50%;
-				box-shadow: -10px -10px 10px var(--primary-color), 0px -10px 10px 0px var(--text-color-primary-bg), 10px -10px 10px var(--primary-color), 10px 0 10px var(--text-color-primary-bg), 10px 10px 10px 0px var(--primary-color), 0 10px 10px 0px var(--text-color-primary-bg), -10px 10px 10px 0px var(--primary-color);
-				} */
+			
 				.overlay {
 					position: fixed;
 					top: 0;
 					left: 0;
-					width: 100%;
-					height: 100%;
-					backdrop-filter: blur(20px);
+					width: 100vw;
+					height: 100vh;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					z-index: 999;
-					animation: logoAnimation 0.7s linear forwards;
+					background: white;
+					transition: opacity 0.75s, visibility 0.75s;
+					z-index: 99999;
 				}
 				
-				.img_loader {
-					position: fixed;
-					max-height: 110px;
-					max-width: 110px;
-					z-index: 9999;
+				.overlay .img_loader {
+					animation: logo_load 3s ease-in-out ;
 				}
 
-				@keyframes logoAnimation {
+				@keyframes logo_load {
 					0% {
-						transform: scale(0.2);
-						opacity: 0; 
+						transform: scale(0.1);
 					}
-					50% {
-						transform: scale(0.6);
-						opacity: 0.5; 
+					70% {
+						transform: scale(0.8);
 					}
 					100% {
 						transform: scale(1);
-						opacity: 1;
 					}
 				}
 			
@@ -119,9 +105,9 @@
 			body,
 			html {
 				overflow-x: hidden !important;
-
+				
 			}
-		</style>
+			</style>
 
 		{% if session.lang.code == 'ar' %}
 			<link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap-rtl.css?v=1.05' }}"/>
@@ -131,12 +117,12 @@
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap-fixes.css?v=1.11') }}"/>
 
-
+		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.structure.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.theme.min.css') }}"/>
-
-
+		
+		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu.css') }}"/>
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}"/>
@@ -151,7 +137,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_commonQ.css') }}"/>
-
+		
 
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
@@ -166,18 +152,18 @@
 			<link rel="stylesheet" href="{{ user_custom_css }}">
 		{% endif %}
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+		
 	</head>
-
+	
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
 		{# edit loader #}
-		{# {% if settings.loader  == 'true' %} #}
-		<div class="overlay">
-			<img src="{{ store.logo }}" class="img_loader"/>
-		</div>
-		{# {% endif %} #}
-
-
+		{% if  settings.load_loader == "true" %}
+			<div class="overlay">
+				<img src="{{ store.logo }}" class="img_loader"/>
+			</div>
+		{% endif %}
+		
+		
 		<div class="popup-product-details"></div>
 
 		{% if store.editing_mode %}
