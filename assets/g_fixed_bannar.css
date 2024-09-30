@@ -2,16 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100dvh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
     width: 100%;
-    margin-bottom: 111px;
     @media (max-width: 765px) {
         height: 60vh;
-        margin-bottom: 56px;
+        margin-bottom: 0px !important;
     }
 }
 .g_fixed_bannar a button{

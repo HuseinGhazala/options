@@ -81,11 +81,11 @@
                     {% include 'products-filter.twig' with { 'count' : products.total, 'has_products_filtration': ( products.filters|length > 0) } %}
                 </div>
              {% endif %}
-            <div id="products-list" class="row products-list">
+            <div id="products-list" class="grid grid-cols-3 products-list">
                 {% for product in products.data %}
 
                     <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
-                        {% include 'product-card.twig' with {'product' : product, 'index': key} %}
+                        {% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings} %}
                     </div>
 
                 {% endfor %}
@@ -102,6 +102,27 @@
 
 {% block footer_scripts %}
     <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const productShapes = document.querySelectorAll('.product_shap i');
+        const productList = document.querySelector('#products-list');
+
+        productShapes.forEach(productShape => {
+            productShape.addEventListener('click', function (event) {
+                const clickedIcon = event.target;
+                const displayValue = clickedIcon.dataset.display;
+
+                productList?.classList.remove('vertical', 'horizontal');
+                productList?.classList.add(displayValue);
+
+                productShapes.forEach(icon => icon.classList.remove('vr_hr_active'));
+                event.target.classList.toggle('vr_hr_active');
+            });
+        });
+    });
+
+
+
         window.onProductAttributesTriggered = function(){
             $('#products-list').css('opacity', '0.4');
         }

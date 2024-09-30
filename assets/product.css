@@ -12,11 +12,12 @@ max-width: 100%;
 }
 
 
-.product-item a.btn.btn-primary.btn-product-card-select-variant {
+.product-item a.btn.btn-primary.btn-product-card-select-variant, a.product-card-add-to-cart {
     width: 90%; 
     height: 50px;
 
 }
+
 .pro-details{
     display: flex !important;
     justify-content: space-between;
@@ -45,6 +46,11 @@ max-width: 100%;
 .product-item:hover .desk{
     bottom: 10px;
 }
+@media (max-width: 450px) {
+    .product-item {
+        margin-bottom: 24px;
+    }        
+ }
 
 @media (max-width: 768px) {
     .desk{

@@ -4,7 +4,6 @@
     background-size: 100% 100%;
     width: 100vw;
     background-repeat: no-repeat;
-    padding: 50px 25px;
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -116,7 +115,7 @@
 /* Responsive: Move Image Down on Smaller Screens */
 @media (min-width: 640px) {
   .photo{
-    align-self: flex-end;
-    transform: translateY(50px);
+    /* align-self: flex-end;
+    transform: translateY(50px); */
   }
 }

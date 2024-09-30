@@ -1,22 +1,60 @@
 <!doctype html>
 <html class="no-js" lang="{{ session.lang.code }}" dir="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}">
-
+	
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-
+		
 		{{ header_meta_tags | raw }}
-
-
+		
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-
+		
+		
 		<link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!--jquery UI -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
+			/* loader edit */
+			
+				.overlay {
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100vw;
+					height: 100vh;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: white;
+					transition: opacity 0.75s, visibility 0.75s;
+					z-index: 999999;
+				}
+				
+				.overlay .img_loader {
+					animation: logo_load 3s ease-in-out ;
+				}
+
+				@keyframes logo_load {
+					0% {
+						transform: scale(0.1);
+					}
+					70% {
+						transform: scale(0.8);
+					}
+					100% {
+						transform: scale(1);
+					}
+				}
+			
+			body.loaded .overlay,
+			body.loaded .img_loader{
+				display: none; 
+			}
+
+
 			.sm-search-div.show {
 				display: block !important;
 			}
@@ -67,9 +105,9 @@
 			body,
 			html {
 				overflow-x: hidden !important;
-
+				
 			}
-		</style>
+			</style>
 
 		{% if session.lang.code == 'ar' %}
 			<link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap-rtl.css?v=1.05' }}"/>
@@ -79,12 +117,12 @@
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap-fixes.css?v=1.11') }}"/>
 
-
+		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.structure.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.theme.min.css') }}"/>
-
-
+		
+		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu.css') }}"/>
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}"/>
@@ -99,7 +137,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_commonQ.css') }}"/>
-
+		
 
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
@@ -114,10 +152,18 @@
 			<link rel="stylesheet" href="{{ user_custom_css }}">
 		{% endif %}
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+		
 	</head>
-
+	
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
+		{# edit loader #}
+		{% if  settings.load_loader == "true" %}
+			<div class="overlay">
+				<img src="{{ store.logo }}" class="img_loader"/>
+			</div>
+		{% endif %}
+		
+		
 		<div class="popup-product-details"></div>
 
 		{% if store.editing_mode %}
@@ -181,6 +227,7 @@
 							</div>
 						</div>
 					</a>
+					<p>{{ settings.logo_position}}</p>
 
 					<a href="/auth/login" class="flex flex-col items-center justify-center gap-1 ">
 						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
@@ -221,7 +268,7 @@
 
 				</div>
 			</div>
-				<div class="main flex-grow-1 app-content" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
+				<div class="main flex-grow-1 app-content" style="background-color:#fff;" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
 					</div>
 					<div class="footer"> {% block footer %}{% endblock %}
 						</div>
@@ -231,6 +278,7 @@
 					{{ zidapi_script|raw }}
 
 <script>
+
 window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
 
 window.loadToasterScriptIfNotLoaded = function (onCompleted) {
@@ -284,26 +332,36 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}"></script>
 
 				{# Local storage #}
-				<script>	
-					if ('{{ settings.newsletter_hide }}' !== '1') {
-						localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");
-					} else {
-						localStorage.removeItem("newsletter");
-					}
-
-					localStorage.setItem("android", "{{settings.android_store_url }}");						
-					localStorage.setItem("mac", "{{settings.mac_store_url }}");
-					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
-					document.querySelector('a.android-store')?.setAttribute('href', "{{settings.android_store_url }}");
-					document.querySelector('a.mac-store')?.setAttribute('href', "{{settings.mac_store_url }}");
-				</script>
+				
 
 				<!-- Initialize Swiper -->
+				<link
+				rel="stylesheet"
+				href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+				/>
+
+				
 				<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-				<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+				
 				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+				
 				{% block footer_scripts %}{% endblock %}
+				
+
+
+				<script>
+					
+				document.addEventListener('DOMContentLoaded', function() {
+					const overlay = document.querySelector(".overlay");
+					overlay.style.display = 'flex';
+				});
+
+				window.addEventListener('load', function() {
+					const overlay = document.querySelector(".overlay").style.display = 'none';
+					const logo = document.querySelecto(".img_loader").style.display = 'none';
+				});
+
+				</script>
 			</body>
 
 
@@ -342,9 +400,127 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		}
 	</style>
 {% endblock %}
+	<style>
+		.product-item .pr-img{
+			width:100%;
+			height:100%;
+		}
+	</style>
 
-		{% schema %}
-		{
+{% if settings.image_control_item %}
+	<style>
+		.product-item .pr-img{
+			height:auto;
+		}
+	</style>
+{% endif %}
+	<style>
+		.newsletters{
+			display:flex;
+		}
+		.btn-img{
+			display:none;
+		}
+	</style>
+{% if settings.newsletter_item %}
+	<style>
+		.newsletters{
+			display:none;
+		}
+		.btn-img{
+			display:flex;
+			flex-direction:column;
+		}
+	</style>
+{% endif %}
+{% if settings.android_store_url | length %}
+	<style>
+		.android-store {
+			display:block;
+		}
+		.btn-img > p  , .pra_hide{
+			display:block;
+		}
+	</style>
+{% endif %}
+{% if settings.mac_store_url | length %}
+	<style>
+		.mac-store {
+			display:block;
+		}
+		.btn-img > p , .pra_hide{
+			display:block;
+		}
+	</style>
+{% endif %}
+
+{% if settings.logo_card_logo_position == 'top_right' %}
+	<style>
+		.up-pr-photo {
+			right:6px;
+			top:6px;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'top_left' %}
+	<style>
+		.up-pr-photo{
+			left:6px;
+			top:6px;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'bottom_right' %}
+	<style>
+		.up-pr-photo{
+			right:6px;
+			bottom:6px;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'bottom_left' %}
+	<style>
+		.up-pr-photo{
+			left:6px;
+			bottom:6px;
+		}
+	</style>
+{% endif %}
+	{% schema %}
+	{
+	"load": {
+		"name": {
+			"ar": "التحميل",
+			"en": "loading"
+		},
+		"icon": "fa fa-paint-brush",
+		"display": true,
+		"settings": {
+			"loader": {
+				"type": "select",
+				"label": {
+					"ar": "انيمشن تحميل الصفحة",
+					"en": "loader of the page"
+				},
+				"options": [
+					{
+						"value": "true",
+						"label": {
+							"ar": "نعم",
+							"en": "yes"
+						}
+					},
+					{
+						"value": "false",
+						"label": {
+							"ar": "لا",
+							"en": "no"
+						}
+					}
+				]
+			}
+		}
+	},		
 	"colors": {
 		"name": {
 			"ar": "الالوان",
@@ -680,12 +856,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			"en": "newsletter"
 		},
 		"settings": {
-			"hide": {
+			"item": {
           "type": "checkbox",
-          "label": {
-            "ar": "",
-            "en": ""
-          },
           "option": {
             "ar": "إخفاء",
             "en": "Hide"
@@ -699,6 +871,104 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 					"en": "link for newsletter"
 				}
 			}
+		}
+	},
+	"logo_card": {
+		"name": {
+			"ar": "اضافه لوجو او صوره على المنتج",
+			"en": "add logo or img on product"
+		},
+		"settings": {
+				"add_img_logo": {
+                    "type": "radios",
+                    "label": {
+                      "ar": "اضافه لوجو المتجر",
+                      "en": "Adding a logo "
+                    },
+                    "options": [
+                      {
+                        "value": "logo",
+                        "label": {
+                          "ar": "اضافه لوجو",
+                          "en": "Add logo"
+                        }
+                      },
+                      {
+                        "value": "photo",
+                        "label": {
+                          "ar": "اضافه صوره",
+                          "en": "Add photo"
+                        }
+                      },
+                      {
+                        "value": "anything",
+                        "label": {
+                          "ar": "الغاء التفعيل ",
+                          "en": "Not adding anything"
+                        }
+                      }
+                    ]
+                },
+                "product_img": {
+                    "type": "image",
+                    "label": {
+                        "ar": "اضف صوره علي المنتج",
+                        "en": "Add a picture to the card"
+                    }
+                },
+                "logo_position": {
+                    "type": "radios",
+                    "label": {
+                      "ar": "مكان الصوره او اللوجو",
+                      "en": "image or logo position"
+                    },
+                    "options": [
+                      {
+                        "value": "top_right",
+                        "label": {
+                          "ar": "اعلي يمين",
+                          "en": "top_right"
+                        }
+                      },
+                      {
+                        "value": "top_left",
+                        "label": {
+                          "ar": "اعلي يسار",
+                          "en": "top_left"
+                        }
+                      },
+                      {
+                        "value": "bottom_right",
+                        "label": {
+                          "ar": "اسفل يمين",
+                          "en": "bottom_right"
+                        }
+                      },
+                      {
+                        "value": "bottom_left",
+                        "label": {
+                          "ar": "اسفل يسار",
+                          "en": "bottom_left"
+                        }
+                      }
+                    ]
+                }        
+    }
+	},
+	"image_control": {
+		"name": {
+			"ar": "اظهار صورة المنتج كامله فى كارد المنتج",
+			"en": "card"
+		},
+		"settings": {
+			"item": {
+          "type": "checkbox",
+          "option": {
+            "ar": "تفعيل",
+            "en": "Hide"
+          },
+          "noLabel": true
+        }
 		}
 	},
 	"android_store": {

@@ -1,5 +1,5 @@
 	<section section-id="{{ sectionId }}" class="mt-5 mb-5">
-		<div class="justify-center d-flex align-items-center">
+		<div class="justify-center d-flex align-items-center" style="margin-top: 119px;">
 			{% include 'title.twig' with { 'component_title': settings.category.name } %}
 		</div>
 
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</section>
-</div>
+
 
 <style>
 			{# Swiper #}
@@ -57,6 +57,7 @@
   left: 10px;
 }
 
+
 </style>
 
 
@@ -66,7 +67,7 @@
   var swiper = new Swiper('.slider-inspire-home-page .swiper-container', {
     loop: true,
     slidesPerView: 1,
-    spaceBetween: 5,
+    spaceBetween: 20,
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -79,15 +80,15 @@
     breakpoints: {
       640: {
         slidesPerView: 2,
-        spaceBetween: 10,
+        spaceBetween: 25,
       },
       768: {
         slidesPerView: 3,
-        spaceBetween: 24,
+        spaceBetween: 30,
       },
       1024: {
         slidesPerView: 4,
-        spaceBetween: 30,
+        spaceBetween: 35,
       },
     }
   });
