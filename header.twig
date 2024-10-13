@@ -9,8 +9,8 @@
       {% include 'header-search-header.twig' with { 'header_settings' : settings } %}
     </div>
     <div style="position: relative; z-index: -1" class="container">
-      <div class="sm-search-div">
-        <div class="autocomplete" style="position: relative">
+      <div class="sm-search-div" style=" background: transparent;">
+        <div class="autocomplete" style="position: relative;">
           <input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
           <div class="autocomplete-items"></div>
         </div>
