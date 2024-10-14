@@ -3,12 +3,12 @@
         {% if not ('hide_country' in header_settings.header_options) or not ('hide_language' in header_settings.header_options)%}
         <div class="language-currency d-flex justify-content-between" data-toggle="modal" data-target="#langCurrecyModal">
 
-            {% if session.lang.code == 'en' %}
+            {# {% if session.lang.code == 'en' %}
                 {% set change_to_lang = 'ar' %}
                 {% set change_to_lang_name = 'العربية' %}
             {% else %}
                 {% set change_to_lang = 'en' %}
-                {% set change_to_lang_name = 'English' %}
+                {% set change_to_lang_name = 'Engsh' %}
             {% endif %}
 
             {% if not ('hide_country' in header_settings.header_options) %}
@@ -17,17 +17,26 @@
             </div>
             {% endif %}
             {% if not ('hide_country' in header_settings.header_options) and not ('hide_language' in header_settings.header_options)%}
-            <div class="vertical-line"></div>
+            <div class="vertical-ne"></div>
             {% endif %}
             {% if not ('hide_language' in header_settings.header_options) %}
             <div class="language-button-area d-flex justify-content-between">
                 <button type="submit" class='c-btn language-btn d-flex justify-content-between align-items-center'>
                     <span class="px-2">{{ change_to_lang_name }}</span>&nbsp;
-<i class="fa-solid fa-language"></i>                </button>
+                 <i class="fa-solid fa-language"></i>                </button>
             </div>
-            {% endif %}
-
+            {% endif %} #}
+             <i class="fa-solid fa-globe"></i>
         </div>
         {% endif %}
     </div>
 </div>
+<style>
+.language-currency {
+    border: none;
+}
+.language-currency  i{
+    margin-bottom: 6px;
+    margin-left: 7px;
+}
+</style>
