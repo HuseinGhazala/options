@@ -65,7 +65,7 @@
                 </ul>
             </nav>
 			<div class="bd-highlight d-flex align-items-center justify-content-end header-cart">
-				
+				 {% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
 					<div class="d-block sm-search-icon">
 						<i class="fa-solid fa-magnifying-glass"></i>
