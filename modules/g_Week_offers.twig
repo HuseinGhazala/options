@@ -170,12 +170,21 @@
     color:white;
      cursor: pointer;
 }
-a{
+.pro_cont a{
     position: relative;
 }
-a:hover .show-stars:before, 
-a:hover .show-stars:after {
+.pro_cont a:hover .show-stars:before, 
+.pro_cont a:hover .show-stars:after {
     opacity: 1 !important; 
+}
+
+.pro_cont a .show-stars:before{
+      left: 0;
+      top: -7px;
+}
+.pro_cont a .show-stars:after {
+      right: 0;
+      bottom: -7px;
 }
 
 
