@@ -10,10 +10,10 @@
                 <h2>{{ discount.discount_popup_title }}</h2>
                 <p>{{ discount.discount_popup_percentage }}</p> 
                 <p>{{ discount.discount_popup_subtitle }}</p>
-                {# {% if discount.discount_action_url | length > 0 %} #}
+                {% if discount.discount_action_url | length > 0 %}
                     <input type="email" placeholder="{{ discount.discount_popup_placeholder }}">
                     <button type="submit">{{ discount.discount_popup_btn_title }}</button>  
-                {# {% endif %} #}
+                {% endif %}
             </form>
         </div>
     </div>
