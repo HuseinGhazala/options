@@ -227,11 +227,7 @@
 										</a>
 									{% endfor %}
 
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="vat-crn-sections d-flex flex-row flex-wrap justify-content-end align-items-center">
+									<div class="vat-crn-sections d-flex flex-row flex-wrap justify-content-end align-items-center">
 						{% if store.vat_settings.is_certificate_visible %}
 							<div class="vat-icon">
 								<a {% if store.vat_settings.tax_registration_certificate %} href="{{ store.vat_settings.tax_registration_certificate }}" target="_blank" {% endif %}>
@@ -244,7 +240,7 @@
 							<div class="maroof-icon " style="text-align: center;">
 							<a class="d-flex flex-column  align-items-center" href="https://eauthenticate.saudibusiness.gov.sa/inquiry?certificateRefID={{ store.social_media.items.business_center }}">
 								<img
-									src="{{ asset_url ~ 'business_center.png' }}" loading="lazy" alt="" width="auto" height="30" style="height:30px;">
+									src="{{ asset_url ~ 'business_center.png' }}" loading="lazy" alt="" width="auto" height="30" style="height:30px;width: auto;">
 									{% if about_settings.businessCenter_showNumber %}
 										<div>{{ store.social_media.items.business_center }}</div>
 									{% endif %}
@@ -275,6 +271,12 @@
 							</div>
 						{% endif %}
 					</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
 
 
 				</div>

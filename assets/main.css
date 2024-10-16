@@ -692,6 +692,29 @@ button.more-button , a.more-button {
 .footer .logistics-pay-icons a img{
     width: 50%;
 }
+@media (max-width: 767px){
+    .under_footer {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-bottom: 7%;
+    }
+
+    .footer-icons{
+        justify-content: center ;
+    }
+
+    .vat-crn-sections {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logistics-pay-icons{
+        justify-content: center;
+    }
+}
 @media (max-width: 430px) {
     .footer .logistics-pay-icons a img {
         margin: 0 auto;
@@ -701,7 +724,6 @@ button.more-button , a.more-button {
         padding: 10px;
         text-align: center;
         align-items: center;
-        flex-wrap: nowrap;
     }
     .under_footer {
         flex-direction: column;
