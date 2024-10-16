@@ -26,19 +26,22 @@
 			</div>
 		{% endif %}
 		<div class="products-container products flex-grow-1 pt-4">
-			<div class="side-banners">
-				{% for banner in settings.categorySideBanners_sideBannerList %}
-					<div class="banner-item">
-						<a href="{{banner.sideBanerLinkUrl}}" class="containt">
-							<h3>
-								{{ banner.sideBanerTitle}}
-							</h3>
-							<p>{{banner.sideBanerLink}}</p>
-						</a>
-                        <img src="{{ banner.sideBanerImage }}" alt="{{ banner.title }}">
-                    </div>	
-				{% endfor %}
-			</div>
+			{% if settings.categorySideBanners_sideBanerCondetion  %}
+				<div class="side-banners">
+					{% for banner in settings.categorySideBanners_sideBannerList %}
+						<div class="banner-item">
+							<a href="{{banner.sideBanerLinkUrl}}" class="containt">
+								<h3>
+									{{ banner.sideBanerTitle}}
+								</h3>
+								<p>{{banner.sideBanerLink}}</p>
+							</a>
+							<img src="{{ banner.sideBanerImage }}" alt="{{ banner.title }}">
+						</div>	
+					{% endfor %}
+				</div>
+			{% endif %}
+			
 			<div class="products-area">
 				{% if  products.filters|length <= 0 %}
 					<div>
@@ -107,9 +110,15 @@
 				font-weight: 700;
 			}
 			
-			.products-area{
-				flex-basis: 78%;
-			}
+			{% if settings.categorySideBanners_sideBanerCondetion  %}
+				.products-area{
+					flex-basis: 78%;
+				}
+			{% else %}
+				.products-area{
+					flex-basis:100%;
+				}
+			{% endif %}
 			@media (max-width: 992px){
 				.side-banners{
 					display: none;
