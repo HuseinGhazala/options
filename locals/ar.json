@@ -192,7 +192,8 @@
   "cart_totals_description":"القيمة",
   "cart_continue_to_purchase":"متابعة الشراء",
   "cart_back_to_store":"العودة للتسوق",
-
+  "noproducts":"لا توجد منتجات حتى الآن",
+  "noproducts_desc":"بحثك لم يطابق أي منتجات",
   "coupon_discount":"كوبون الخصم",
   "coupon_discount_enter": "ادخل كود الخصم",
   "coupon_discount_submit": "إرسال",

@@ -18,6 +18,8 @@
 
     "search_placeholder": "Search",
     "phones_apps": "mobile applications",
+    "noproducts":"لا توجد منتجات حتى الآن",
+    "noproducts_desc":"بحثك لم يطابق أي منتجات",
 
     "store_language" : "Language",
     "store_currency_country" : "Country",
