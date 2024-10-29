@@ -180,15 +180,16 @@
 
     <!-- Thumbnail Swiper -->
     <div thumbsSlider="" class="swiper mySwiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper allsmallimages ">
             {% for key, image in product.selected_product.images %}
-                <div class="swiper-slide">
-                    <img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
+                <div class="swiper-slide small_images">
+                    <img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy" class="thumbimagee">
                 </div>
             {% endfor %}
         </div>
     </div>
-</div>
+	
+						</div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 						<div class="col-lg-6  col-product-info {% if product.selected_product.images | length <= 1 %}col-product-info-single-image{% endif %}">
@@ -405,6 +406,16 @@
 				</section>
 			{% endif %}
 			<style>
+				.allsmallimages{
+					align-items: center;
+				}
+				.thumbimagee{
+					height: 100px;
+				}
+				.slide-product{
+					display: flex;
+					flex-direction: row-reverse;
+				}
 				.sec_des p span{
 					font-size:16px;
 					font-weight: 400;
@@ -427,9 +438,10 @@
 				}
 
 				.slide-product .mySwiper {
-					height: 20%;
+					height: 80%;
 					box-sizing: border-box;
 					padding: 2px 0;
+					width: 30%;
 				}
 
 				.slide-product .mySwiper .swiper-slide {
@@ -442,12 +454,6 @@
 					opacity: 1;
 				}
 
-				.slide-product .swiper-slide img {
-					display: block;
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
 
 				#abas {
 					margin: 0;
@@ -1154,7 +1160,9 @@ var swiper = new Swiper(".slide-product .mySwiper", {
 spaceBetween: 10,
 slidesPerView: 4,
 freeMode: true,
-watchSlidesProgress: true
+watchSlidesProgress: true,
+direction: 'vertical' // اجعل الشريط الصغير عمودي
+
 });
 var swiper2 = new Swiper(".slide-product .mySwiper2", {
 spaceBetween: 4,
