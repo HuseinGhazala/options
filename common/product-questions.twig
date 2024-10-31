@@ -1,13 +1,13 @@
 {% if questions is not empty %}
   {% for key, question in questions %}
-    <div class="card questions-card-preview mt-2 mb-5"  >
-      <div class="card-body p-0">
+    <div class="card questions-card-preview mt-2 mb-5" style="background-color: transparent;border-color: var(--primary-color);" >
+      <div class="card-body p-4">
         {% if not question.is_anonymous and question.name is defined and question.name is not empty %}
           <div class="customer-name">{{ question.name }}</div>
         {% endif %}
         <div class="d-flex">
           <div class="question-box">
-            <p class="question">{{ question.question }}</p>
+            <p class="question"style="font-size: 20px;color: var(--primary-color);margin-bottom: 8px;">{{ question.question }}</p>
           </div>
         </div>
         <div class="answer-box">
