@@ -6,7 +6,7 @@
    </div> 
    <div class="swiper-container">
       <!-- أزرار التنقل -->
-       <div class="content_btns absolute">
+       <div class="content_btns absolute {% if settings.hide_arrows == "false" %} d-none {% endif %}">
          <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
          &gt;
          </div>
@@ -222,7 +222,34 @@
               "ar":" العنوان",
               "en":"title"
           }
-      }, 
+      },"hide_arrows": {
+        "type": "select",
+        "label": {
+            "ar": "إظهار أسهم الاسلايدر",
+            "en": "hide slider arrows "
+        },
+        "options": [
+            {
+                "value": "true",
+                "label": {
+                    "ar": "نعم",
+                    "en": "Yes"
+                }
+            },
+            {
+                "value": "false",
+                "label": {
+                    "ar": "لا",
+                    "en": "No"
+                }
+            }
+        ],
+        "default": "false",
+        "info": {
+            "ar": "اختر نعم لعرض الأقسام كـ Slider",
+            "en": "Choose Yes to display categories as a slider"
+        }
+    },
       "customer_reviews": {
           "type": "list",
           "label": {

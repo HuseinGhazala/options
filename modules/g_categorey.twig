@@ -103,7 +103,7 @@
             </div>
             <div class="container overflow-x-hidden q-category">
                 <!-- أزرار التنقل -->
-                <div class="content_btns absolute {% if settings.slider_toggle == "false" %} d-none {% endif %}" style="margin-top:20px;">
+                <div class="content_btns absolute {% if settings.slider_toggle == "false" %} d-none {% endif %} {% if settings.hide_arrows == "false" %} d-none {% endif %}" style="margin-top:20px;">
                     <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
                     &lt;
                     </div>
@@ -193,6 +193,34 @@ document.addEventListener('DOMContentLoaded', function () {
             "label": {
                 "ar": "عرض التصنيفات في صورة سلايدر",
                 "en": "Display categories as slider"
+            },
+            "options": [
+                {
+                    "value": "true",
+                    "label": {
+                        "ar": "نعم",
+                        "en": "Yes"
+                    }
+                },
+                {
+                    "value": "false",
+                    "label": {
+                        "ar": "لا",
+                        "en": "No"
+                    }
+                }
+            ],
+            "default": "false",
+            "info": {
+                "ar": "اختر نعم لعرض الأقسام كـ Slider",
+                "en": "Choose Yes to display categories as a slider"
+            }
+        },
+        "hide_arrows": {
+            "type": "select",
+            "label": {
+                "ar": "إظهار أسهم الاسلايدر",
+                "en": "hide slider arrows "
             },
             "options": [
                 {
