@@ -8,6 +8,7 @@
     "login": "Login",
     "logout": "Logout",
     "hello": "Hello",
+    "go_cart":"Go to Cart",
   "rest":"time",
     "product_is_not_taxable": "Tax free",
     "product_has_options": "Available in several options",

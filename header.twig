@@ -51,3 +51,39 @@
   }
 </style>
 {% endblock %}
+
+{% schema %}
+{
+  "name": {
+    "ar": "اعلى الصفحة",
+    "en": "Header"
+  },
+  "icon": "fa fa-square",
+  "display": true,
+  "settings": {
+    "side_bar": {
+      "type": "fieldset",
+      "label": {
+        "ar": "السلة الجانبية",
+        "en": "Side Bar"
+      },
+      "icon": "font_awesome",
+      "expandable": true,
+      "settings": {
+        "check": {
+          "type": "checkbox",
+          "label": {
+            "ar": "اظهار السله الجانبيه",
+            "en": "display the side bar"
+          },
+          "option": {
+            "ar": "تفعيل السله الجانبيه",
+            "en": "Display menu"
+          },
+          "noLabel": true
+        }
+      }
+    }
+  }
+}
+{% endschema %}
