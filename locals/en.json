@@ -32,7 +32,13 @@
     "or":"Or",
     "and":"And",
     "ok":"Ok",
-    "contact_us":"contact us",
+    "contact_us":"contact us",  
+
+    "product_details" : "Product details",
+   "product_features" : "Product features",
+    "product_reviews" : "Product Reviews",
+    "questions_and_answers":"Questions and answers",
+
 
     "sub_newsletter":"Subscribe to the newsletter",
     "join_desc":"Join now and get 10% off your next purchase!",
