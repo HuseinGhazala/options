@@ -531,22 +531,22 @@
 				<ul id="abas" class="teste ">
 				{% if product.description and product.description| striptags | trim | length > 0 %}
 					<li class="selecionada ">
-						<a id="aba_1" class="rounded-lg">تفاصيل المنتج</a>
+						<a id="aba_1" class="rounded-lg">{{locals.product_details}} </a>
 					</li>
 				{% endif %}
 				{% if product.has_variants %}
 					<li>
-						<a id="aba_2" class="rounded-lg">مميزات المنتج</a>
+						<a id="aba_2" class="rounded-lg">{{locals.product_features}} </a>
 					</li>
 				{% endif %}
 				{% if store.is_product_reviews_enabled %}
 					<li>
-						<a id="aba_3" class="rounded-lg">تقييمات المنتج</a>
+						<a id="aba_3" class="rounded-lg">{{locals.product_reviews}} </a>
 					</li>
 				{% endif %}
 				{% if store.is_product_question_and_answer_enabled %}
 					<li>
-						<a id="aba_4" class="rounded-lg">الاسئلة والاجوبة </a>
+						<a id="aba_4" class="rounded-lg">{{locals.questions_and_answers}}  </a>
 					</li>
 				{% endif %}
 			</ul>

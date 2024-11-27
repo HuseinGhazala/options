@@ -40,6 +40,11 @@
   "ok":"موافق",
   "salla_shops": "سلة المشتريات" ,
 
+  "product_details" : "تفاصيل المنتج",
+  "product_features" : " مميزات المنتج",
+  "product_reviews" : " تقييمات المنتج",
+  "questions_and_answers":" الاسئلة والاجوبة  ",
+
   "sorry":"عفوا",
   "search":"إبحث",
   "close":"اغلاق",
