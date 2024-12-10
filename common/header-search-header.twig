@@ -124,9 +124,7 @@
                 </div>
 			</div>
 		</div>
-	</div>
-	
-</div>
+
 <style>
 .search-header{
 	padding: 0px;
@@ -149,28 +147,7 @@
 
     
     document.addEventListener('DOMContentLoaded', function () {
-    let cartBtn = document.querySelector(".a-shopping-cart");
-    let slideBar = document.querySelector('.salla-side-bar');
-
-    // Show sidebar when clicking the cart button
-    cartBtn.onclick = (event) => {
-        event.stopPropagation(); // Prevents the event from bubbling to `document`
-        slideBar.style.display = 'block';
-    };
-
-    // Hide sidebar when clicking anywhere outside of it
-    document.addEventListener("click", function (event) {
-        // Check if the click is outside both the sidebar and the cart button
-        if (!slideBar.contains(event.target) && event.target !== cartBtn) {
-			
-            slideBar.style.display = 'none';
-        }
-    });
-
-    // Prevent sidebar from hiding when clicking inside it
-    slideBar.onclick = (event) => {
-        event.stopPropagation();
-    };
+    
 });
 
 
