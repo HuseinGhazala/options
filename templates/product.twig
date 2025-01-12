@@ -163,11 +163,12 @@
 				<div>
 					<div class="row">
 
-						<div class="slide-product col-lg-6">
+  <div class="slide-product col-lg-6">
     <!-- Carousel -->
     <!-- Main Swiper -->
     <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
         <div class="swiper-wrapper">
+	
             {% for key, image in product.selected_product.images %}
                 <div class="swiper-slide">
                     <img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ product.name }}" loading="lazy">
@@ -342,8 +343,8 @@
 							<div class="product-buttons{% if product.selected_product.out_of_stock %}d-none{% else %}{% endif %}">
 								<div class="border-product "></div>
 								<button id="product-view-add-to-cart" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+							        <img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
 									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
 									<span>{{ locals.add_to_cart }}</span>
 								</button>
 
@@ -408,6 +409,8 @@
 			<style>
 				.allsmallimages{
 					align-items: center;
+					justify-content: space-between;
+					gap:10px
 				}
 				.thumbimagee{
 					height: 100px;
@@ -415,6 +418,9 @@
 				.slide-product{
 					display: flex;
 					flex-direction: row-reverse;
+					padding: 0 !important;
+					gap:5px;
+					margin-bottom: 25px;
 				}
 				.sec_des p span{
 					font-size:16px;
@@ -430,6 +436,9 @@
 				.slide-product .swiper-slide {
 					background-size: cover;
 					background-position: center;
+					height: 100%;
+                    max-height: 400px;
+					width: 100%;
 				}
 
 				.slide-product .mySwiper2 {
@@ -438,23 +447,39 @@
 				}
 
 				.slide-product .mySwiper {
-					height:80%;
+					height:100%;
 					box-sizing: border-box;
-					padding: 2px 0;
+					padding: 2px 0;   
 					width: 30%;
-					max-height: 50vh;
+					margin-top: 20px;  
+					overflow-y: scroll ;
 				}
+              	   .slide-product .mySwiper::-webkit-scrollbar {
+				    	 width: 0px;
+					}
 
+					/* Track */
+					.slide-product .mySwiper::-webkit-scrollbar-track {
+				    	background: transparent;
+					}
+
+					/* Handle */
+					.slide-product .mySwiper::-webkit-scrollbar-thumb {
+				    	background: transparent;
+					}
 				.slide-product .mySwiper .swiper-slide {
-					width: 25%;
-					height: 100%;
+					width: unset !important;
+					height: fit-content !important;
 					opacity: 0.4;
+					margin: 0 !important;
 				}
 
 				.slide-product .mySwiper .swiper-slide-thumb-active {
 					opacity: 1;
 				}
-
+                   .products-details-page .lg-thumbs img, .carousel-img{
+					height: 100%;
+				   }
 
 				#abas {
 					margin: 0;
@@ -509,18 +534,21 @@
 					flex-wrap: wrap;
 				}
 				.allsmallimages{
-					width: 100%;
+					width: fit-content;
 					height: fit-content;
 				}
 				.swiper-free-mode>.swiper-wrapper{
 					height: auto;
+					justify-content: space-between;
+					flex-direction: row;
 				}
 			
 
 			}
-
-
-				
+				 #product-view-add-to-cart {
+					height: 50px;
+					gap: 10px;
+				 }
 			</style>
 
 			<div class="product_payments">
@@ -861,14 +889,14 @@ max-width:fit-content;
 
 
 					<div class="slider-inspire container overflow-hidden description-paragrah">
-						<div class="swiper-containerr">
-							<div class="con swiper-wrapper justify-center" >
+						<swiper-container navigation="true"  class="slider_part_single" >
+							{# <div class="con swiper-wrapper justify-center" > #}
 								{% for key,rProduct in product.related_products %}
-									<div class="swiper-slide prod-col slide-p">
+									<swiper-slide class="swiper-slidexx prod-col slide-p">
 										{% include 'product-card.twig' with {'product' : rProduct, 'index': key, 'pr_settings':settings} %}
-									</div>
+									</swiper-slide>
 								{% endfor %}
-							</div>
+							{# </div> #}
 
 							<div class="swiper-button-next"></div>
 							<div class="swiper-button-prev"></div>
@@ -876,6 +904,67 @@ max-width:fit-content;
 					</div>
 				</section>
 				<style>
+
+                        
+						.slider_part_single swiper-slide{
+							min-width: 180px;
+							max-width: 240px;
+							width: 100% !important;
+						}
+
+						.slider_part_single::part(container){
+							padding-top: 100px;
+						}
+						.slider_part_single::part(button-prev){
+						top: 25px;
+							left: 50px;
+							right: unset;
+						}
+						.slider_part_single::part(button-next){
+						top: 25px;
+						left: 0;
+
+						}
+
+							.slider_part_single swiper-slide .product-item .product-price{
+								margin-bottom: 10px;
+								width:fit-content;
+							}
+							.slider_part_single swiper-slide .product-item .dis-offer{
+							display: flex !important; 
+							align-items: center;
+
+						}
+							.slider_part_single swiper-slide .product-item .dis-offer span{
+							font-size: 11px;
+						}
+
+						.slider_part_single::part(button-prev),
+						.slider_part_single::part(button-next){
+						color: var(--primary-color) !important;
+							background-color: white  !important;
+							padding: 10px !important;
+							width: 25px !important;
+							height: 25px !important;
+							border: 1px solid gainsboro !important;
+							border-radius: 8px !important;
+						}
+
+						@media (max-width: 768px) {
+						.slider_part_single::part(button-prev),
+						.slider_part_single::part(button-next){
+							padding: 8px !important;
+							width: 20px !important;
+							height: 20px !important;
+						}
+						.slider_part_single swiper-slide{
+							min-width: 150px;
+							max-width: 180px;
+							width: 100% !important;
+						}
+						}
+
+
 					.slide-p{
 						max-width: 30%;
 						margin-left: 15px;
@@ -935,6 +1024,54 @@ max-width:fit-content;
 					}
 				</style>
 				<script>
+				    const swiperEl = document.querySelector('.slider_part_single');
+					const prevButton = document.querySelector('#button-prev');
+					const nextButton = document.querySelector('#button-next');
+
+					// إعدادات Swiper
+					const swiperParams = {
+					slidesPerView: 5,
+					spaceBetween: 40,
+					speed: 300,
+					loop: false,
+					navigation: true,
+					cssMode: true,
+					watchOverflow: true,
+						breakpoints: {
+						320: {
+						slidesPerView: 2,
+						spaceBetween: 20,
+						},
+						768: {
+						slidesPerView: 2,
+						spaceBetween: 20,
+						},
+						992: {
+						slidesPerView: 5,
+						spaceBetween: 40,
+						},
+					},
+					};
+
+					// دمج الإعدادات مع swiper-container
+					Object.assign(swiperEl, swiperParams);
+
+					// تهيئة Swiper
+					swiperEl.initialize();
+
+					// تحقق عند التهيئة
+					swiperEl.addEventListener('ready', () => {
+					console.log('Swiper is ready!');
+					});
+
+					// أحداث إضافية للأزرار (اختياري)
+					prevButton.addEventListener('click', () => {
+					swiperEl.swiper.slidePrev();
+					});
+
+					nextButton.addEventListener('click', () => {
+					swiperEl.swiper.slideNext();
+					});
 					document.addEventListener("DOMContentLoaded", function () {
 					    showRelatedProducts();
 					});
@@ -987,7 +1124,8 @@ max-width:fit-content;
 	{{ product_view_scripts|raw }}
 
 	<script>
-		var productImages = {{ product.selected_product.images | json_encode() | raw }};
+
+var productImages = {{ product.selected_product.images | json_encode() | raw }};
 
 function productAddToCart() {
 if (!$('.add-to-cart-progress').hasClass('d-none')) 

@@ -84,7 +84,11 @@
 	{% include 'pagination.twig' with { 'totalPages' : products.last_page , 'currentPage' : products.current_page } %}
 
 	<style>
-
+      @media (max-width: 768px) {
+		 .prod-col{
+		  padding: 5px !important;
+	     }
+	  }
 		.side-banners .banner-item {
 			position: relative;
 			overflow: hidden;
@@ -115,9 +119,7 @@
 		.side-banners .banner-item img {
 			transition: transform 0.3s ease, opacity 0.3s ease;
 		}
-		.products-area {
-			padding-right: 30px;
-		}
+	
 		#products-list .salla {
 			display: flex;
 			justify-content: center;
