@@ -409,6 +409,8 @@
 			<style>
 				.allsmallimages{
 					align-items: center;
+					justify-content: space-between;
+					gap:10px
 				}
 				.thumbimagee{
 					height: 100px;
@@ -416,6 +418,9 @@
 				.slide-product{
 					display: flex;
 					flex-direction: row-reverse;
+					padding: 0 !important;
+					gap:5px;
+					margin-bottom: 25px;
 				}
 				.sec_des p span{
 					font-size:16px;
@@ -433,6 +438,7 @@
 					background-position: center;
 					height: 100%;
                     max-height: 400px;
+					width: 100%;
 				}
 
 				.slide-product .mySwiper2 {
@@ -441,18 +447,31 @@
 				}
 
 				.slide-product .mySwiper {
-					height:80%;
+					height:100%;
 					box-sizing: border-box;
 					padding: 2px 0;
 					width: 30%;
-					max-height: 50vh;
 					margin-top: 20px;
+					overflow-y: scroll ;
 				}
+              	   .slide-product .mySwiper::-webkit-scrollbar {
+				    	 width: 0px;
+					}
 
+					/* Track */
+					.slide-product .mySwiper::-webkit-scrollbar-track {
+				    	background: transparent;
+					}
+
+					/* Handle */
+					.slide-product .mySwiper::-webkit-scrollbar-thumb {
+				    	background: transparent;
+					}
 				.slide-product .mySwiper .swiper-slide {
-					width: 25%;
-					height: 100%;
+					width: unset !important;
+					height: fit-content !important;
 					opacity: 0.4;
+					margin: 0 !important;
 				}
 
 				.slide-product .mySwiper .swiper-slide-thumb-active {
@@ -515,11 +534,13 @@
 					flex-wrap: wrap;
 				}
 				.allsmallimages{
-					width: 100%;
+					width: fit-content;
 					height: fit-content;
 				}
 				.swiper-free-mode>.swiper-wrapper{
 					height: auto;
+					justify-content: space-between;
+					flex-direction: row;
 				}
 			
 
@@ -1103,7 +1124,8 @@ max-width:fit-content;
 	{{ product_view_scripts|raw }}
 
 	<script>
-		var productImages = {{ product.selected_product.images | json_encode() | raw }};
+
+var productImages = {{ product.selected_product.images | json_encode() | raw }};
 
 function productAddToCart() {
 if (!$('.add-to-cart-progress').hasClass('d-none')) 

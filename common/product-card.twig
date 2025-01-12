@@ -26,10 +26,13 @@
 					{% if product.is_infinite == false and product.quantity <= 0 %}
 						<a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
 					{% elseif ( product.has_options or product.has_fields ) %}
-						<a class="btn btn-primary btn-product-card-select-variant addToCartBtn" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+						<a class="btn btn-primary btn-product-card-select-variant addToCartBtn" href="/products/{{ product.slug }}">
+					    <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+						{{ locals.add_to_cart }}</a>
 					{% else %}
 						<a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
 							<img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
+							<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
 							{{ locals.add_to_cart }}
 						</a>
 					{% endif %}
@@ -94,10 +97,13 @@
 					{% if product.is_infinite == false and product.quantity <= 0 %}
 						<a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
 					{% elseif ( product.has_options or product.has_fields ) %}
-						<a style="width: 100%;" class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+						<a style="width: 100%;" class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">
+				       	<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+						{{ locals.add_to_cart }}</a>
 					{% else %}
 						<a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
 							<img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
+						   	<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
 							{{ locals.add_to_cart }}
 						</a>
 					{% endif %}    
@@ -168,7 +174,15 @@
 	height: 45px !important;
     font-size:14px;
   }
-	
+	.product-card-add-to-cart {
+		gap:6px;
+	}
+	.product-card-add-to-cart i {
+		margin-top: 2px;
+	}
+	.btn-product-card-select-variant {
+		gap:5px
+	}
 	/* إعدادات المكونات */
 	/* .product-item {
 		padding: 15px;
