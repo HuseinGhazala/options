@@ -180,9 +180,9 @@ function addToCart(product_id, quantity, onCompleted) {
         if(response.status  === 'success') {
             setCartTotalAndBadge(response.data.cart);
 
-            // if (onCompleted) {
+            if (onCompleted) {
                 onCompleted();
-            // }
+            }
         }
         else{
             window.loadToasterScriptIfNotLoaded(function () {

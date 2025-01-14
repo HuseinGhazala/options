@@ -340,7 +340,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 				<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 
-				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}"></script>
+				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.125') }}"></script>
 
 				{# Local storage #}
 				
@@ -937,7 +937,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				]
 			}
 		}
-	},		
+	},	
 	"colors": {
 		"name": {
 			"ar": "الالوان",
@@ -1252,8 +1252,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 	},
 	"titlebg": {
 		"name": {
-			"ar": "خلفية العنوان",
-			"en": "Title background"
+			"ar": "خلفية عنوان القسم" ,
+			"en": "Title background section"
 		},
 		"icon": "fa fa-paint-brush",
 		"display": true,
@@ -1286,163 +1286,162 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
      },
     "discount": {
-    "type": "fieldset",
-    "name": {
-      "ar": "نافذة الخصم المثبتة",
-      "en": "Pop-up discount window"
-    },
-    "expandable": true,
-    "settings": {
-      "is_popup": {
-        "type": "checkbox",
-        "label": {
-          "ar": "تفعيل نافذة الخصم",
-          "en": "Activate the discount window"
-        }
-      },
-      "popup_img": {
-        "type": "image",
-        "label": {
-          "ar": "الصور",
-          "en": "the image"
-        }
-      },
-      "popup_title": {
-        "type": "text",
-        "label": {
-          "ar": "العنوان",
-          "en": "title"
-        }
-      },
-      "popup_percentage": {
-        "type": "text",
-        "label": {
-          "ar": "نسبة الخصم",
-          "en": "discount rate"
-        }
-      },
-      "popup_subtitle": {
-        "type": "text",
-        "label": {
-          "ar": "الوصف",
-          "en": "description"
-        }
-      },
-      "popup_placeholder": {
-        "type": "text",
-        "label": {
-          "ar": "نص توضيحي في مكان ادخال البريد",
-          "en": "Explanatory Text in Enter Mail"
-        }
-      },
-      "popup_btn_title": {
-        "type": "text",
-        "label": {
-          "ar": "نص الزر",
-          "en": "button text"
-        }
-      },
-      "action_url": {
-        "type": "url",
-        "label": {
-          "ar": "رابط الفورم",
-          "en": "form URL"
-        }
-      }
-    }
-     },"categorySideBanners": {
-    "type": "fieldset",
-    "name": {
-        "ar": "وضع بنرات جانبيه في صفحة التصنيف",
-        "en": "Place side banners on the category page"
-    },
-    "expandable": true,
-    "settings": {
-        "sideBanerCondetion": {
-            "type": "checkbox",
-            "label": {
-                "ar": "اظهار البنرات الجانبيه في صفحه الاقسام",
-                "en": "Show side banners on sections page"
-            }
-        },
-        "sideBannerList": {
-            "type": "list",
-            "label": {
-                "ar": "اضف البنرات الجانبيه",
-                "en": "Add side banners"
-            },
-            "settings": {
-                "mediaType": {
-                    "type": "select",
-                    "label": {
-                        "ar": "نوع الوسائط",
-                        "en": "Media Type"
-                    },
-                    "options": [
-                        {
-                            "value": "image",
-                            "label": {
-                                "ar": "صورة",
-                                "en": "Image"
-                            }
-                        },
-                        {
-                            "value": "video",
-                            "label": {
-                                "ar": "فيديو",
-                                "en": "Video"
-                            }
-                        }
-                    ]
-                },
-                "sideBanerImage": {
-                    "type": "image",
-                    "label": {
-                        "ar": "الصوره",
-                        "en": "image"
-                    },
-                    "condition": {
-                        "field": "mediaType",
-                        "value": "image"
-                    }
-                },
-                "sideBanerVideoUrl": {
-                    "type": "text",
-                    "label": {
-                        "ar": "رابط الفيديو",
-                        "en": "Video URL"
-                    },
-                    "condition": {
-                        "field": "mediaType",
-                        "value": "video"
-                    }
-                },
-                "sideBanerTitle": {
-                    "type": "text",
-                    "label": {
-                        "ar": "عنوان البنر",
-                        "en": "banner Title"
-                    }
-                },
-                "sideBanerLink": {
-                    "type": "text",
-                    "label": {
-                        "ar": "نص الزر",
-                        "en": "button Text"
-                    }
-                },
-                "sideBanerLinkUrl": {
-                    "type": "url",
-                    "label": {
-                        "ar": "رابط الزر",
-                        "en": "link URL"
-                    }
-                }
-            }
-        }
-    }
-}
-,
+		"type": "fieldset",
+		"name": {
+		"ar": "نافذة الخصم المثبتة",
+		"en": "Pop-up discount window"
+		},
+		"expandable": true,
+		"settings": {
+		"is_popup": {
+			"type": "checkbox",
+			"label": {
+			"ar": "تفعيل نافذة الخصم",
+			"en": "Activate the discount window"
+			}
+		},
+		"popup_img": {
+			"type": "image",
+			"label": {
+			"ar": "الصور",
+			"en": "the image"
+			}
+		},
+		"popup_title": {
+			"type": "text",
+			"label": {
+			"ar": "العنوان",
+			"en": "title"
+			}
+		},
+		"popup_percentage": {
+			"type": "text",
+			"label": {
+			"ar": "نسبة الخصم",
+			"en": "discount rate"
+			}
+		},
+		"popup_subtitle": {
+			"type": "text",
+			"label": {
+			"ar": "الوصف",
+			"en": "description"
+			}
+		},
+		"popup_placeholder": {
+			"type": "text",
+			"label": {
+			"ar": "نص توضيحي في مكان ادخال البريد",
+			"en": "Explanatory Text in Enter Mail"
+			}
+		},
+		"popup_btn_title": {
+			"type": "text",
+			"label": {
+			"ar": "نص الزر",
+			"en": "button text"
+			}
+		},
+		"action_url": {
+			"type": "url",
+			"label": {
+			"ar": "رابط الفورم",
+			"en": "form URL"
+			}
+		}
+		}
+		},"categorySideBanners": {
+		"type": "fieldset",
+		"name": {
+			"ar": "وضع بنرات جانبيه في صفحة التصنيف",
+			"en": "Place side banners on the category page"
+		},
+		"expandable": true,
+		"settings": {
+			"sideBanerCondetion": {
+				"type": "checkbox",
+				"label": {
+					"ar": "اظهار البنرات الجانبيه في صفحه الاقسام",
+					"en": "Show side banners on sections page"
+				}
+			},
+			"sideBannerList": {
+				"type": "list",
+				"label": {
+					"ar": "اضف البنرات الجانبيه",
+					"en": "Add side banners"
+				},
+				"settings": {
+					"mediaType": {
+						"type": "select",
+						"label": {
+							"ar": "نوع الوسائط",
+							"en": "Media Type"
+						},
+						"options": [
+							{
+								"value": "image",
+								"label": {
+									"ar": "صورة",
+									"en": "Image"
+								}
+							},
+							{
+								"value": "video",
+								"label": {
+									"ar": "فيديو",
+									"en": "Video"
+								}
+							}
+						]
+					},
+					"sideBanerImage": {
+						"type": "image",
+						"label": {
+							"ar": "الصوره",
+							"en": "image"
+						},
+						"condition": {
+							"field": "mediaType",
+							"value": "image"
+						}
+					},
+					"sideBanerVideoUrl": {
+						"type": "text",
+						"label": {
+							"ar": "رابط الفيديو",
+							"en": "Video URL"
+						},
+						"condition": {
+							"field": "mediaType",
+							"value": "video"
+						}
+					},
+					"sideBanerTitle": {
+						"type": "text",
+						"label": {
+							"ar": "عنوان البنر",
+							"en": "banner Title"
+						}
+					},
+					"sideBanerLink": {
+						"type": "text",
+						"label": {
+							"ar": "نص الزر",
+							"en": "button Text"
+						}
+					},
+					"sideBanerLinkUrl": {
+						"type": "url",
+						"label": {
+							"ar": "رابط الزر",
+							"en": "link URL"
+						}
+					}
+				}
+			}
+		}
+	},
 	"logo_card": {
 		"name": {
 			"ar": "اضافه لوجو او صوره على المنتج",
@@ -1523,7 +1522,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                       }
                     ]
                 }        
-    }
+     }
 	},
 	"image_control": {
 		"name": {

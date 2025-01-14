@@ -4,7 +4,7 @@
 				{% for item in settings.slider %}
 					<swiper-slide>
                         <div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
-                            <div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt">
+                            <div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt text-banner">
                                 <h1 class="animate__animated animate__fadeInUp custom-dlay-heading " 
                                     style="color: {{ item.address_color ? item.address_color : '#000000' }}">
                                     {{ item.slider_bannar_title }}
@@ -31,17 +31,19 @@
         .g_fixed_bannar{
             height: 90vh
         }
+
             .g_fixed_bannar h1 {
                         font-size: 36px;
                         line-height: 1.5;
-                        width: 70%;
                         font-weight: bold;
             }
           .g_fixed_bannar p{
                 margin-block: 15px;
                 font-size: 20px;
           }
-       
+        .text-banner{
+            width: 70%;
+        }
         .g_fixed_bannar a button{
                 max-width: 175px;
                 height: 50px;

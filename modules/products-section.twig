@@ -1,86 +1,90 @@
 <div section-id="{{ sectionId }}" data-lg-scroll-offset="130" data-md-scroll-offset="130" data-sm-scroll-offset="94" class="home-products-section section-padding-space">
-  <div class="container">
-    <div class="mb-4" style="margin-bottom: 55px;">
-      {% include 'title.twig' with { 'component_title': settings.title } %}
-    </div>
-    <swiper-container 
-      init="false"
-      class="slider_part"
-      >
-      {% for product in settings.products.products %}
-        <swiper-slide>
-          <div class="prod-col">
-            {% include 'product-card.twig' with {'product' : product, 'index': key} %}
-          </div>
-        </swiper-slide>
-      {% endfor %}
-    </swiper-container>
+	<div class="container">
+		<div class="mb-4" style="margin-bottom: 55px;">
+			{% include 'title.twig' with { 'component_title': settings.title } %}
+		</div>
+		<swiper-container init="false" class="slider_part">
+			{% for product in settings.products.products %}
+				<swiper-slide>
+					<div class="prod-col">
+						{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+					</div>
+				</swiper-slide>
+			{% endfor %}
+		</swiper-container>
 
-    {% if settings.more_text %}
-      <div class="mt-5 text-center category-products-display-more-section">
-        <a style="width: auto;" href="{{ settings.products.url }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
-      </div>
-    {% endif %}
-  </div>
+		{% if settings.display_more %}
+			<div class="mt-5 text-center category-products-display-more-section">
+				<a style="width: auto;" href="{{ settings.products.url }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
+			</div>
+		{% endif %}
+	</div>
 </div>
 <style>
-.home-products-section{
-  margin-top: 20px;
-}
-
-
-
-.slider_part::part(container){
-    padding-top: 75px;
-}
-.slider_part::part(button-prev){
-   top: 25px;
-    left: 50px;
-    right: unset;
-}
-.slider_part::part(button-next){
-  top: 25px;
-  left: 0;
-
-}
-
-	.slider_part swiper-slide .product-item .product-price{
-		margin-bottom: 10px;
-		width:fit-content;
+	.home-products-section
+	{
+		margin-top: 20px;
 	}
-	.slider_part swiper-slide .product-item .dis-offer{
-    display: flex !important; 
-    align-items: center;
-
-  }
-	.slider_part swiper-slide .product-item .dis-offer span{
-    font-size: 11px;
-  }
-
-.slider_part::part(button-prev),
-.slider_part::part(button-next){
-  color: var(--primary-color) !important;
-    background-color: white  !important;
-    padding: 10px !important;
-    width: 25px !important;
-    height: 25px !important;
-    border: 1px solid gainsboro !important;
-    border-radius: 8px !important;
-}
-
-@media (max-width: 768px) {
-.slider_part::part(button-prev),
-.slider_part::part(button-next){
-    padding: 8px !important;
-    width: 20px !important;
-    height: 20px !important;
-  }
-
-}
 
 
+	.slider_part::part(container)
+	{
+		padding-top: 75px;
+	}
+	.slider_part::part(button-prev)
+	{
+		top: 25px;
+		left: 50px;
+		right: unset;
+	}
+	.slider_part::part(button-next)
+	{
+		top: 25px;
+		left: 0;
+
+	}
+
+	.slider_part swiper-slide .product-item .product-price
+	{
+		margin-bottom: 10px;
+		width: fit-content;
+	}
+	.slider_part swiper-slide .product-item .dis-offer
+	{
+		display: flex !important;
+		align-items: center;
+
+	}
+	.slider_part swiper-slide .product-item .dis-offer span
+	{
+		font-size: 11px;
+	}
+
+	.slider_part::part(button-prev),
+	.slider_part::part(button-next)
+	{
+		color: var(--primary-color) !important;
+		background-color: white !important;
+		padding: 10px !important;
+		width: 25px !important;
+		height: 25px !important;
+		border: 1px solid gainsboro !important;
+		border-radius: 8px !important;
+	}
+
+	@media(max-width: 768px)
+	{
+		.slider_part::part(button-prev),
+		.slider_part::part(button-next)
+		{
+			padding: 8px !important;
+			width: 20px !important;
+			height: 20px !important;
+		}
+
+	}
 </style>
-<script>
+ <script>
 
 
 // تحديد عناصر Swiper
@@ -145,18 +149,14 @@ nextButton.addEventListener('click', () => {
     swiperEl.swiper.slideNext(); 
   }); #}
 
-    {# const arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
+{# const arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
     const arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
 
     const editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
 
     console.log("Swiper initialized. Editing mode:", editingMode); #}
-  
-</script>
-
-
-{% schema %}
-{
+    </script>
+  {% schema %}{
   "name": {
     "ar": "قائمة المنتجات",
     "en": "Products"
@@ -198,5 +198,4 @@ nextButton.addEventListener('click', () => {
       }
     }
   }
-}
-{% endschema %}
+}{% endschema %}
