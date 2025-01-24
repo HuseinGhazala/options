@@ -12,16 +12,6 @@ function menuFiixedHeader() {
     sticky = fixed_header.offsetTop;
 }
 
-document.addEventListener("scroll", function () {
-    const scrollTop = window.scrollY;
-  
-    if (scrollTop > 100) {
-        console.log("hi")
-    } else {
-        console.log("hi")
-    }
-  });
-  
 
 function fixed_header_to_top() {
     if (window.pageYOffset > sticky) {
