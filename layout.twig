@@ -273,7 +273,7 @@
 
 				</div>
 			</div>
-				<div class="main flex-grow-1 app-content" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
+				<div class="main flex-grow-1 {% if template != 'home' %} p-header {% endif %} app-content" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
 					</div>
 				     {# <p>{{settings}}</p> #}
 					 {% if template == 'home'  %}
@@ -683,7 +683,9 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 {% block header_bottom %}
 	<style>
-	
+	  .p-header{
+		padding-top:120px ;
+	  }
 		.auth-login {
 			font-size: 21px;
 		}
