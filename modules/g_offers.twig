@@ -88,6 +88,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="" id="inputData" value="{{ settings.dateTime_choose }}">
         {% endfor %}
         {% endif %}
     </div>
@@ -150,7 +151,8 @@
     }
 
     // Get the target countdown date
-    const realDate = convertToDate('{{ settings.dateTime_choose }}');
+    const inputData = document.getElementById("inputData")
+    const realDate = convertToDate(inputData.value);
     const countDownDate = new Date(realDate).getTime();
 
     // Select all countdown elements
