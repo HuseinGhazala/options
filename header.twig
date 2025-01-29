@@ -4,9 +4,9 @@
 
 
 	<div
-		id="fixed-header" style="z-index: 3">
+		id="fixed-header" style="z-index: 600">
 		<!-- input search for mobile view -->
-		<div style="z-index: 100">
+		<div >
 			{% include 'header-search-header.twig' with { 'header_settings' : settings } %}
 		</div>
 		<div style="position: relative; z-index: -1" class="container">
@@ -67,7 +67,7 @@
 		{
 			#fixed-header
 			{
-				height: 70px !important;
+				height: 80px !important;
 			}
 			.search-header-bar
 			{
