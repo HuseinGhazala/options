@@ -88,56 +88,60 @@ video {
 
 <script>
  document.addEventListener('DOMContentLoaded', () => {
-  const videoTag = document.querySelector('#videoPlayer');
-  const bgImage = document.querySelector('#bgImage');
-  const videoParent = document.querySelector('.video-parent');
-  const playButton = document.querySelector('#play');
-  const textBox = document.querySelector('.text-box');
   const isAutoplay = '{{ settings.video_control }}' === 'true';
 
-  if (isAutoplay) {
-    videoTag.style.display = 'block'; 
-    videoTag.style.opacity = 1; 
-    bgImage.style.display = 'none'; 
-    textBox.style.display = 'none'; 
-    playButton.style.display = 'none';
-    videoTag.play(); 
-  } else {
-    videoTag.style.display = 'none';
-    videoTag.style.opacity = 0;
-    playButton.style.display = 'block'; 
-    textBox.style.display = 'flex'; 
-    bgImage.style.display = 'block';
+  const components = document.querySelectorAll('.video-parent');
 
-    
-    videoParent.addEventListener('click', () => {
-      videoTag.style.display = 'block'; 
-      videoTag.style.opacity = 1; 
-      videoTag.play(); 
-      bgImage.style.display = 'none'; 
-      playButton.style.display = 'none'; 
-      textBox.style.display = 'none'; 
-    });
+  components.forEach((parent, index) => {
+    const videoTag = parent.querySelector('#videoPlayer');
+    const bgImage = parent.querySelector('#bgImage');
+    const playButton = parent.querySelector('#play');
+    const textBox = parent.querySelector('.text-box');
 
-    
-    videoTag.addEventListener('pause', () => {
-      videoTag.style.display = 'none'; 
-      videoTag.style.opacity = 0; 
+    if (!videoTag || !bgImage || !playButton || !textBox) return;
+
+    if (isAutoplay) {
+      videoTag.style.display = 'block';
+      videoTag.style.opacity = 1;
+      bgImage.style.display = 'none';
+      textBox.style.display = 'none';
+      playButton.style.display = 'none';
       videoTag.play();
-      bgImage.style.display = 'block'; 
-      playButton.style.display = 'block'; 
-      textBox.style.display = 'flex';
-    });
-
-  
-    videoTag.addEventListener('ended', () => {
-      videoTag.style.display = 'none'; 
-      bgImage.style.display = 'block'; 
+    } else {
+      videoTag.style.display = 'none';
+      videoTag.style.opacity = 0;
       playButton.style.display = 'block';
-      textBox.style.display = 'flex'; 
-    });
-  }
+      textBox.style.display = 'flex';
+      bgImage.style.display = 'block';
+
+      parent.addEventListener('click', () => {
+        videoTag.style.display = 'block';
+        videoTag.style.opacity = 1;
+        videoTag.play();
+        bgImage.style.display = 'none';
+        playButton.style.display = 'none';
+        textBox.style.display = 'none';
+      });
+
+      videoTag.addEventListener('pause', () => {
+        videoTag.style.display = 'none';
+        videoTag.style.opacity = 0;
+        bgImage.style.display = 'block';
+        playButton.style.display = 'block';
+        textBox.style.display = 'flex';
+      });
+
+      videoTag.addEventListener('ended', () => {
+        videoTag.style.display = 'none';
+        videoTag.style.opacity = 0;
+        bgImage.style.display = 'block';
+        playButton.style.display = 'block';
+        textBox.style.display = 'flex';
+      });
+    }
+  });
 });
+
 </script>
 
 {% schema %}
