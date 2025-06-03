@@ -446,8 +446,8 @@ document.addEventListener("DOMContentLoaded", function(){
     window.slidingMenu = new SlideMenu(window.slidingMenuElement,{
         position: (window.appDirection === 'ltr') ? 'left' : 'right',
         showBackLink: true,
-        backLinkBefore: (window.appDirection === 'ltr') ? '<span class="icon-arrow_left slide-menu-arrow slide-menu-arrow-back"></span>' : '<span class="icon-arrow_right slide-menu-arrow slide-menu-arrow-back"></span>',
-        submenuLinkAfter: (window.appDirection === 'ltr') ? '<span class="icon-arrow_right slide-menu-arrow"></span>' : '<span class="icon-arrow_left slide-menu-arrow"></span>'
+        backLinkBefore: (window.appDirection === 'ltr') ? '<span class="fa-solid fa-angles-left slide-menu-arrow slide-menu-arrow-back"></span>' : '<span class="fa-solid fa-angles-right slide-menu-arrow slide-menu-arrow-back"></span>',
+        submenuLinkAfter: (window.appDirection === 'ltr') ? '<span class="fa-solid fa-angles-right slide-menu-arrow"></span>' : '<span class="fa-solid fa-angles-left slide-menu-arrow"></span>'        
     });
 
     window.slidingMenuElement.addEventListener('sm.open', function () {
