@@ -1055,7 +1055,7 @@ max-width:fit-content;
 					const prevButton = document.querySelector('#button-prev');
 					const nextButton = document.querySelector('#button-next');
 
-					// إعدادات Swiper
+    
 					const swiperParams = {
 					slidesPerView: 5,
 					spaceBetween: 40,
@@ -1080,18 +1080,18 @@ max-width:fit-content;
 					},
 					};
 
-					// دمج الإعدادات مع swiper-container
+    
 					Object.assign(swiperEl, swiperParams);
 
-					// تهيئة Swiper
+    
 					swiperEl.initialize();
 
-					// تحقق عند التهيئة
+    
 					swiperEl.addEventListener('ready', () => {
 					console.log('Swiper is ready!');
 					});
 
-					// أحداث إضافية للأزرار (اختياري)
+    
 					prevButton.addEventListener('click', () => {
 					swiperEl.swiper.slidePrev();
 					});
@@ -1201,6 +1201,7 @@ max-width:fit-content;
 	<script>
 
 var productImages = {{ product.selected_product.images | json_encode() | raw }};
+	var productVariants = {{ product.variants | json_encode() | raw }};
 
 function productAddToCart() {
   if (!$('.add-to-cart-progress').hasClass('d-none')) return;
@@ -1265,7 +1266,7 @@ if (selected_product) {
 $('#product-id').val(selected_product.id)
 $('.send-notify-product-id').val(selected_product.id)
 
-if (! selected_product.unavailable) { // Selected a valid variant that is available.
+if (! selected_product.unavailable) {
 if (selected_product.formatted_sale_price) {
 $('.product-formatted-price').html(selected_product.formatted_sale_price)
 $('.product-formatted-price-old').html(selected_product.formatted_price)
@@ -1327,7 +1328,7 @@ $('.section-out-of-stock-notify-me').addClass('d-none');
 $('.btn-add-to-cart span').html('{{ locals.add_to_cart }}');
 
 updateProductImages(selected_product);
-} else { // Variant is sold out.
+} else {
 $('.select-quantity-div').addClass('d-none')
 $('.product-buttons').addClass('d-none');
 $('.section-out-of-stock-notify-me').removeClass('d-none');
@@ -1337,7 +1338,7 @@ $('.btn-add-to-cart span').html('{{ locals.error_item_unavailable }}');
 updateProductImages(selected_product);
 }
 
-} else { // variant doesn't exist.
+} else {
 $('.select-quantity-div').addClass('d-none')
 $('.product-buttons').addClass('d-none');
 $('.section-out-of-stock-notify-me').removeClass('d-none');
@@ -1353,21 +1354,54 @@ if (selected_product.images && selected_product.images.length > 0) {
 $('.product-images-carousel').removeClass('d-none');
 $('.product-images-carousel-thumbs').removeClass('d-none-important');
 $('.product-images-empty').addClass('d-none');
-$('#product-images-slick').slick('unslick');
-$('.product-images-carousel').addClass('product-images-carousel-init');
 
 productImages = selected_product.images;
 
-$('#product-images-slick').html('');
-$('.product-images-carousel-thumbs').html('');
-
+if (window.mainSwiper && typeof window.mainSwiper.removeAllSlides === 'function') {
+    try {
+        window.mainSwiper.removeAllSlides();
+        
 for (var z = 0; z < productImages.length; z++) {
 var prImage = productImages[z];
-$('#product-images-slick').append('' + '<div>\n' + '                                                                    <div class="box-1-1">\n' + '                                                                        <div class="content">\n' + '                                                                            <a class="image-link"\n' + '                                                                               style="display:block; width: 100%; height: 100%;">\n' + '                                                                                <img src="' + prImage.image.full_size + '" class="carousel-img" loading="lazy" alt="' + selected_product.name + '">\n' + '                                                                            </a>\n' + '                                                                        </div>\n' + '                                                                    </div>\n' + '                                                                </div>');
+            var slideHtml = '<div class="swiper-slide">' +
+                '<img src="' + prImage.image.full_size + '" class="carousel-img" alt="' + selected_product.name + '" loading="lazy">' +
+                '</div>';
+            window.mainSwiper.appendSlide(slideHtml);
+        }
+        
+        window.mainSwiper.update();
+        window.mainSwiper.slideTo(0); // العودة للصورة الأولى
+    } catch (error) {
+        console.error('Error updating main Swiper:', error);
+    }
+}
 
+if (window.thumbSwiper && typeof window.thumbSwiper.removeAllSlides === 'function') {
+    try {
+        window.thumbSwiper.removeAllSlides();
+        
+        for (var z = 0; z < productImages.length; z++) {
+            var prImage = productImages[z];
+            var thumbHtml = '<div class="swiper-slide small_images">' +
+                '<img src="' + prImage.image.medium + '" data-index="' + z + '" loading="lazy" class="thumbimagee">' +
+                '</div>';
+            window.thumbSwiper.appendSlide(thumbHtml);
+        }
+        
+        window.thumbSwiper.update();
+        window.thumbSwiper.slideTo(0); // العودة للصورة الأولى
+    } catch (error) {
+        console.error('Error updating thumb Swiper:', error);
+    }
+}
 
-$('.product-images-carousel-thumbs').append('<div class="col-3">\n' + '                                                         <div class="box-1-1">\n' + '                                                                <div class="content">\n' + '                                                                    <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="                {{ key }}"\n' + '                                                                       style="width: 100%; height: 100%;" >\n' + '                                                                        <img src="' + prImage.image.medium + '" loading="lazy" data-index="' + z + '">\n' + '                                                                    </a>\n' + '                                                                </div>\n' + '                                                            </div>\n' + '                                                        </div>');
-
+if (window.mainSwiper && window.thumbSwiper) {
+    try {
+        window.mainSwiper.thumbs.swiper = window.thumbSwiper;
+        window.mainSwiper.update();
+    } catch (error) {
+        console.error('Error reconnecting Swiper thumbs:', error);
+    }
 }
 
 } else {
@@ -1408,19 +1442,69 @@ scrollTop: $($.attr(this, 'href')).offset().top -(
 
 
 $(document).on('click', '.variant-image-wrapper a', function (event) {
-$('.pswp').removeClass('d-hide');
-$('.app').addClass('d-hide');
-var elm = event.currentTarget;
-var varId = $(elm).attr('data-link-var-id');
+	event.preventDefault();
+		var elm = event.currentTarget;
+		var varId = $(elm).attr('data-link-var-id');
+		var currentVarId = $('#product-id').val();
+		var targetIndex = parseInt($(elm).attr('data-index'), 10);
+		if (isNaN(targetIndex)) targetIndex = 0;
 
-var images = [];
+	if (varId && currentVarId && String(varId) === String(currentVarId) && window.mainSwiper) {
+		try {
+			window.mainSwiper.slideTo(targetIndex);
+			if (window.thumbSwiper) {
+				window.thumbSwiper.slideTo(targetIndex);
+			}
+			if (window.innerWidth < 992) {
+				var $gallery = $('.slide-product');
+				if ($gallery.length) {
+					$('html, body').animate({ scrollTop: $gallery.offset().top - 80 }, 250);
+				}
+			}
+			return;
+		} catch (err) {
+			console.warn('Failed to slide Swiper, falling back to lightbox:', err);
+		}
+	}
 
-$("div[data-var-id='" + varId + "']  img").each(function (iElm) {
-images.push($(this).attr('data-image-url'))
-});
+		try {
+				var variantData = (typeof productVariants !== 'undefined' && Array.isArray(productVariants))
+					? productVariants.find(function (v) { return String(v.id) === String(varId); })
+					: null;
+				var newImages = variantData && Array.isArray(variantData.images) ? variantData.images : [];
+				if (newImages.length && window.mainSwiper && window.thumbSwiper) {
 
-openPhotoSwipe(images, $(elm).attr('data-index'));
+				productImages = newImages;
 
+				window.mainSwiper.removeAllSlides();
+					newImages.forEach(function (prImage) {
+						window.mainSwiper.appendSlide('<div class="swiper-slide">\n  <img src="' + prImage.image.full_size + '" class="carousel-img" alt="{{ product.name }}" loading="lazy">\n</div>');
+				});
+				window.mainSwiper.update();
+
+				window.thumbSwiper.removeAllSlides();
+					newImages.forEach(function (prImage, idx) {
+						window.thumbSwiper.appendSlide('<div class="swiper-slide small_images">\n  <img src="' + prImage.image.medium + '" data-index="' + idx + '" loading="lazy" class="thumbimagee">\n</div>');
+				});
+				window.thumbSwiper.update();
+
+				window.mainSwiper.thumbs.swiper = window.thumbSwiper;
+				window.mainSwiper.update();
+
+					var goTo = (typeof targetIndex === 'number' && targetIndex >= 0 && targetIndex < newImages.length) ? targetIndex : 0;
+					window.mainSwiper.slideTo(goTo);
+					window.thumbSwiper.slideTo(goTo);
+				return;
+			}
+		} catch (e) {
+			console.warn('Failed to rebuild gallery for variant images. Falling back to lightbox.', e);
+		}
+
+		$('.pswp').removeClass('d-hide');
+		$('.app').addClass('d-hide');
+		var images = [];
+		$("div[data-var-id='" + varId + "'] img").each(function () { images.push($(this).attr('data-image-url')); });
+		openPhotoSwipe(images, $(elm).attr('data-index'));
 });
 
 
@@ -1519,11 +1603,61 @@ document.addEventListener('DOMContentLoaded', function () {
   thumbSwiper = initializeThumbSwiper(window.innerWidth < 768 ? 'horizontal' : 'vertical');
   mainSwiper = initializeMainSwiper();
 
-  // **إعادة التهيئة عند تغيير حجم الشاشة**
+  window.thumbSwiper = thumbSwiper;
+  window.mainSwiper = mainSwiper;
+
   window.addEventListener('resize', function () {
     setTimeout(adjustSwiperLayout, 300);
   });
   setTimeout(adjustSwiperLayout, 100);
+
+		var lastClickedOptionImageUrl = null;
+		$(document).on('click', '.g-custom-size-box [data-image-url], .g-custom-size-box img[data-image-url], .g-custom-size-box [data-image]', function () {
+			lastClickedOptionImageUrl = $(this).attr('data-image-url') || $(this).attr('data-image') || null;
+		});
+
+	$(document).on('change click', '.g-custom-size-box :input[name^="options"], .g-custom-size-box .btn, .g-custom-size-box [data-option-id]', function () {
+		setTimeout(function () {
+			var currentVarId = $('#product-id').val();
+			if (!currentVarId || !productVariants || !Array.isArray(productVariants)) return;
+			var selVar = productVariants.find(function (v) { return String(v.id) === String(currentVarId); });
+			if (!selVar || !selVar.images || !selVar.images.length) return;
+
+			try {
+				productImages = selVar.images;
+				if (window.mainSwiper && window.thumbSwiper) {
+					window.mainSwiper.removeAllSlides();
+					selVar.images.forEach(function (img) {
+						window.mainSwiper.appendSlide('<div class="swiper-slide">\n  <img src="' + img.image.full_size + '" class="carousel-img" alt="{{ product.name }}" loading="lazy">\n</div>');
+					});
+					window.mainSwiper.update();
+
+					window.thumbSwiper.removeAllSlides();
+					selVar.images.forEach(function (img, idx) {
+						window.thumbSwiper.appendSlide('<div class="swiper-slide small_images">\n  <img src="' + img.image.medium + '" data-index="' + idx + '" loading="lazy" class="thumbimagee">\n</div>');
+					});
+					window.thumbSwiper.update();
+
+					window.mainSwiper.thumbs.swiper = window.thumbSwiper;
+								window.mainSwiper.update();
+
+								var goTo = 0;
+								if (lastClickedOptionImageUrl) {
+									for (var i = 0; i < selVar.images.length; i++) {
+										var u = selVar.images[i].image;
+										if (u && (u.full_size === lastClickedOptionImageUrl || u.medium === lastClickedOptionImageUrl)) {
+											goTo = i; break;
+										}
+									}
+								}
+								window.mainSwiper.slideTo(goTo);
+								window.thumbSwiper.slideTo(goTo);
+				}
+			} catch (e) {
+				console.warn('Failed to update gallery on option change:', e);
+			}
+		}, 0);
+	});
 });
 
 let btn_popup = document.getElementById('product-view-add-to-cart');
