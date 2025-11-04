@@ -34,6 +34,7 @@
             .content_btns{
                 left: 5%;
             }
+           
         }
     </style>
 
@@ -82,12 +83,15 @@
             padding: 10px 20px 9px !important;
             font-size: 15px;
         }
+         .g_cat{
+                padding: 25px 0 !important;
+     }
     }
 
 
     </style>
 
-    <section id="g_cat_{{ sectionId }}" class="g_cat" style="padding:70px 0px;" dir="ltr">
+    <section id="g_cat_{{ sectionId }}" class="g_cat " style="padding:70px 0px;" dir="ltr">
     <div style="margin-bottom: 50px;">
         {% include 'title.twig' with { 'component_title': settings.section_title } %}
     </div>
