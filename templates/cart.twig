@@ -158,19 +158,28 @@
 					<div>
 						<div class="mt-5">
 							{% if store.availability.closed_now %}
-								<a href="#" class="btn btn-lg btn-block btn-disabled" style="border-radius: 5px; height: 50px; font-size: 18px;">
-									{{ locals.cart_continue_to_purchase }}
-								</a>
-							{% else %}
-								<a href="{% if customer %}/checkout/choose-address-and-shipping{% else %}/auth/login?redirect_to=/checkout/choose-address-and-shipping{% endif %}" class="btn btn-primary btn-lg btn-block" style="border-radius: 5px;  height: 50px; font-size: 18px;">
+                                <a href="#"
+                                   class="btn btn-lg btn-block btn-disabled"
+                                >
+                                    {{ locals.cart_continue_to_purchase }}
+                                </a>
+                            {% else %}
+                                <a id="redirectAddress"  zid-visible-customer="true"  href="/checkout/choose-address-and-shipping"
+                                class="btn btn-primary btn-lg btn-block"
+                                >
+                                    {{ locals.cart_continue_to_purchase }}
+                                </a>
 
-									{{ locals.cart_continue_to_purchase }}
-								</a>
-								<div style="margin-top: 1rem">
+                                <a zid-visible-guest="true" href="/auth/login?redirect_to=/checkout/choose-address-and-shipping"
+                                   class="btn btn-primary btn-lg btn-block"
+                                >
+                                    {{ locals.cart_continue_to_purchase }}
+                                </a>
+                               
+                                <div style="margin-top: 1rem">
                                     {{ template_for_cart_apple_pay_button }}
                                 </div>
-							{% endif %}
-
+                            {% endif %}
 						</div>
 
 						{% if store.gift_order_settings.is_gift_order_enabled == '1' %}
