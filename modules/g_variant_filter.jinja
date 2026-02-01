@@ -116,21 +116,16 @@
     }
 </style>
 
-{% set top_padding = 40 %}
-{% if settings.section_padding_top is defined and settings.section_padding_top %}
-    {% set top_padding = settings.section_padding_top %}
-{% endif %}
-
-{% set bottom_padding = 40 %}
-{% if settings.section_padding_bottom is defined and settings.section_padding_bottom %}
-    {% set bottom_padding = settings.section_padding_bottom %}
-{% endif %}
+{% set top_padding = settings.section_padding_top if settings.section_padding_top is defined and settings.section_padding_top else 40 %}
+{% set bottom_padding = settings.section_padding_bottom if settings.section_padding_bottom is defined and settings.section_padding_bottom else 40 %}
 
 <section id="variant_filter_{{ sectionId }}" class="variant-filter-section" style="padding: {{ top_padding }}px 0 {{ bottom_padding }}px 0;">
     <div class="container">
         {% if settings.section_title %}
             <div style="margin-bottom: 30px;">
-                {% include 'title.twig' with { 'component_title': settings.section_title } %}
+                {% with component_title=settings.section_title %}
+                    {% include 'title.jinja' %}
+                {% endwith %}
             </div>
         {% endif %}
         
@@ -446,28 +441,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="form-group mt-3 d-flex justify-content-end">
                             <button type="button" class="btn round btn-white variant-filter-reset" id="variant-filter-reset-${sectionId}" onclick="clearVariantFilters('${sectionId}')">
                                 <span style="padding: 0px 20px">
-                                    {% if settings.reset_button_text is defined and settings.reset_button_text %}
-                                        {{ settings.reset_button_text }}
-                                    {% else %}
-                                        إعادة تعيين
-                                    {% endif %}
+                                    {{ settings.reset_button_text if settings.reset_button_text is defined and settings.reset_button_text else 'إعادة تعيين' }}
                                 </span>
                             </button>
                         </div>
             
             <div class="variant-filter-results d-none" id="variant-filter-results-${sectionId}">
                 <span id="variant-filter-count-${sectionId}">0</span>
-                {% if settings.results_text is defined and settings.results_text %}
-                    {{ settings.results_text }}
-                {% else %}
-                    منتج متطابق
-                {% endif %}
+                {{ settings.results_text if settings.results_text is defined and settings.results_text else 'منتج متطابق' }}
             </div>
         `;
 
                 html +=`
                         <div>
-                        <a id="variant-filter-options-link-${sectionId}" href="{{store.url}}/blogs/options" style="font-size: 14px; color: var(--primary-color, #CE5A67); text-decoration: underline;">
+                        <a id="variant-filter-options-link-${sectionId}" href="{{ store.url }}/blogs/options" style="font-size: 14px; color: var(--primary-color, #CE5A67); text-decoration: underline;">
                             عرض كل المنتجات
                         </a>
                         </div>
@@ -533,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!linkEl) return;
 
         const optionValue = selectedOption || getSelectedOptionValue();
-        const baseUrl = '{{store.url}}/blogs/options';
+        const baseUrl = '{{ store.url }}/blogs/options';
 
         if (optionValue) {
             const encoded = encodeURIComponent(optionValue);
@@ -982,7 +969,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // إضافة زر "عرض المزيد" إذا كان هناك أكثر من 3 منتجات ولم يتم عرض كل المنتجات بعد
         if (hasMoreProducts && !showAllProducts) {
             const optionValue = selectedOption || getSelectedOptionValue();
-            const baseUrl = '{{store.url}}/blogs/options';
+            const baseUrl = '{{ store.url }}/blogs/options';
             let moreUrl = baseUrl;
             if (optionValue) {
                 const encoded = encodeURIComponent(optionValue);
@@ -1068,63 +1055,4 @@ function clearVariantFilters(sectionId) {
 }
 </script>
 
-{% schema %}
-{
-    "name": {
-        "ar": "فلتر المتغيرات - جلامور",
-        "en": "Variant Filter - Glamour"
-    },
-    "icon": "fal fa-filter",
-    "display": true,
-    "settings": {
-        "section_title": {
-            "type": "text",
-            "label": {
-                "ar": "عنوان السكشن",
-                "en": "Section Title"
-            }
-        },
-        "filter_title": {
-            "type": "text",
-            "label": {
-                "ar": "عنوان الفلتر",
-                "en": "Filter Title"
-            },
-            "default": "فلتر المتغيرات"
-        },
-        "reset_button_text": {
-            "type": "text",
-            "label": {
-                "ar": "نص زر إعادة التعيين",
-                "en": "Reset Button Text"
-            },
-            "default": "إعادة تعيين الفلتر"
-        },
-        "results_text": {
-            "type": "text",
-            "label": {
-                "ar": "نص النتائج",
-                "en": "Results Text"
-            },
-            "default": "منتج متطابق"
-        },
-        "section_padding_top": {
-            "type": "number",
-            "label": {
-                "ar": "المسافة العلوية (بالبكسل)",
-                "en": "Top Padding (px)"
-            },
-            "default": 40
-        },
-        "section_padding_bottom": {
-            "type": "number",
-            "label": {
-                "ar": "المسافة السفلية (بالبكسل)",
-                "en": "Bottom Padding (px)"
-            },
-            "default": 40
-        }
-    }
-}
-{% endschema %}
 

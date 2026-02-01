@@ -32,15 +32,398 @@
                 {% endif %}
             </div>
 
+            {# Container لعرض المنتجات المتطابقة #}
+            <div id="filtered-products-container" style="display: none; margin-top: 40px;">
+                <div id="filtered-products-loading" style="text-align: center; padding: 40px;">
+                    <span style="font-size: 16px; color: #666;">جاري تحميل المنتجات...</span>
+                </div>
+                <div id="filtered-products-content" style="display: none;"></div>
+                <div id="filtered-products-empty" style="display: none; text-align: center; padding: 40px; color: #999;">
+                    <p style="font-size: 18px;">لا توجد منتجات متطابقة</p>
+                </div>
+            </div>
 
         </div>
     </section>
+
+<style>
+.filtered-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+.filtered-product-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+.filtered-product-card:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+    color: inherit;
+}
+.filtered-product-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.filtered-product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.filtered-product-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+.filtered-product-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color, #CE5A67);
+}
+</style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
    const searchParams = new URLSearchParams(window.location.search);
    const optionParam = searchParams.get('option');
    console.log('Option parameter from URL:', optionParam);
+   console.log('Full URL:', window.location.href);
+   
+   // إذا كان هناك option parameter، قم بجلب وعرض المنتجات المتطابقة
+   if (optionParam) {
+       const container = document.getElementById('filtered-products-container');
+       if (container) {
+           container.style.display = 'block';
+           const decodedValue = decodeURIComponent(optionParam);
+           console.log('Decoded option value:', decodedValue);
+           loadFilteredProducts(decodedValue);
+       }
+   } else {
+       console.log('No option parameter found in URL');
+   }
+   
+   // دالة لجلب وعرض المنتجات المتطابقة
+   async function loadFilteredProducts(optionValue) {
+       const loadingDiv = document.getElementById('filtered-products-loading');
+       const contentDiv = document.getElementById('filtered-products-content');
+       const emptyDiv = document.getElementById('filtered-products-empty');
+       
+       if (loadingDiv) loadingDiv.style.display = 'block';
+       if (contentDiv) contentDiv.style.display = 'none';
+       if (emptyDiv) emptyDiv.style.display = 'none';
+       
+       try {
+           // التحقق من وجود zid.store API
+           if (typeof zid === 'undefined' || !zid.store || !zid.store.product || !zid.store.product.fetchAll) {
+               throw new Error('Zid Store API not available');
+           }
+           
+           let page = 1;
+           let hasMore = true;
+           const allProducts = [];
+           
+           // جلب كل المنتجات صفحة بصفحة
+           while (hasMore && page <= 50) {
+               const response = await zid.store.product.fetchAll(null, { 
+                   per_page: 100, 
+                   page: page 
+               });
+               
+               if (response && response.status === 'success' && response.data && response.data.products) {
+                   const products = response.data.products.data || [];
+                   allProducts.push(...products);
+                   
+                   const totalPages = response.data.products.last_page || 1;
+                   const currentPage = response.data.products.current_page || page;
+                   hasMore = currentPage < totalPages;
+                   page++;
+                   
+                   if (loadingDiv) {
+                       loadingDiv.innerHTML = `<span style="font-size: 16px; color: #666;">جاري تحميل المنتجات... (${allProducts.length} منتج)</span>`;
+                   }
+               } else {
+                   hasMore = false;
+               }
+           }
+           
+           console.log('Total products loaded:', allProducts.length);
+           
+           // جلب البيانات الكاملة للمنتجات التي قد لا تحتوي على variants في البيانات الأولية
+           const productsNeedingFetch = allProducts.filter(p => 
+               (!p.variants || !Array.isArray(p.variants) || p.variants.length === 0) && 
+               (p.has_options || p.has_variants) && 
+               p.slug
+           );
+           
+           console.log('Products needing full fetch:', productsNeedingFetch.length);
+           
+           // جلب البيانات الكاملة لعدد محدود من المنتجات (بحد أقصى 50 لتجنب البطء)
+           const maxFetch = Math.min(50, productsNeedingFetch.length);
+           for (let i = 0; i < maxFetch; i++) {
+               const product = productsNeedingFetch[i];
+               if (loadingDiv) {
+                   loadingDiv.innerHTML = `<span style="font-size: 16px; color: #666;">جاري تحميل بيانات المنتجات... (${i + 1}/${maxFetch})</span>`;
+               }
+               
+               try {
+                   if (zid && zid.store && zid.store.product && zid.store.product.fetch) {
+                       const fullProduct = await zid.store.product.fetch(product.slug);
+                       if (fullProduct && fullProduct.status === 'success' && fullProduct.data && fullProduct.data.product) {
+                           const fetchedProduct = fullProduct.data.product;
+                           // تحديث المنتج في القائمة
+                           const index = allProducts.findIndex(p => p.slug === product.slug);
+                           if (index !== -1) {
+                               allProducts[index].variants = fetchedProduct.variants;
+                               allProducts[index].options = fetchedProduct.options;
+                           }
+                       }
+                   }
+               } catch (error) {
+                   console.warn('Failed to fetch product:', product.slug, error);
+               }
+               
+               // تأخير صغير لتجنب إرهاق الـ API
+               await new Promise(resolve => setTimeout(resolve, 100));
+           }
+           
+           // فلترة المنتجات بناءً على option value
+           const matchingProducts = filterProductsByOptionValue(allProducts, optionValue);
+           
+           console.log('Matching products:', matchingProducts.length);
+           
+           if (loadingDiv) loadingDiv.style.display = 'none';
+           
+           if (matchingProducts.length === 0) {
+               if (emptyDiv) emptyDiv.style.display = 'block';
+           } else {
+               displayProducts(matchingProducts, contentDiv);
+               if (contentDiv) contentDiv.style.display = 'block';
+           }
+           
+       } catch (error) {
+           console.error('Error loading filtered products:', error);
+           if (loadingDiv) {
+               loadingDiv.innerHTML = '<span style="color: #d32f2f;">حدث خطأ أثناء تحميل المنتجات. يرجى تحديث الصفحة.</span>';
+           }
+       }
+   }
+   
+   // دالة لفلترة المنتجات بناءً على option value
+   function filterProductsByOptionValue(products, optionValue) {
+       const matchingProducts = [];
+       const normalizedOptionValue = String(optionValue).trim();
+       let productsWithVariants = 0;
+       let sampleValues = [];
+       
+       console.log('Filtering products with option value:', normalizedOptionValue);
+       console.log('Total products to check:', products.length);
+       
+       // طباعة مثال من variant attributes للتحقق
+       let sampleVariantPrinted = false;
+       
+       for (let product of products) {
+           // إذا المنتج مافيهاش variants، نتخطاه
+           if (!product.variants || !Array.isArray(product.variants) || product.variants.length === 0) {
+               continue;
+           }
+           
+           productsWithVariants++;
+           
+           // جمع عينة من القيم للتحقق (فقط أول 5 منتجات)
+           if (productsWithVariants <= 5 && sampleValues.length < 20) {
+               for (let variant of product.variants) {
+                   if (variant.unavailable) continue;
+                   
+                   let attributes = [];
+                   if (variant.attributes && Array.isArray(variant.attributes)) {
+                       attributes = variant.attributes;
+                   } else if (variant.attributes && typeof variant.attributes === 'object') {
+                       attributes = Object.values(variant.attributes);
+                       // إذا كانت القيم strings مباشرة
+                       if (attributes.length === 0) {
+                           for (let key in variant.attributes) {
+                               const val = variant.attributes[key];
+                               if (val && typeof val === 'object') {
+                                   attributes.push(val);
+                               } else {
+                                   attributes.push({ value: val });
+                               }
+                           }
+                       }
+                   }
+                   
+                   for (let attr of attributes) {
+                       if (attr && typeof attr === 'object') {
+                           if (attr.value !== undefined && attr.value !== null) {
+                               sampleValues.push(String(attr.value));
+                           }
+                           if (attr.name !== undefined && attr.name !== null) {
+                               sampleValues.push(String(attr.name));
+                           }
+                       } else if (attr !== null && attr !== undefined) {
+                           sampleValues.push(String(attr));
+                       }
+                   }
+               }
+           }
+           
+           // البحث عن variant يحتوي على option value المطلوب
+           for (let variant of product.variants) {
+               if (variant.unavailable) continue;
+               
+               // طباعة مثال من variant attributes (فقط مرة واحدة)
+               if (!sampleVariantPrinted && variant.attributes) {
+                   console.log('Sample variant attributes structure:', {
+                       type: Array.isArray(variant.attributes) ? 'array' : typeof variant.attributes,
+                       value: variant.attributes,
+                       keys: typeof variant.attributes === 'object' ? Object.keys(variant.attributes) : null
+                   });
+                   sampleVariantPrinted = true;
+               }
+               
+               let found = false;
+               
+               // معالجة attributes بطرق مختلفة (نفس المنطق في g_variant_filter.twig)
+               let attributes = [];
+               if (variant.attributes && Array.isArray(variant.attributes)) {
+                   attributes = variant.attributes;
+               } else if (variant.attributes && typeof variant.attributes === 'object') {
+                   // إذا attributes object مش array - محاولة استخراج القيم بطرق مختلفة
+                   // محاولة 1: Object.values (إذا كانت القيم objects)
+                   attributes = Object.values(variant.attributes);
+                   
+                   // محاولة 2: التكرار على keys مباشرة (للتعامل مع { "0": {...}, "1": {...} })
+                   if (attributes.length === 0 || (attributes.length > 0 && attributes.every(v => typeof v === 'string'))) {
+                       attributes = [];
+                       for (let key in variant.attributes) {
+                           const val = variant.attributes[key];
+                           if (val && typeof val === 'object') {
+                               attributes.push(val);
+                           } else if (val !== null && val !== undefined) {
+                               // إذا كانت القيمة مباشرة، نحولها إلى object
+                               attributes.push({ value: val, name: val });
+                           }
+                       }
+                   }
+               }
+               
+               // البحث في attributes
+               for (let idx = 0; idx < attributes.length; idx++) {
+                   const attr = attributes[idx];
+                   let attrValue;
+                   
+                   // استخراج value بنفس الطريقة في processProductVariants
+                   if (attr && typeof attr === 'object') {
+                       // محاولة استخراج value بطرق مختلفة
+                       if (attr.value !== undefined && attr.value !== null) {
+                           attrValue = attr.value;
+                       } else if (attr.name !== undefined && attr.name !== null) {
+                           attrValue = attr.name;
+                       } else if (attr.label !== undefined && attr.label !== null) {
+                           attrValue = attr.label;
+                       }
+                   } else if (attr !== null && attr !== undefined) {
+                       // إذا attr قيمة مباشرة
+                       attrValue = String(attr);
+                   }
+                   
+                   // المقارنة (case-insensitive و trim)
+                   if (attrValue !== null && attrValue !== undefined) {
+                       const normalizedAttrValue = String(attrValue).trim();
+                       const normalizedSearchValue = normalizedOptionValue;
+                       
+                       // مقارنة دقيقة
+                       if (normalizedAttrValue === normalizedSearchValue) {
+                           found = true;
+                           console.log('Found exact match:', product.name, 'variant:', variant.id, 'value:', normalizedAttrValue);
+                           break;
+                       }
+                       // مقارنة case-insensitive
+                       if (normalizedAttrValue.toLowerCase() === normalizedSearchValue.toLowerCase()) {
+                           found = true;
+                           console.log('Found case-insensitive match:', product.name, 'variant:', variant.id, 'value:', normalizedAttrValue);
+                           break;
+                       }
+                   }
+               }
+               
+               if (found) {
+                   matchingProducts.push(product);
+                   break; // نضيف المنتج مرة واحدة فقط
+               }
+           }
+       }
+       
+       console.log('Products with variants:', productsWithVariants);
+       console.log('Sample variant values found:', [...new Set(sampleValues)].slice(0, 10));
+       console.log('Matching products found:', matchingProducts.length);
+       if (matchingProducts.length > 0) {
+           console.log('Sample matching products:', matchingProducts.slice(0, 3).map(p => p.name));
+       } else {
+           console.warn('No products matched! Check if option value matches any variant values.');
+       }
+       
+       return matchingProducts;
+   }
+   
+   // دالة لعرض المنتجات
+   function displayProducts(products, container) {
+       if (!container) return;
+       
+       let productsHTML = `
+           <h3 style="margin-bottom: 30px; font-size: 24px; font-weight: 600; color: #333;">
+               المنتجات المتطابقة (${products.length})
+           </h3>
+           <div class="filtered-products-grid">
+       `;
+       
+       products.forEach(product => {
+           let productImage = '';
+           if (product.images && product.images[0]) {
+               if (product.images[0].image) {
+                   productImage = product.images[0].image.medium || product.images[0].image.small || '';
+               } else if (product.images[0].medium) {
+                   productImage = product.images[0].medium;
+               } else if (typeof product.images[0] === 'string') {
+                   productImage = product.images[0];
+               }
+           }
+           if (!productImage) {
+               productImage = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23ddd" width="200" height="200"/%3E%3C/svg%3E';
+           }
+           
+           const productPrice = product.formatted_sale_price || product.formatted_price || product.price || '';
+           let productUrl = product.html_url || (product.slug ? '/products/' + product.slug : '#');
+           
+           // إضافة option parameter إلى URL
+           if (optionParam) {
+               const separator = productUrl.includes('?') ? '&' : '?';
+               productUrl = productUrl + separator + 'option=' + encodeURIComponent(optionParam);
+           }
+           
+           productsHTML += `
+               <div class="prod-col prod-col-tb">
+                   <a href="${productUrl}" class="filtered-product-card" data-product-slug="${product.slug || ''}">
+                       <div class="filtered-product-image">
+                           <img src="${productImage}" alt="${product.name}" loading="lazy">
+                       </div>
+                       <h5 class="filtered-product-name">${product.name}</h5>
+                       <div class="filtered-product-price">${productPrice}</div>
+                   </a>
+               </div>
+           `;
+       });
+       
+       productsHTML += '</div>';
+       container.innerHTML = productsHTML;
+   }
 });
 
 </script>
